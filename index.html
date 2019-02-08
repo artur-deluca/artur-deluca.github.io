@@ -8,8 +8,25 @@
   <meta name="author" content="Artur de Luca">
 </head>
 <body>
+  
   <h1>Hello World</h1>
-  <p>testing 1,2</p>
-  <p>Artur</p>
+  <p>artur's try out personal page: testing 1,2, 1,2 ...</p>
+  <a href="https://github.com/GEIA-UFSC/imbalanced-learning"><p>Imbalanced Learning - Artur de Luca</p></a>
+  <iframe height=640 width=640 id='presentation'></iframe>
+  <script>
+    var request = new XMLHttpRequest();
+
+    request.open("GET", "https://api.github.com/repos/GEIA-UFSC/imbalanced-learning/contents/presentation.slides.html?ref=master");
+    request.send(null)
+
+    request.onreadystatechange = function() {
+      if (request.readyState == 4)
+        var test = JSON.parse(request.responseText).content;
+        body=document.getElementsByTagName('body')[0];
+        iframe=document.getElementById('presentation');
+        iframe.src="data:text/html;base64,"+test;
+        body.appendChild(iframe); 
+    };
+  </script>
 </body>
 </html>
