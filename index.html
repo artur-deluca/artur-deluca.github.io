@@ -1,32 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>artur de luca</title>
-  <meta charset="UTF-8">
-  <meta name="description" content="Artur's personal page">
-  <meta name="keywords" content="personal,artur-deluca,profile,github">
-  <meta name="author" content="Artur de Luca">
-</head>
-<body>
-  
-  <h1>Hello World</h1>
-  <p>artur's try out personal page: testing 1,2, 1,2 ...</p>
-  <a href="https://github.com/GEIA-UFSC/imbalanced-learning"><p>Imbalanced Learning - Artur de Luca</p></a>
-  <iframe height=640 width=640 id='presentation'></iframe>
-  <script>
-    var request = new XMLHttpRequest();
+---
+layout: default
+---
 
-    request.open("GET", "https://api.github.com/repos/GEIA-UFSC/imbalanced-learning/contents/presentation.slides.html?ref=master");
-    request.send(null)
 
-    request.onreadystatechange = function() {
-      if (request.readyState == 4)
-        var test = JSON.parse(request.responseText).content;
-        body=document.getElementsByTagName('body')[0];
-        iframe=document.getElementById('presentation');
-        iframe.src="data:text/html;base64,"+test;
-        body.appendChild(iframe); 
-    };
-  </script>
-</body>
-</html>
+ <div class="post-container">
+
+  <h2 class="post-title">Blog</h2>
+
+  <hr>
+
+  {% for post in site.posts %}
+    <div class ="post-preview">
+      <span class="post-title">
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+          {{ post.title }}
+        </a>
+      </span>
+
+      <span class="post-time">
+        <p>{{ post.date | date: "%b %-d, %Y" }}</p>
+      </span>
+
+
+    </div>
+
+    {% endfor %}
+
+
+
+</div>
