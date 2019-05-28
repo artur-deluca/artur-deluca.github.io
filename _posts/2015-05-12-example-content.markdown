@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Example content"
-date:   2016-05-12 22:02:01 -0500
+title:  "A big fat lorem ipsum example"
+date:   2019-05-28 00:00:00 -0500
 comments: true
-categories: jekyll
+categories:
 ---
 
 Morbi ultrices libero imperdiet [lectus](#) dignissim, sit amet bibendum nisl consectetur. Morbi erat purus, pretium at ligula tincidunt, faucibus commodo sem. Etiam vel porttitor est, vitae maximus ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien turpis, cursus non porta ac.
@@ -31,8 +31,6 @@ Cras fermentum nibh quis nisl imperdiet ornare. Sed nisi nunc, dictum sit amet g
 1. Vestibulum id ligula porta felis euismod semper.
 2. Cum sociis natoque penatibus.
 3. Maecenas sed diam eget risus.
-
-![Large example image](http://placehold.it/800x400 "Large example image")
 
 Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 

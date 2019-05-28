@@ -1,8 +1,6 @@
 ---
 ---
 
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
-
 /* ------------ Core Style -------------- */
 
 
@@ -66,10 +64,6 @@ label[data-function*='swipe'] {
   transition: transform .3s;
 }
 
-input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
-  transform: translate3d(260px,0,0);
-}
-
 #social-icons
 {
     font-size:  1.1em;
@@ -100,7 +94,7 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
   transform: translate3d(0,0,0);
   transition: transform .3s;
 
-  font-family: "Roboto Condensed", Arial, sans-serif;
+  font-family: 'Lusitana', serif;
   background-color: #fff;
   font-size: 16px;
   line-height: 1.5em;
@@ -140,7 +134,7 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
 
 .content p
 {
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: 'Lusitana', serif;
     background-color: #fff;
     font-size: 16px;
     line-height: 24px;
@@ -150,7 +144,7 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
 
 .content a {
 
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: 'Lusitana', serif;
     background-color: #fff;
     font-size: 16px;
     line-height: normal;
@@ -182,21 +176,12 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
   border-radius: 2px;
 }
 
-input[data-function*='swipe']:checked ~ .content {
+.content {
   transform: translate3d(180px,0px,0px);
 }
 
-input[data-function*='swipe']:checked ~ .sidebar {
-  transform: translate3d(0px,0px,0px);
-  .menu {
-    li {
-      width: 100%;
-    }
-  }
-}
-
 .sidebar {
-  transform: translate3d(-180px,0px,0px);
+  transform: translate3d(0px,0px,0px);
   position: absolute;
   width: 180px;
   color: #eee;
@@ -213,7 +198,7 @@ input[data-function*='swipe']:checked ~ .sidebar {
 
   p
   {
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: 'Lusitana', serif;
     background-color: #fff;
     font-size: 13px;
     line-height: normal;
@@ -239,7 +224,7 @@ input[data-function*='swipe']:checked ~ .sidebar {
 
     a{
 
-      font-family: "Roboto Condensed", Arial, sans-serif;
+      font-family: 'Lusitana', serif;
       background-color: #fff;
       font-size: 13px;
       line-height: normal;
