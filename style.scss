@@ -1,8 +1,6 @@
 ---
 ---
 
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
-
 /* ------------ Core Style -------------- */
 
 
@@ -34,9 +32,13 @@ th.title {
   width: 30%;
 }
 
+.post {
+  margin-right: 10px;
+}
+
 /* ------------ Sidebar Style -------------- */
 
-#picture{
+#front-picture{
     width:150px;
     height:150px;
     border-radius:5%;
@@ -66,13 +68,8 @@ label[data-function*='swipe'] {
   transition: transform .3s;
 }
 
-input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
-  transform: translate3d(260px,0,0);
-}
-
 #social-icons
 {
-    font-size:  1.1em;
     display: block;
 }
 
@@ -84,11 +81,11 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
 
 #social-icons li {
     display: inline-block;
-    padding-right: 15px;
+    padding-right: 28px;
 }
 
 #social-icons a {
-    font-size: 16px;
+    font-size: 20px;
     color: rgb(162, 163, 163);
 }
 
@@ -96,11 +93,10 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
 
 .content {
   flex: 1;
-  padding: 80px 30px;
+  padding: 93px 30px;
   transform: translate3d(0,0,0);
-  transition: transform .3s;
-
-  font-family: "Roboto Condensed", Arial, sans-serif;
+  word-wrap: break-word;
+  font-family: 'Lusitana', serif;
   background-color: #fff;
   font-size: 16px;
   line-height: 1.5em;
@@ -140,7 +136,7 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
 
 .content p
 {
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: 'Lusitana', serif;
     background-color: #fff;
     font-size: 16px;
     line-height: 24px;
@@ -150,7 +146,7 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
 
 .content a {
 
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: 'Lusitana', serif;
     background-color: #fff;
     font-size: 16px;
     line-height: normal;
@@ -158,6 +154,16 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
     color: #8C8C8C;
     font-weight: 300;
 
+}
+
+.navigation a {
+    background-color: #fff;
+    font-style: normal;
+    color: #8C8C8C;
+    font-weight: 300;
+    padding: 10px;
+    width: 0%;
+    font-size: 16px;
 }
 
 .content pre
@@ -182,27 +188,61 @@ input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
   border-radius: 2px;
 }
 
-input[data-function*='swipe']:checked ~ .content {
+.content {
   transform: translate3d(180px,0px,0px);
 }
 
-input[data-function*='swipe']:checked ~ .sidebar {
-  transform: translate3d(0px,0px,0px);
-  .menu {
-    li {
-      width: 100%;
-    }
-  }
-}
-
 .sidebar {
-  transform: translate3d(-180px,0px,0px);
+  transform: translate3d(0px,0px,0px);
   position: absolute;
   width: 180px;
   color: #eee;
   left: 0;
   height: 100%;
   transition: all .3s;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  #social-icons ul {
+    text-align: right;
+    margin-right: 20px
+  }
+  
+  .sidebar menu {
+    height: auto;
+    position: relative;
+  }
+  .sidebar p {float: left;}
+  
+  .content {
+    margin-left: 0;
+    transform: translate3d(0px,0px,0px);
+  }
+  
+  .navigation {
+    float: left;
+    vertical-align: baseline;
+  }
+
+  #front-picture {
+    display: none;
+  }
+
+  #description {
+    display: none;
+  }
+
+  #division {
+    display: none;
+  }
+
+  #social-icons {
+    float: right;
+  }
 }
 
 .menu {
@@ -213,7 +253,7 @@ input[data-function*='swipe']:checked ~ .sidebar {
 
   p
   {
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: 'Lusitana', serif;
     background-color: #fff;
     font-size: 13px;
     line-height: normal;
@@ -233,16 +273,14 @@ input[data-function*='swipe']:checked ~ .sidebar {
     padding: 10px;
     list-style: none;
     width: 0%;
-    line-height: 1.2rem;
     font-weight: 300;
 
 
     a{
 
-      font-family: "Roboto Condensed", Arial, sans-serif;
+      /*font-family: 'Lusitana', serif;*/
       background-color: #fff;
       font-size: 13px;
-      line-height: normal;
       font-style: normal;
       color: #8C8C8C;
       font-weight: 300;
