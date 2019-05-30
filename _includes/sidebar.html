@@ -26,10 +26,10 @@
         <ul>
             {% for my_page in site.pages %}
                 {% if my_page.title %}
-                <p><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></p>
-            {% endif %}
+                  <p><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></p>
+                {% endif %}
             {% endfor %}
-            <p><a href="{{ site.baseurl }}/assets/pdf/artur-deluca.pdf">Resume</a></p>
+            <li><a href="{{ site.baseurl }}/assets/pdf/artur-deluca.pdf">Resume</a></li>
         </ul>
     </div>
 
