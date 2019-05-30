@@ -1,19 +1,20 @@
 # Site settings
-title: Pedantic platitudes
-
+title: Your awesome title
+email: your-email@domain.com
 baseurl: "" # the subpath of your site, e.g. /blog
 #url: "http://yourdomain.com" # the base hostname & protocol for your site
 
 # Sidebar settings
-description: I am a floating head
+description: One sentence introducing yourself or what you do
 
 # Social icons
-twitter: backdeluca
-linkedin: arturbackdeluca
-github: artur-deluca
-email: arturbackdeluca@gmail.com
+facebook: username
+linkedin: username
+github: username
+deviantart: username
+codepen: username
 
-footer:
+footer: © Taken theme
 
 # Build settings
 markdown: kramdown
