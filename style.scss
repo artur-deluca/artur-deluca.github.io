@@ -32,9 +32,13 @@ th.title {
   width: 30%;
 }
 
+.post {
+  margin-right: 10px;
+}
+
 /* ------------ Sidebar Style -------------- */
 
-#picture{
+#front-picture{
     width:150px;
     height:150px;
     border-radius:5%;
@@ -66,7 +70,6 @@ label[data-function*='swipe'] {
 
 #social-icons
 {
-    font-size:  1.1em;
     display: block;
 }
 
@@ -78,11 +81,11 @@ label[data-function*='swipe'] {
 
 #social-icons li {
     display: inline-block;
-    padding-right: 15px;
+    padding-right: 28px;
 }
 
 #social-icons a {
-    font-size: 16px;
+    font-size: 20px;
     color: rgb(162, 163, 163);
 }
 
@@ -90,10 +93,9 @@ label[data-function*='swipe'] {
 
 .content {
   flex: 1;
-  padding: 80px 30px;
+  padding: 93px 30px;
   transform: translate3d(0,0,0);
-  transition: transform .3s;
-
+  word-wrap: break-word;
   font-family: 'Lusitana', serif;
   background-color: #fff;
   font-size: 16px;
@@ -154,6 +156,16 @@ label[data-function*='swipe'] {
 
 }
 
+.navigation a {
+    background-color: #fff;
+    font-style: normal;
+    color: #8C8C8C;
+    font-weight: 300;
+    padding: 10px;
+    width: 0%;
+    font-size: 16px;
+}
+
 .content pre
 {
     border:none;
@@ -190,6 +202,49 @@ label[data-function*='swipe'] {
   transition: all .3s;
 }
 
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  #social-icons ul {
+    text-align: right;
+    margin-right: 20px
+  }
+  
+  .sidebar menu {
+    height: auto;
+    position: relative;
+  }
+  .sidebar p {float: left;}
+  
+  .content {
+    margin-left: 0;
+    transform: translate3d(0px,0px,0px);
+  }
+  
+  .navigation {
+    float: left;
+    vertical-align: baseline;
+  }
+
+  #front-picture {
+    display: none;
+  }
+
+  #description {
+    display: none;
+  }
+
+  #division {
+    display: none;
+  }
+
+  #social-icons {
+    float: right;
+  }
+}
+
 .menu {
 
   font-size:  1.1em;
@@ -218,16 +273,14 @@ label[data-function*='swipe'] {
     padding: 10px;
     list-style: none;
     width: 0%;
-    line-height: 1.2rem;
     font-weight: 300;
 
 
     a{
 
-      font-family: 'Lusitana', serif;
+      /*font-family: 'Lusitana', serif;*/
       background-color: #fff;
       font-size: 13px;
-      line-height: normal;
       font-style: normal;
       color: #8C8C8C;
       font-weight: 300;

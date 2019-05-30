@@ -6,46 +6,36 @@
 
   <div class='sidebar menu'>
 
-      <div id="picture" style="background-image:url(https://pbs.twimg.com/profile_images/1121099217227911168/XnsRB92h_200x200.jpg)"></div>-->
-      <p>{{site.description}}</p>
+      <div id="front-picture" style="background-image:url(https://pbs.twimg.com/profile_images/1121099217227911168/XnsRB92h_200x200.jpg)"></div>
+      <p id="description">{{site.description}}</p>
 
-      <hr>
+      <hr id="division">
 
       <div id="social-icons">
         <ul>
             <li><a href="http://twitter.com/{{ site.twitter }}"><i class="fa fa-twitter"></i></a></li>
             <li><a href="https://linkedin.com/in/{{ site.linkedin }}"><i class="fa fa-linkedin"></i></a></li>
             <li><a href="http://github.com/{{ site.github }}"><i class="fa fa-github"></i></a></li>
-            <li><a href="mailto:{{ site.email }}"><i class="fa fa-envelope"></i></a></li>
-            <li><a href="{{ my_page.url }}/resume"><i class="fa fa-user"></i></a></li>
+            <li class="last"><a href="mailto:{{ site.email }}"><i class="fa fa-envelope"></i></a></li>
         </ul>
       </div>
 
-       <hr>
+      <hr id="division">
 
        <div class="navigation">
         <ul>
             {% for my_page in site.pages %}
                 {% if my_page.title %}
-                <li><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
+                <p><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></p>
             {% endif %}
             {% endfor %}
+            <p><a href="{{ site.baseurl }}/assets/pdf/artur-deluca.pdf">Resume</a></p>
         </ul>
     </div>
 
-    <hr>
+    <hr id="division">
 
-     <div class="navigation">
-             <ul>
-               {% for category in site.categories %}
-                 <li><a href="{{ site.baseurl | prepend: url }}/categories/{{ category | first | prepend: site.baseurl }}">{{ category | first }}</a></li>
-               {% endfor %}
-             </ul>
-     </div>
-
-     <hr>
-
-     <p>{{site.footer}}<p>
+    <!--<p id="division">{{site.footer}}<p>-->
 
   </div>
 
