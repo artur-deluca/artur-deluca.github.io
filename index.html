@@ -4,8 +4,16 @@ layout: default
 
 
  <div class="post-container">
-
-  <h2 class="post-title">Blog posts</h2>
+  {% for my_page in site.pages %}
+    {% if my_page.name == 'blog.md' %}
+      {% if my_page.title %}
+        <h2 class="post-title">{{ my_page.title }}</h2>
+      {% else %}
+        <h2 class="post-title">Blog</h2>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  
 
   <hr>
 
