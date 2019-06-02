@@ -1,3 +1,3 @@
-It definetely is and it will always be under construction
+Personal website
 <br><br>
-Made with [taken](http://vfalanis.github.io/taken)
+Modified version of [taken](https://github.com/vfalanis/taken)
