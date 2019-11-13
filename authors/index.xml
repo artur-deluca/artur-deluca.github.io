@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | </title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;&lt;code&gt;arturbackdeluca [at] gmail [dot] com&lt;/code&gt;&lt;/p&gt;
+
+&lt;div style=&#34;text-align: justify&#34;&gt;
+I am a graduate student in Artificial Intelligence and Robotics at the &lt;a href=&#34;https://www.diag.uniroma1.it/en&#34;&gt;University of Rome&lt;/a&gt;. But I am currently pursuing research programs involving the problems of Statistical Learning and optimization within (but not restricted to) Deep Learning.
+&lt;br&gt;&lt;br&gt;
+
+Please feel free to reach me within any of the digital medium available here. I currently live in Rome but I&#39;m originally from Brazil. My favorite activities are listening to unfamiliar genres of music and running, although usually not at the same time 😃.
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
