@@ -293,7 +293,9 @@ body {
 text-align: justify}
 &lt;/style&gt;
 
-&lt;p&gt;Deep learning (deep structured learning or hierarchical learning) can be defined as &lt;em&gt;“a class of machine learning techniques that exploit many layers of non-linear units”&lt;/em&gt; (&lt;a href=&#34;#References&#34;&gt;Deng and Yu (2013, pg. 199)&lt;/a&gt;). Traditionally, shallow architectures with only one or two non-linearities have been most useful in machine learning. For complicated, highly varying functions, however, deep architectures are necessary to learn with reasonable sample complexity (&lt;a href=&#34;#References&#34;&gt;Bradley (2010, pg. 22)&lt;/a&gt;). This is achieved through its ability to derive complex feature hierarchies from low-level inputs, by substantially coupling non-linear operations throughout layers whose parameters, in turn, rearrange, gradually adapting to a target function.&lt;/p&gt;
+&lt;p&gt;Hierarchical learning, deep structured learning, or simply deep learning can be defined as &lt;em&gt;a class of machine learning techniques that exploit many layers of non-linear units&lt;/em&gt; (&lt;a href=&#34;#References&#34;&gt;Deng and Yu (2013, pg. 199)&lt;/a&gt;). As the functions we choose to learn become more complicated and highly varying, deep learning becomes decisive as it is able to generalize under reasonable sample complexity (&lt;a href=&#34;#References&#34;&gt;Bradley (2010, pg. 22)&lt;/a&gt;). This is achieved by deriving complex feature hierarchies from low-level inputs, by the substantial coupling of non-linear operations whose parameters, in turn, readapt,gradually approximating the target function.&lt;/p&gt;
+
+&lt;!-- maybe talk about the limitations of linear models here --&gt;
 
 &lt;p&gt;&lt;img src=&#34;./figures/deep_learning_pg6.png&#34; width=&#34;50%&#34;/&gt;
 &lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Compositional representation of features throughout layers: from pixels to gradients and edges. &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Goodfellow et al. (2016, pg. 6)&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
@@ -316,8 +318,10 @@ text-align: justify}
 
 &lt;h2 id=&#34;the-challenges-of-training-deep-networks&#34;&gt;The challenges of training deep networks&lt;/h2&gt;
 
-&lt;p&gt;&lt;br&gt;
-Despite the remarked capacity, deep architectures were not widely researched as today. The reasons for this may encompass more than just technical aspects, such as the former contemptuous view of researchers on this topic, or the overall impotent computation capability compared to contemporary standards. This, however, will not be covered in this study. The technical challenges of such architectures were posed by the difficulty in training neural networks with more than two layers, ultimately delivering poor generalization (Bengio et al. (2007))&lt;sup&gt;1&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;The separation from models with a few layers stems from the observation that, traditionally, shallow architectures have been widely more successful in research.
+&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;Despite the remarked capacity, deep architectures were not widely researched as today. The reasons for this may encompass more than just technical aspects, such as the former contemptuous view of researchers on this topic, or the overall impotent computation capability compared to contemporary standards. This, however, will not be covered in this study. The technical challenges of such architectures were posed by the difficulty in training neural networks with more than two layers, ultimately delivering poor generalization (Bengio et al. (2007))&lt;sup&gt;1&lt;/sup&gt;.&lt;/p&gt;
 
 &lt;p&gt;In this series, many of the predicaments faced during the early and recent development of deep learning are going to be described with their corresponding solutions.
 &lt;a&gt;&lt;sup&gt;&lt;/sup&gt;&lt;/a&gt;&lt;br /&gt;
@@ -336,7 +340,7 @@ Despite the remarked capacity, deep architectures were not widely researched as 
 &lt;p&gt;where $n$ is the number of inputs to the unit. The authors then verified that in deep configurations of 4 to 5 layers, activation values on the last layers got stuck in plateaus situated at the extremes of the activation function, instance otherwise known as saturation.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;./figures/saturation.png&#34; width=&#34;80%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Saturation regions on the sigmoid function. In the case observed by &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;, the saturation occured in the 5th and last layer of the network, with activation values converging to zero.&lt;/p&gt;&lt;/p&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Saturation regions on the sigmoid function. In the case observed by &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;, the saturation occurred in the 5th and last layer of the network, with activation values converging to zero.&lt;/p&gt;&lt;/p&gt;
 
 &lt;p&gt;One hypothesized explanation for saturation on sigmoid-equipped deep networks is that the random initialization does not provide useful information to the last layer of the network, that starts to rely more on its biases, which, in turn, are trained faster than its weights. Gradually but rapidly, the error gradient tends to push the activations towards zero in an attempt to suppress the influence of the previous layers. Eventually, the saturation may be overcome but the overall result would be of poor generalization.&lt;/p&gt;
 
