@@ -146,7 +146,7 @@ Problem: Vanishing gradients As mentioned in the previous post, the activation v
   
 
 
-  <link rel="shortcut icon" type="image/png" href="./favicon.ico"/>
+  <link rel="shortcut icon" type="image/icon" href="./img/favicon.ico"/>
 
 
   <title>Obstacles along deep learning evolution: vanishing gradients | </title>
@@ -368,16 +368,16 @@ text-align: justify}
 
 <!--
 ## The challenges of training deep networks
-Despite mentioning pre-training as solution for saturation, such technique is not employed as much today. This is due to fact that the properties that pre-training ensures can be attained by a much more efficent strategy which will be explained further on. 
+Despite mentioning pre-training as solution for saturation, such technique is not employed as much today. This is due to fact that the properties that pre-training ensures can be attained by a much more efficient strategy which will be explained further on. 
 
 https://arxiv.org/pdf/1504.06825.pdf
 -->
 
 <h3 id="problem-vanishing-gradients">Problem: Vanishing gradients</h3>
 
-<p>As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers. But what happens to the gradients? Around the 1980&rsquo;s researchers at USC and CMU started to work on algorithms using the gradient of the loss function throughout the layers of the network as a way to adjust each weight with a corresponding &ldquo;influence&rdquo; over the error. These gradients were obtained analytically by applying the chain rule from the loss function to the desired weight. This is famously called the backpropagation technique, and has spured the development of neural networks later on. (Cite hinton 1989)</p>
+<p>As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers. But what happens to the gradients? Around the 1980&rsquo;s researchers at USC and CMU started to work on algorithms using the gradient of the loss function throughout the layers of the network as a way to adjust each weight with a corresponding &ldquo;influence&rdquo; over the error. These gradients were obtained analytically by applying the chain rule from the loss function to the desired weight. This is famously called the backpropagation technique, and has spurred the development of neural networks later on. (Cite hinton 1989)</p>
 
-<p>However, once again, as the stack of layers increase, obstacles arise to  hamper performance, and this time this is caused by a phenonmenon known as the Vasinhing/Exploding Gradients. To illustrate it, consider a network with a general cost function and symmetric activation functions $f$ with unit derivative at 0. If we write $a_{i}$ for the activation vector of layer $i$, and $s_{i}$ the argument vector of the activation function at layer $i$, we have $s_{i}=a_{i}W_{i}+b_{i}$ and $a_{i}=f(s_{i})$.</p>
+<p>However, once again, as the stack of layers increase, obstacles arise to  hamper performance, and this time this is caused by a phenomenon known as the Vanishing/Exploding Gradients. To illustrate it, consider a network with a general cost function and symmetric activation functions $f$ with unit derivative at 0. If we write $a_{i}$ for the activation vector of layer $i$, and $s_{i}$ the argument vector of the activation function at layer $i$, we have $s_{i}=a_{i}W_{i}+b_{i}$ and $a_{i}=f(s_{i})$.</p>
 
 <p>Consider the following node output and activation:</p>
 
