@@ -4,26 +4,21 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-05-28T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/work/feature_selection/</loc>
-    <lastmod>2019-05-28T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/work/</loc>
-    <lastmod>2019-05-28T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/work/saturation/</loc>
     <lastmod>2019-05-09T00:00:00-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/work/vanishing_gradients/</loc>
+    <loc>/post/saturation/</loc>
+    <lastmod>2019-05-09T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/deep_learning/</loc>
+    <lastmod>2019-05-09T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
     <lastmod>2019-05-09T00:00:00-05:00</lastmod>
   </url>
   

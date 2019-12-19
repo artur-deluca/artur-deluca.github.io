@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Work | </title>
+    <link>/post/</link>
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Work</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 09 May 2019 00:00:00 -0500</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Work</title>
+      <link>/post/</link>
+    </image>
+    
+    <item>
+      <title>Deep learning challenges: saturation</title>
+      <link>/post/saturation/</link>
+      <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
+      <guid>/post/saturation/</guid>
+      <description>&lt;style&gt;
+    h1 {
+        text-align: left;
+    }
+
+    body {
+        text-align: justify;
+    }
+&lt;/style&gt;
+&lt;blockquote&gt;
+&lt;p style=&#34;font-size:0.8em&#34;&gt;This series intend to shed some light onto the problems that have followed the development of machine learning, and especially deep learning. I don&#39;t intend to make this a comprehensive review of all problems and corresponding techniques, whether to select some of the prominent obstacles.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In the early development of neural networks, the initialization of parameters was performed by sampling a uniform distribution bounded to a predetermined interval. In this process, the weights and biases produced solutions that would generally lie far from an optimum set of parameters, requiring many training iterations to readjust. Shallow networks did not suffer too much from this due to the smaller number of parameters, hence presenting an easier system to optimize. However, as the depth of networks increased, so did the difficulty to train such models using this initialization procedure.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt; promoted a study to understand why random initialization performed so poorly in deep networks. In this investigation, the authors considered one common initialization heuristic, introduced by &lt;a href=&#34;#References&#34;&gt;LeCun et al. (1998)&lt;/a&gt;, that defines the biases at 0 and the weights via sampling according to the following distribution:&lt;/p&gt;
+&lt;p&gt;$$W_{ij}\sim U\left[-\frac{1}{\sqrt{n}},\frac{1}{\sqrt{n}}\right]$$&lt;/p&gt;
+&lt;p&gt;where $n$ is the number of inputs to the unit. The authors then verified that in deep configurations of 4 to 5 layers, activation values on the last layers got stuck in plateaus situated at the extremes of the activation function, case otherwise known as saturation.&lt;/p&gt;
+&lt;img src=&#34;./figures/saturation.png&#34; width=&#34;80%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Saturation regions on the sigmoid function. In the case observed by &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;, the saturation occurred in the 5th and last layer of the network, with activation values converging to zero.&lt;/p&gt;
+&lt;p&gt;One hypothesis that explains saturation on sigmoid-equipped deep networks is that the random initialization does not provide useful information to the last layer of the network, that starts to rely more on its biases, which, in turn, are trained faster than its weights.&lt;/p&gt;
+&lt;img src=&#34;./figures/saturation_plot.png&#34; width=&#34;100%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Mean (&lt;i&gt;lines&lt;/i&gt;) and standard deviation (&lt;i&gt;vertical bars&lt;/i&gt;) of sigmoid activation values across layers in a neural network using random initialization. The saturation is detectable in the last layer, where the activation values reach virtually zero. Source: &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Gradually but rapidly, the error gradient tends to push the activations towards zero in an attempt to suppress the influence of the previous layers. Eventually, the saturation may be overcome but the overall result would be of poor generalization.&lt;/p&gt;
+&lt;h3 id=&#34;solution-unsupervised-pre-training&#34;&gt;Solution: Unsupervised pre-training&lt;/h3&gt;
+&lt;p&gt;Layer saturation was the biggest technical hurdle that limited the progress of deep learning in the dawn of the millennium. In 2006, however, &lt;a href=&#34;#References&#34;&gt;Hinton et al. (2006)&lt;/a&gt; inspired by a well-established procedure, developed a novel approach to initialize the parameters of a Deep Belief Network — a class of neural networks — what in time overcame the saturation issue and surpassed performance ever seen using deep architectures. These results not only re-sparked but drastically expanded researchers&amp;rsquo; interest in this field.&lt;/p&gt;
+&lt;img src=&#34;./figures/deep_belief_net.svg&#34; width=&#34;80%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;A Deep Belief Network (DBN) can be seen as a stack of smaller unsupervised learning algorithms named Restricted Boltzmann Machines. This configuration can then be bundled with a classical multi-layer perceptron for supervised learning tasks&lt;/p&gt;
+&lt;p&gt;This initialization procedure encompassed an unprecedented process: an unsupervised greedy layer-wise pre-training step.&lt;sup&gt;1&lt;/sup&gt; Preceding the conventional supervised training, each layer is trained with its anterior neighboring layer identically to a Restricted Boltzmann Machine. This process starts with the input and first layer, and progressively advances one layer at a time until it sweeps all layers.&lt;/p&gt;
+&lt;p&gt;A Boltzmann Machine is an unsupervised generative algorithm that learns the data representation by associating the patterns identified in the inputs to probabilistic configurations within its parameters. A Restricted Boltzmann Machine is a variation of such a model that reproduces a similar behavior but with significantly fewer connections.&lt;/p&gt;
+&lt;p style=&#34;font-size:0.6em;&#34;&gt;
+[1] Despite the imprecision, unsupervised pre-training is here used interchangeably
+&lt;/p&gt;
+&lt;img src=&#34;./figures/BM_RBM.svg&#34; width=&#34;80%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;A Boltzmann Machine (&lt;i&gt;left&lt;/i&gt;) and a Restricted Boltzmann Machine (&lt;i&gt;right&lt;/i&gt;)&lt;/p&gt;
+&lt;p&gt;Many other unsupervised pre-training algorithms were developed concomitantly or immediately after, such as autoencoders &lt;a href=&#34;#References&#34;&gt;(Bengio et al. (2007))&lt;/a&gt;, denoising autoencoders &lt;a href=&#34;#References&#34;&gt;(Vincent et al. (2008))&lt;/a&gt;, contractive autoencoders &lt;a href=&#34;#References&#34;&gt;(Rifai et al. (2011))&lt;/a&gt;, among others.&lt;/p&gt;
+&lt;img src=&#34;./figures/pretraining_improvement_comparison.png&#34; width=&#34;100%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Comparison of performance between networks running without pre-training (&lt;i&gt;left&lt;/i&gt;) and with pre-training (&lt;i&gt;right&lt;/i&gt;) &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010, pg. 636)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Why does this unsupervised learning methods help training deep architectures? Much of the explanation remains uncertain. Nonetheless, &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010)&lt;/a&gt; provide some clarifications through considerable experimentation. The claims of the authors reside on two possible, but not mutually exclusive reasons: &lt;i&gt;optimization&lt;/i&gt; and &lt;i&gt;regularization&lt;/i&gt;.&lt;/p&gt;
+&lt;p&gt;Deep neural networks are composed of many parameters whose values are used to compute an approximation of a function. Due to its substantial nonlinear nature, this approximation yields a non-convex function that poses a challenge on searching the best combination of weights and biases.&lt;sup&gt;2&lt;/sup&gt;&lt;/p&gt;
+&lt;img src=&#34;./figures/convex_nonconvex.png&#34; width=&#34;100%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;A convex (left) and non-convex (right) function. Note that, contrarily to the convex function, the non-convex function possesses multiple local optima. Source: &lt;a href=&#34;#References&#34;&gt;Zadeh (2016)&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&#34;font-size:0.6em;&#34;&gt;
+[2] Many discussions today in academia evolve around the particular shape of loss landscape in deep neural networks, since many of the local minima appear to have equally good qualities, suggesting that the critical solutions reached during training are actually saddle points. This discussion will be reserved for &lt;a href=&#34;https://github.com/artur-deluca/landscapeviz&#34;&gt;further studies&lt;/a&gt;.
+&lt;/p&gt;
+&lt;p&gt;Gradient-based methods employed in training eventually converge to their pre-selected basin of attraction, a region of the function space, such that any point in it eventually is iterated into the attractor. Unsupervised pre-training may work towards optimization by favoring a basin of attraction that might yield a lower training error. Thus, since the gradients are very prompt to abrupt changes, backpropagation is only used at a local search level, from an already favorable starting point (&lt;a href=&#34;#References&#34;&gt;Hinton (2012, lecture 14b)&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;As for &lt;i&gt;regularization&lt;/i&gt;, one may commonly associate it with explicit techniques, such as the L1 or L2 norm:&lt;/p&gt;
+&lt;p&gt;$$C=-\frac{1}{n}\sum_{j}\left[y_j\ln a_j^{L}+\left(1-y_j\right)\ln\left(1-a_j^{L}\right)\right]+\frac{\lambda}{2n}\sum_iw_i{{}^2}$$&lt;/p&gt;
+&lt;p&gt;By adding the &lt;i&gt;L2 regularization&lt;/i&gt; factor in the cross-entropy cost function, presented in the equation above, one can penalize overly complex models, that would result in poor generalization, i.e. &lt;i&gt;high testing error&lt;/i&gt;. However, the regularization employed by pre-training is implicit. In attempt to model how such technique would work explicitly, &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2009)&lt;/a&gt; defines a regularization term such as:&lt;/p&gt;
+&lt;p&gt;$$regularizer=-log,P\left(\theta\right)$$&lt;/p&gt;
+&lt;p&gt;The function $P\left(\theta\right)$ describes the probability that the weights of the neural network are initialized as $\theta$. So, if a configuration shows to be highly improbable, the regularizer term will hurt the cost function strongly. Furthermore, if the probability of landing such set of parameters is high, the regularizer will then reward the cost function. This probability is governed by the initialization methods employed. Considering two instances with and without pre-training, we obtain:&lt;/p&gt;
+&lt;p&gt;$$P_{{\text{pre-training}}}(\theta) = \sum_k\frac{1_{\theta \in R_k}\pi_k}{v_k}$$&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;$$P_{{\text{no pre-training}}}(\theta) = \sum_k\frac{1_{\theta \in R_k}r_k}{v_k}$$&lt;/p&gt;
+&lt;br&gt;
+where $R_k$ is the basin of attraction that contains $\theta$, and $1\_{\theta \in R_k}$ is the identifier function – unitary for all $\theta$ in $R_k$, otherwise null. Additionally, $\pi_k$ and $r_k$ are the probabilities of landing in the basin of attraction $R_k$, which has a volume $v_k$. Since the basins of attraction are disjunct sets, the probability density function of the set of parameters located in $R_k$ is uniform, calculated by taking the probability of landing in the k-th basin ($\pi_k$ or $r_k$) and dividing by its volume.
+&lt;p&gt;Pre-training the parameters of the network conditions the network initialization to land on regions of better generalization. This is hypothetically achieved by increasing the $\pi_k$&#39;s where the network parameters represent meaningful variations of the input, contributing to predict the output. For this reason, pre-training also reduces the variance upon parameter initialization.&lt;/p&gt;
+&lt;img src=&#34;./figures/trajectories.png&#34; width=&#34;70%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;2-D visualization of parameters&#39; trajectory of 100 neural networks with and without the unsupervised pre-training step. The color gradient from dark-blue to cyan symbolizes the progression of iterations. &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010, pg. 541)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The visualization of the parameters&amp;rsquo; trajectory may demonstrate the effects of optimization and regularization. As mentioned through the former, it may select a basin of attraction with lower training errors. Conversely, regularization may bound the parameter interval to a range that yields good generalization. Also, it is crucial to notice that both training and testing errors collected in the experiments of &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010)&lt;/a&gt; support these hypotheses, but do favor the latter.&lt;/p&gt;
+&lt;p&gt;Furthermore, once established within the solution space, the parameters do not drastically change during the gradient-based adjustment process. This process is also denominated fine-tuning, as it only modifies the features slightly to get the category boundaries, rather than discovering new relationships (&lt;a href=&#34;#References&#34;&gt;Hinton (2012, lecture 14b)&lt;/a&gt;).&lt;/p&gt;
+&lt;img src=&#34;./figures/trained_filters.svg&#34; width=&#34;90%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Visualization of filters of a Deep Belief Network used to recognize digits form the MNIST data-set after the different training processes; from left to right: units from the first, second and third layers, respectively. &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010, pg. 638-639)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;But how can one conceptually understand the effects of unsupervised learning? Apart from the regularization and optimization hypothesis, the layer-wise pre-training resembles the underlying distribution of the input. Ideally, this representation, by combining the different features and mapping their inner relationships, can unveil, and more importantly, disentangle causal elements that influence the output. If those inputs can be transformed into uncorrelated features, it is possible to solve for a particular parameter disregarding its influence over the others.&lt;/p&gt;
+&lt;p&gt;As mentioned in &lt;a href=&#34;#References&#34;&gt;Goodfellow et al. (2016, pg. 541)&lt;/a&gt;, this hypothesis justifies approaches in which one first seeks a good representation for $p(x)$ before training with the output. If the output is closely related to factors captured by the input, an initialization that captures the distribution of x is useful for predicting the desired output distribution $p\left(y|x\right)$.&lt;/p&gt;
+&lt;p&gt;However, despite the aforementioned advantages, unsupervised pre-training presents noteworthy drawbacks, such as establishing two separate learning stages (unsupervised and supervised). As a consequence, there is a long delay between adjusting hyperparameters on the first stage utilizing feedback from the second. Additionally, although pre-training being considered a valuable regularizer, its strength adjustment is troublesome, requiring a somewhat unclear modification of far too many hyperparameters — contrasting with explicit regularization techniques that can be adjusted by a single one.&lt;/p&gt;
+&lt;p&gt;For the reasons mentioned above, unsupervised pre-training is not so popularly used today, as other techniques discovered yielded the same benefits but much more efficiently. These will be explained in the following post, where these strategies will also tackle a different obstacle: Vanishing gradients.&lt;/p&gt;
+&lt;h2&gt;&lt;a name=&#34;References&#34;&gt;&lt;/a&gt;References&lt;/h2&gt;
+&lt;ul style=&#34;font-size:0.6em;&#34;&gt;
+    &lt;li&gt;Bengio, Y. (2009). Learning Deep Architectures for AI. Foundations and Trends in Machine Learning. 1-127.&lt;/li&gt;
+    &lt;li&gt;Bengio, Y., Lamblin, P., Popovici, D., and Larochelle, H. (2007). Greedy Layer-Wise Training of Deep Networks. In Advances in Neural Information Processing Systems 19, 153-160.&lt;/li&gt;
+    &lt;li&gt;Erhan, D., Bengio, Y., Courville, A., Manzagol, P.A., Vincent, P., and Bengio, S. (2010). Why Does Unsupervised Pre-training Help Deep Learning? Journal of Machine Learning Research, 11-36.&lt;/li&gt;
+    &lt;li&gt;Erhan, D., Manzagol, P.A., Bengio, Y., Bengio, S., and Vincent, P. (2009). The Difficulty of Training Deep Architectures and the Effect of Unsupervised Pre-Training. Artificial Intelligence and Statistics, 153-160.&lt;/li&gt;
+    &lt;li&gt;Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
+    Statistics , pages 249-256.&lt;/li&gt;
+    &lt;li&gt;Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep Learning. MIT Press.&lt;/li&gt;
+    &lt;li&gt;He, K., Zhang, X., Ren, S., and Sun, J. (2015). Deep Residual Learning for Image Recognition. Proceedings of the IEEE conference on computer vision and pattern recognition.&lt;/li&gt;
+    &lt;li&gt;Hinton, G. (2012). Neural Networks for Machine Learning. Coursera Online Course.&lt;/li&gt;
+    &lt;li&gt;Hinton, G. E., Osindero, S., and Teh, Y.-W. (2006). A Fast Learning Algorithm for Deep Belief Nets. Neural Computation , 1527-1554.&lt;/li&gt;
+    &lt;li&gt;LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K.-R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.&lt;/li&gt;
+    &lt;li&gt;Rifai, S., Vincent, P., Muller, X., Glorot, X., and Bengio, Y. (2011).
+    Contractive Auto-encoders: Explicit Invariance During Feature Extraction. Proceedings of the 28th International Conference 
+    on Machine Learning, 833-840.&lt;/li&gt;
+    &lt;li&gt;Vincent, P., Larochelle, H., Bengio, Y., and Manzagol, P.-A. (2008).
+    Extracting and Composing Robust Features with Denoising Autoencoders. Proceedings of the 25th International Conference, 1096-1103.&lt;/li&gt;
+    &lt;li&gt;Zadeh, R. (2016). The hard thing about deep learning. O&#39;Reilly Media.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Why deep learning became relevant</title>
+      <link>/post/deep_learning/</link>
+      <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
+      <guid>/post/deep_learning/</guid>
+      <description>&lt;style&gt;
+    h1 {
+        text-align: left;
+    }
+
+    body {
+        text-align: justify;
+    }
+
+&lt;/style&gt;
+&lt;p&gt;In machine learning, the role of models is to approximate a mapping using data and, more importantly, generalizing this behavior for unseen instances of the given problem.&lt;/p&gt;
+&lt;p&gt;On this matter, several strategies within artificial intelligence once had their share of success. In the past these were mainly supported by expert knowledge - either by embedding rigid rules into models or by manually combining input variables and designing more abstract features to mitigate limitations of the settings then used. Conversely, neural networks were able to learn target functions solely based on input data. At that time, their architecture relied on a shallow structure, i.e. using a small number of layers, and their achievements were limited to simple sets of applications.&lt;/p&gt;
+&lt;div&gt;
+    &lt;img src=&#34;https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/spiral.1-2.2-2-2-2-2-2.gif&#34; width=&#34;50%&#34; align=&#34;left&#34;/&gt;
+    &lt;img src=&#34;https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/img/spiral.2.2-2-2-2-2-2-2.gif&#34; width=&#34;50%&#34; align=&#34;right&#34;/&gt;
+    &lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Combination of features to generate a linearly-separable decision space. On the left a two-layer network successfully separating the two classes. On the right a similar setting in which the same network fails.&lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Olah, C. (2016)&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;As the complexity of applications increase the mentioned approaches tend to fail. A task such as image classification poses a challenge to these methods namely because it is overwhelmingly difficult to combine a large number of low-level features (pixels) to determine a contrasting abstract outcome (object). Alternatively, deep learning is able to better accomplish this task &lt;a href=&#34;#References&#34;&gt;Bradley (2010, pg. 22)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Hierarchical learning, deep structured learning, or simply deep learning can be defined as &lt;em&gt;a class of machine learning techniques that exploit many layers of non-linear units&lt;/em&gt; (&lt;a href=&#34;#References&#34;&gt;Deng and Yu (2013, pg. 199)&lt;/a&gt;). This better capability is attained by the substantial coupling of non-linear operations whose parameters readapt, gradually approximating the target function thus deriving complex feature hierarchies from low-level inputs.&lt;/p&gt;
+&lt;img src=&#34;./figures/deep_learning_pg6.png&#34; width=&#34;60%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Compositional representation of features throughout layers: from pixels to gradients and edges. &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Goodfellow et al. (2016, pg. 6)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A neural network can progressively synthesize more structured features along the layers, indicating the number of layers as a crucial factor in model design, and as experimental outlines in &lt;a href=&#34;#References&#34;&gt;He et al. (2015)&lt;/a&gt; and &lt;a href=&#34;(#References)&#34;&gt;Krizhevsky et al. (2012)&lt;/a&gt; indicate performance improvement upon increase in depth.&lt;/p&gt;
+&lt;p&gt;Still, how many layers are necessary to well approximate a function? In reality, the absolute number of layers is not the important factor, rather how many of these are necessary to effectively represent the target function, denominated as the &lt;em&gt;compact representation&lt;/em&gt;. Moreover, if a configuration is smaller than the compact representation, that can pose a predicament to performance, as &lt;a href=&#34;(#References)&#34;&gt;Bengio (2009, pg. 9)&lt;/a&gt; describes:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;More precisely, functions that can be compactly represented by a depth $k$ architecture might require an exponential number of computational elements to be represented by a depth $k-1$ architecture. Since the number of computational elements one can afford depends on the number of training examples available to tune or select them, the consequences are not just computational but also statistical: poor generalization may be expected when using an insufficiently deep architecture for representing some functions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This can be illustrated by the work of &lt;a href=&#34;(#References)&#34;&gt;Håstad (1986)&lt;/a&gt;, awarded the Gödel Prize of 1994. Analogously, the author claims that logic architecture with a limited in-depth presents an exponential number of components in comparison with a deep counterpart. Consider the calculation of the parity function, defined as:&lt;/p&gt;
+&lt;p&gt;$$f:\{0,1\}^{n}\rightarrow\{0,1\},\thinspace f(x)=\left(\overset{|x]}{\underset{i=1}{\sum}}x_{i}\right) mod\space 2$$&lt;/p&gt;
+&lt;p&gt;The number of logical components for a depth-limited architecture of 2 layers and $N$ inputs is of in order of $O(2^{N})$. On the other hand, unbounded architectures can produce less complex systems, such as the balanced tree structure of complexity $O(N\thinspace log\thinspace N)$.&lt;/p&gt;
+&lt;img src=&#34;./figures/logic_circuits.png&#34; width=&#34;80%&#34;/&gt;
+&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Distinct architectures to compute the parity function. A Disjunctive normal form structure (left) with complexity of $2^{N-1}$ and a balanced tree structure (right) with 5 layers and complexity of $O(N\thinspace log\thinspace N)$.&lt;/p&gt;
+&lt;p&gt;So, ideally, a function requires a number of layers to be represented in an efficient manner. However, in theory, that does not imply any counterpoints to stacks of layers greater than required by the function, as the spare layers could simply replicate the last compact representation output. However, many challenges arise as the depth of networks increase.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p style=&#34;font-size:0.6em;&#34;&gt;Consider leaving a &amp;nbsp&lt;span style=&#34;text-shadow: none;&#34;&gt;&lt;a class=&#34;github-button&#34; href=&#34;https://github.com/artur-deluca/artur-deluca.github.io&#34; data-icon=&#34;octicon-star&#34; data-size=&#34;small&#34; data-show-count=&#34;true&#34; aria-label=&#34;Star this on GitHub&#34;&gt;Star&lt;/a&gt;&lt;script async defer src=&#34;https://buttons.github.io/buttons.js&#34;&gt;&lt;/script&gt;&lt;/span&gt; &amp;nbsp if this helps you.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Despite the remarked capacity, deep architectures were not widely researched in the past as today. The reasons for this may encompass the former contemptuous view of researchers on this topic, or an insufficient computational power especially compared to contemporary standards. This, however, will not be covered in this series. The challenges of employing such architectures were also imposed by the difficulty in training neural networks with more than two layers, ultimately delivering poor generalization (&lt;a href=&#34;#References&#34;&gt;Bengio et al. (2007)&lt;/a&gt;)&lt;sup&gt;1&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;In the next series of posts I cover some of the predicaments that have followed the development of deep learning, starting from &lt;a href=&#34;home/saturation&#34;&gt;saturation&lt;/a&gt;.&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;
+&lt;a style=&#34;font-size:0.6em;&#34;&gt;&amp;nbsp;&amp;nbsp;1&lt;/a&gt;    
+&lt;/summary&gt;
+&lt;p style=&#34;font-size:0.6em;&#34;&gt;
+&lt;br&gt;
+&lt;a href=&#34;#References&#34;&gt;Bengio (2009, pg. 24)&lt;/a&gt; appropriately points out that Convolutional Neural Networks with up to seven layers did not suffer as other types of models. This may be due to what the author denominates as a Topographic Structure, suggesting that each neuron in a layer is associated with a small portion of the input. From this, two favorable aspects are hypothesized: the gradient is propagated less diffusely and this hierarchical local connectivity structure may be more suited for image recognition tasks, which is the most common use for such architecture.
+&lt;br&gt;
+&lt;/p&gt;
+&lt;/details&gt;
+&lt;h2&gt;&lt;a name=&#34;References&#34;&gt;&lt;/a&gt;References&lt;/h2&gt;
+&lt;ul style=&#34;font-size:0.6em;&#34;&gt;
+    &lt;li&gt;Bengio, Y. (2009). Learning Deep Architectures for AI. Foundations and Trends in Machine Learning. 1-127.&lt;/li&gt;
+    &lt;li&gt;Bengio, Y., Lamblin, P., Popovici, D., and Larochelle, H. (2007). Greedy Layer-Wise Training of Deep Networks. In Advances in Neural Information Processing Systems 19, 153-160.&lt;/li&gt;
+    &lt;li&gt;Bradley, D. M. (2010). Learning In Modular Systems. PhD Thesis, Carnegie Mellon University.&lt;/li&gt;
+    &lt;li&gt;Olah, C. (2014). Neural Networks, Manifolds, and Topology. Colah&#39;s blog&lt;/li&gt;
+    &lt;li&gt;Deng, L. and Yu, D. (2013). Deep Learning: Methods and Applications.
+    Foundations and Trends in Signal Processing, 7-197.&lt;/li&gt;
+    &lt;li&gt;Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep Learning. MIT Press.&lt;/li&gt;
+    &lt;li&gt;He, K., Zhang, X., Ren, S., and Sun, J. (2015). Deep Residual Learning for Image Recognition. Proceedings of the IEEE conference on computer vision and pattern recognition.&lt;/li&gt;
+    &lt;li&gt;Krizhevsky, A., Sutskever, I., and Hinton, G. E. (2012). ImageNet Classification with Deep Convolutional Neural Networks. Advances in Neural Information Processing Systems 25, 1097-1105.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
