@@ -1,3 +1,1 @@
-[Personal website](http://artur-deluca.github.io)
-
-Modified version of [taken](https://github.com/vfalanis/taken)
+[Personal website](http://artur-deluca.github.io) based on [Hugo Academic](https://github.com/gcushen/hugo-academic)
