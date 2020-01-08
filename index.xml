@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>arturdeluca</title>
-    <link>/</link>
-      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://artur-deluca.github.io/</link>
+      <atom:link href="https://artur-deluca.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>arturdeluca</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 09 May 2019 00:00:00 -0500</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://artur-deluca.github.io/img/icon-192.png</url>
       <title>arturdeluca</title>
-      <link>/</link>
+      <link>https://artur-deluca.github.io/</link>
     </image>
     
     <item>
       <title>posts</title>
-      <link>/post/</link>
+      <link>https://artur-deluca.github.io/post/</link>
       <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
-      <guid>/post/</guid>
+      <guid>https://artur-deluca.github.io/post/</guid>
       <description></description>
     </item>
     

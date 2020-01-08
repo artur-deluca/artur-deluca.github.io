@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>posts | arturdeluca</title>
-    <link>/post/</link>
-      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://artur-deluca.github.io/post/</link>
+      <atom:link href="https://artur-deluca.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>posts</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 09 May 2019 00:00:00 -0500</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://artur-deluca.github.io/img/icon-192.png</url>
       <title>posts</title>
-      <link>/post/</link>
+      <link>https://artur-deluca.github.io/post/</link>
     </image>
     
     <item>
       <title>Deep learning advances: unsupervised pretraining</title>
-      <link>/post/pretraining/</link>
+      <link>https://artur-deluca.github.io/post/pretraining/</link>
       <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
-      <guid>/post/pretraining/</guid>
+      <guid>https://artur-deluca.github.io/post/pretraining/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;These series intend to shed some light on the problems and corresponding solutions that have followed the development of deep learning. I don&#39;t intend to make this a comprehensive review of all techniques but to select some of the prominent ones.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -122,9 +122,9 @@ $$&lt;/p&gt;
     
     <item>
       <title>Why deep learning became relevant</title>
-      <link>/post/introduction/</link>
+      <link>https://artur-deluca.github.io/post/introduction/</link>
       <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
-      <guid>/post/introduction/</guid>
+      <guid>https://artur-deluca.github.io/post/introduction/</guid>
       <description>&lt;p&gt;In the last decade, there&#39;s been a widespread interest in artificial intelligence, particularly machine learning, and even more specifically deep learning. Curiously, this topic has not only resurged within academia but rather it has also been commonly showcased on non-technical mediums.&lt;/p&gt;
 &lt;p&gt;Why these topics became so popular now? Certainly, recent feats such as AlphaGo or Waymo may raise awareness and hint to potential implications in our social organization, especially in the labor sector. Still, but what underlying technical advances have enabled these achievements - and what makes deep learning a paradigm so relevant within the past few years?&lt;/p&gt;
 &lt;p&gt;In the aforementioned fields, one common task is to reason upon prior knowledge to derive plausible conclusions, a task known as inference. On this matter, strategies within artificial intelligence like expert systems had shared some success by encapsulating an expert&#39;s rationale into knowledge bases. These databases were then used by an inference engine, typically using logical rules, to reason out conclusions.&lt;/p&gt;
