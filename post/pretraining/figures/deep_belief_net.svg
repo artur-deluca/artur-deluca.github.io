@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="110.54826"
-     inkscape:cy="279.33213"
+     inkscape:cx="304.53089"
+     inkscape:cy="139.58868"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -259,40 +259,18 @@
          id="path833-7-4"
          style="fill:#ffffff;stroke:#000000;stroke-width:0.1527001;stroke-miterlimit:4;stroke-dasharray:none" />
     </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.52499962px;line-height:1.25;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="18.772488"
-       y="173.90335"
-       id="text1152"><tspan
-         sodipodi:role="line"
-         id="tspan1150"
-         x="18.772488"
-         y="173.90335"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.52499962px;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';stroke-width:0.26458332">visible layer</tspan></text>
     <path
-       style="fill:none;stroke:#1a1a1a;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 80.715397,118.06305 c 0,0 4.677216,2.96319 4.677216,6.81537 v 23.11882 c 0,6.53612 4.543582,7.75081 4.543582,7.75081"
+       style="fill:none;stroke:#1a1a1a;stroke-width:0.24706571px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80.052508,129.82318 c 0,0 5.352394,2.25787 5.352394,5.19313 v 17.61591 c 0,4.98034 5.199469,5.9059 5.199469,5.9059"
        id="path1195"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssc" />
     <path
-       style="fill:none;stroke:#1a1a1a;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 89.899563,80.361999 c 0,0 -4.677216,2.96319 -4.677216,6.81537 v 23.118821 c 0,6.53612 -4.543582,7.75081 -4.543582,7.75081"
+       style="fill:none;stroke:#1a1a1a;stroke-width:0.24706571px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 90.562452,101.09602 c 0,0 -5.352394,2.25787 -5.352394,5.19313 v 17.6159 c 0,4.98034 -5.199469,5.90591 -5.199469,5.90591"
        id="path1195-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssc" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.52499962px;line-height:1.25;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="19.496387"
-       y="120.25352"
-       id="text1152-8"><tspan
-         sodipodi:role="line"
-         id="tspan1150-7"
-         x="19.496387"
-         y="120.25352"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.52499962px;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';stroke-width:0.26458332">hidden layers</tspan></text>
     <g
        id="g1386"
        transform="translate(1.2655964,-2.0045215)"
@@ -405,5 +383,38 @@
          x="185.257"
          y="97.158569"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.65795755px;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';stroke-width:0.12938771">RBM</tspan></text>
+    <text
+       id="text886"
+       y="173.82729"
+       x="21.012571"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.8194437px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';stroke-width:0.26458332"
+         y="173.82729"
+         x="21.012571"
+         id="tspan884"
+         sodipodi:role="line">input layer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.8194437px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="21.012571"
+       y="129.99509"
+       id="text890"><tspan
+         sodipodi:role="line"
+         id="tspan888"
+         x="21.012571"
+         y="129.99509"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';stroke-width:0.26458332">hidden layers</tspan></text>
+    <text
+       id="text894"
+       y="88.568306"
+       x="21.012571"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.8194437px;line-height:1.25;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'CMU Serif';-inkscape-font-specification:'CMU Serif';stroke-width:0.26458332"
+         y="88.568306"
+         x="21.012571"
+         id="tspan892"
+         sodipodi:role="line">output layer</tspan></text>
   </g>
 </svg>
