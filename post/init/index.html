@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Artur de Luca">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="body { text-align: justify}  The objective of this series is to illustrate some of the past and on-going challenges within deep learning. In the previous blog post, the obstacle discussed was the saturation within activation functions during training. This is a follow-up, so I recommend you take a brief look before continuing.
+Problem: Vanishing gradients As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://artur-deluca.github.io/post/init/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="anonymous">
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.2d819551d436d2320319fca8a8497a72.css">
+
+  
+    
+    
+    
+    
+      
+    
+    
+    
+    <link rel="stylesheet" href="/css/academic.bd654c477505d2f4707dc3fd3a8e905d.css">
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://artur-deluca.github.io/post/init/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@backdeluca">
+  <meta property="twitter:creator" content="@backdeluca">
+  
+  <meta property="og:site_name" content="arturdeluca">
+  <meta property="og:url" content="https://artur-deluca.github.io/post/init/">
+  <meta property="og:title" content="Obstacles along deep learning evolution: vanishing gradients | arturdeluca">
+  <meta property="og:description" content="body { text-align: justify}  The objective of this series is to illustrate some of the past and on-going challenges within deep learning. In the previous blog post, the obstacle discussed was the saturation within activation functions during training. This is a follow-up, so I recommend you take a brief look before continuing.
+Problem: Vanishing gradients As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers."><meta property="og:image" content="https://artur-deluca.github.io/img/icon-192.png">
+  <meta property="twitter:image" content="https://artur-deluca.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-09T00:00:00-05:00">
+    
+    <meta property="article:modified_time" content="2019-05-09T00:00:00-05:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://artur-deluca.github.io/post/init/"
+  },
+  "headline": "Obstacles along deep learning evolution: vanishing gradients",
+  
+  "datePublished": "2019-05-09T00:00:00-05:00",
+  "dateModified": "2019-05-09T00:00:00-05:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Artur de Luca"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "arturdeluca",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://artur-deluca.github.io/img/icon-512.png"
+    }
+  },
+  "description": "body { text-align: justify}  The objective of this series is to illustrate some of the past and on-going challenges within deep learning. In the previous blog post, the obstacle discussed was the saturation within activation functions during training. This is a follow-up, so I recommend you take a brief look before continuing.\nProblem: Vanishing gradients As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  <link rel="shortcut icon" type="image/icon" href="./img/favicon.ico"/>
+
+
+  <title>Obstacles along deep learning evolution: vanishing gradients | arturdeluca</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">arturdeluca</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Obstacles along deep learning evolution: vanishing gradients</h1>
+
+  
+
+  
+    
+
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 9, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+  
+    
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <style>
+body {
+text-align: justify}
+</style>
+<p>The objective of this series is to illustrate some of the past and on-going challenges within deep learning. In the previous blog post, the obstacle discussed was the <a href="../saturation">saturation</a> within activation functions during training. This is a follow-up, so I recommend you take a brief look before continuing.</p>
+<!--
+## The challenges of training deep networks
+Despite mentioning pre-training as solution for saturation, such technique is not employed as much today. This is due to fact that the properties that pre-training ensures can be attained by a much more efficient strategy which will be explained further on. 
+
+https://arxiv.org/pdf/1504.06825.pdf
+-->
+<h3 id="problem-vanishing-gradients">Problem: Vanishing gradients</h3>
+<p>As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers. But what happens to the gradients? Around the 1980's researchers at USC and CMU started to work on algorithms using the gradient of the loss function throughout the layers of the network as a way to adjust each weight with a corresponding &ldquo;influence&rdquo; over the error. These gradients were obtained analytically by applying the chain rule from the loss function to the desired weight. This is famously called the backpropagation technique, and has spurred the development of neural networks later on. (Cite hinton 1989)</p>
+<p>However, once again, as the stack of layers increase, obstacles arise to  hamper performance, and this time this is caused by a phenomenon known as the Vanishing/Exploding Gradients. To illustrate it, consider a network with a general cost function and symmetric activation functions $f$ with unit derivative at 0. If we write $a_{i}$ for the activation vector of layer $i$, and $s_{i}$ the argument vector of the activation function at layer $i$, we have $s_{i}=a_{i}W_{i}+b_{i}$ and $a_{i}=f(s_{i})$.</p>
+<p>Consider the following node output and activation:</p>
+<p>Consider the following node output and activation:</p>
+<p>$$s^{i}=W^{i}a^{i-1}+b_{i}$$</p>
+<p>$$a_{i+1}=g\left(W_{i}a_{i-1}+b_{i}\right)$$</p>
+<p>The derivative of the loss function $\mathcal{L}$ in a network with $l$ layers in terms of a weight $W_{n}$ can be written as:</p>
+<p>$$\frac{\partial\mathcal{L}}{\partial W_{n}}=\frac{\partial s_{n}}{\partial W_{n}}\left[\underset{i=n}{\overset{l-1}{\prod}}\frac{\partial a_{i+1}}{\partial s_{i}}\frac{\partial s_{i+1}}{\partial a_{i+1}}\right]\frac{\partial a_{l}}{\partial s_{l}}\frac{\partial\mathcal{L}}{\partial a_{l}}$$</p>
+<p>Defining a linear activation function $g(z_{i})=z_{i}$ and $W_{i}=W$, we obtain:</p>
+<p>$$\require{cancel}\frac{\partial\mathcal{L}}{\partial W_{n}}=\frac{\partial s_{n}}{\partial W_{n}}\left[\underset{i=n}{\overset{l-1}{\prod}}\cancelto{1}{\frac{\partial a_{i+1}}{\partial s_{i}}}\cancelto{W}{\frac{\partial s_{i+1}}{\partial a_{i+1}}}\right]\frac{\partial a_{l}}{\partial s_{l}}\frac{\partial\mathcal{L}}{\partial a_{l}}$$</p>
+<p>Thus:</p>
+<p>$$\frac{\partial\mathcal{L}}{\partial W_{n}}=a_{n-1}W^{n-l}\frac{\partial\mathcal{L}}{\partial a_{l}}$$</p>
+<p>So, in deep configurations, the backpropagation technique may become troublesome as a result of exploding or vanishing gradients. As the cost function is progressively derived in terms of numerically large parameters, these adjustments will likely overshoot, hampering training. Conversely, small contributions propagated through many layers may cause virtually no effect at all:</p>
+<p>Moreover, in deep configurations, the backpropagation technique may become troublesome as a result of exploding or vanishing gradients. As the cost function is progressively derived in terms of numerically large parameters, these adjustments will likely overshoot, hampering training. Conversely, small contributions propagated through many layers may cause virtually no effect at all:</p>
+<p>If the elements in W greater than one, and with a sufficiently large n-l value, $\frac{\partial\mathcal{L}}{\partial W_{n}}$ will tend to infinity, i.e. exploding. Conversely, for values less than one, the derivative tends to zero, i.e. vanishing.</p>
+<p>For the case of early neural network development, a typical initialization framework presented in Erhan et al. (2009) would have parameters randomly sampled from a uniform distribution centered in zero of $[-1/\sqrt{k};1/\sqrt{k}]$ where k is the size of the previous layer of a fully-connected network. For deep architectures, many nodes would likely be initialized very close to zero, leading to the previously mentioned vanishing gradient problem. Bradley (2010, pg. 25) provides an interesting illustration of this, by analyzing the distribution of weights in the initialization of the network. As the number of layers increased, the weights got significantly peaked around zero, thus evidenciating the cause of the issue.</p>
+<h3 id="activation-functions-and-initialization-methods">Activation functions and initialization methods</h3>
+<p>In the following course of deep learning development, improvements introduced into networks&rsquo; training and architecture led to the near abandonment of the very one technique that resurged attention onto the field: unsupervised pre-training. Such advances were a combination of modern activation functions and simpler but sophisticated initialization methods. These also helped to mitigate the vanishing gradient problem. But appart from the ackowledged need for better alternatives to pre-training, what is the problem of using the once well-adopted activation function: the sigmoid? By exploring different functions, it became apparent that the activation was one of the main contributors to the saturation issue, demonstrated through research conducted by Glorot and Bengio (2010)</p>
+<img src="./figures/saturation_plot.png" width="100%"/>
+<p style="font-size:0.8em;" align="center">Mean (<i>lines</i>) and standard deviation (<i>vertical bars</i>) of sigmoid activation values across layers in a neural network using random initialization. The saturation is detectable in the last layer, where the activation values reach virtually zero. <br>Source: [Glorot and Bengio (2010)](#References)</p>
+<p>A technique employed way before such improvements although is goes along with them are the old standardizing of inputs and parameters. LeCun et al. (1998) points out that rescaling the input reducing its mean to 0 and variance to 1 may help training. The first prevents undiserable bias towards particular directions, making it less sensible to the distinc features scales while it also prevents undesirable uniform gradient updates if the majority of the input data where of the same sign. The latter helps to even the contributions from all features, balancing the rate at which the weights connected to the input nodes learn. Additionally it also helps to not saturate too early and does not go straight to zero. Such techniques are not only important on the inputs as they are desirable characteristics for each layer within the network. So, preserving the variance throughout layers during training is a desirable property. Additionally from the backpropagation point of view, the variance of the derivative of the cost function by the weights is equally important to be mantained.</p>
+<p>Nevertheless, expanding on <a href="#References">Glorot and Bengio (2010</a> work, <a href="#References">Xu et al. (2016)</a> draws theorical clues to indicate that in its linear regime, in comparison with other activation functions, the sigmoid is more prone to escalating the variance of layers througout training.</p>
+<p>Considering the following notation:</p>
+<p>$$s^i=f\left(s^{i-1}\right)W^i+b^i$$</p>
+<p>and</p>
+<p>$$a^{i+1}=f\left(a^{i}W^{i}+b^{i}\right)$$</p>
+<p>where $f(s)$ and $s$ are the activation function and its argument vector, respectively; $a$ is the activation value, $W\in\mathbb{R}^{{n_i\times n_{i-1}}}$ the weight matrix and $b\in \mathbb{R}^{n_i}$ the bias vector. In a linear regime, the activation function can be modeled as:</p>
+<p>$$f(s)=\alpha s+\beta$$</p>
+<p>Assuming that, similar to the intialization presented in [eq:1], biases are set to 0, the variance at layer i can be defined as:</p>
+<p>$$Var\left[a^{i}\right]=\alpha{{}^2}n_i\sigma_{i-1}^{2}\left(Var\left(a^{i-1}\right)+\beta{{}^2}I_{n_i}\right)$$</p>
+<p>Likewise, the gradient variance, comprised during the backwards pass, is defined as:</p>
+<p>$$Var\left(\frac{\partial cost}{\partial a^{i-1}}\right)=\alpha{{}^2}n_i\sigma_{i-1}^{2}Var\left(\frac{\partial cost}{\partial a^{i}}\right)$$</p>
+<p>According to <a href="#References">Glorot and Bengio (2010)</a>, preserving the variance throuhgout layers and iterations is an indication that the information is flowing without loss. Furthermore, it is evident that as the variance increase, the more the activation values resort to the function's extremes, resulting in saturation. Thus, ideally:</p>
+<p>$$Var\left(y^{i}\right)=Var\left(y^{i-1}\right)\text{ and }Var\left(\frac{\partial cost}{\partial y^{i}}\right)=Var\left(\frac{\partial cost}{\partial y^{l-1}}\right)$$</p>
+<p>assuming $n_{i}\sigma_{i-1}^{2}\approxeq1$ and $n_{i-1}\sigma_{i-1}^{2}\approxeq 1$. So, to satisfy this condition $\alpha$ and $\beta$ must be:</p>
+<p>$$\alpha=1\text{ and }\beta=0$$</p>
+<p>Considering the Taylor expansions of different activation functions:</p>
+<p>$$sigmoid(x)=\frac{1}{2}+\frac{x}{4}-\frac{x^{3}}{48}+O\left(x^{5}\right)$$</p>
+<p>$$tanh(x)=0+x+\frac{x^{3}}{3}+O\left(x^{5}\right)$$</p>
+<p>This approximation indicates, that in the linear regime, the tanh function satisfies the condition $\alpha=1$ while the sigmoid posesses a constant term that may explain the increase in variance throughout the feedfoward propagation. Additionally, due to the significantly small slope in comparison with the tanh, the sigmoid function requires a weight initialization 16 times greater ($\alpha^{2}$) than the tanh to maintain the gradient variance (<a href="#References">Xu et al. (2016)</a>).</p>
+<p>mention Xu et. al and also Tishby variance</p>
+<h1><a name="References"></a>References</h1>
+<ul style="font-size:0.8em;">
+    <li>Bradley, D. M. (2010). Learning In Modular Systems. PhD Thesis, Carnegie Mellon University.</li>
+    <li>Erhan, D., Manzagol, P.A., Bengio, Y., Bengio, S., and Vincent, P. (2009). The Difficulty of Training Deep Architectures and the Effect of Unsupervised Pre-Training. Artificial Intelligence and Statistics, 153-160.</li>
+    <li>Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
+    Statistics , pages 249-256.</li>
+    <li>Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep Learning. MIT Press.</li>
+    <li>LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K.-R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.</li>
+    <li>Shanmugamani, R. (2018). Deep Learning for Computer Vision.</li>
+    <li>Xu, B., Huang, R., and Li, M. (2016). Revise Saturated Activation Functions.</li>
+</ul>
+
+    </div>
+
+    
+
+
+    
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card">
+    
+      <img class="portrait mr-3" src="https://s.gravatar.com/avatar/f6c8c4a6a41a1172a087f1635c006d61?s=200')" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://artur-deluca.github.io/">Artur de Luca</a></h5>
+      <h6 class="card-subtitle">Graduate Student in Artificial Intelligence and Robotics<br> at La Sapienza</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://twitter.com/backdeluca" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://github.com/artur-deluca" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://www.linkedin.com/in/arturbackdeluca" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="/files/cv.pdf" >
+              <i class="ai ai-cv"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+    
+
+    
+
+    
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "artur-deluca-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js" integrity="sha256-0w92bcB21IY5+rGI84MGj52jNfHNbXVeQLrZ0CGdjNY=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/python.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.130521ecfc6f534c52c158217bbff718.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
