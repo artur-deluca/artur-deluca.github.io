@@ -121,78 +121,6 @@ $$&lt;/p&gt;
     </item>
     
     <item>
-      <title>Obstacles along deep learning evolution: vanishing gradients</title>
-      <link>https://artur-deluca.github.io/post/init/</link>
-      <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
-      <guid>https://artur-deluca.github.io/post/init/</guid>
-      <description>&lt;style&gt;
-body {
-text-align: justify}
-&lt;/style&gt;
-&lt;p&gt;The objective of this series is to illustrate some of the past and on-going challenges within deep learning. In the previous blog post, the obstacle discussed was the &lt;a href=&#34;../saturation&#34;&gt;saturation&lt;/a&gt; within activation functions during training. This is a follow-up, so I recommend you take a brief look before continuing.&lt;/p&gt;
-&lt;!--
-## The challenges of training deep networks
-Despite mentioning pre-training as solution for saturation, such technique is not employed as much today. This is due to fact that the properties that pre-training ensures can be attained by a much more efficient strategy which will be explained further on. 
-
-https://arxiv.org/pdf/1504.06825.pdf
---&gt;
-&lt;h3 id=&#34;problem-vanishing-gradients&#34;&gt;Problem: Vanishing gradients&lt;/h3&gt;
-&lt;p&gt;As mentioned in the previous post, the activation values start to migrate towards the extremities of the sigmoid function in networks with several layers. But what happens to the gradients? Around the 1980&#39;s researchers at USC and CMU started to work on algorithms using the gradient of the loss function throughout the layers of the network as a way to adjust each weight with a corresponding &amp;ldquo;influence&amp;rdquo; over the error. These gradients were obtained analytically by applying the chain rule from the loss function to the desired weight. This is famously called the backpropagation technique, and has spurred the development of neural networks later on. (Cite hinton 1989)&lt;/p&gt;
-&lt;p&gt;However, once again, as the stack of layers increase, obstacles arise to  hamper performance, and this time this is caused by a phenomenon known as the Vanishing/Exploding Gradients. To illustrate it, consider a network with a general cost function and symmetric activation functions $f$ with unit derivative at 0. If we write $a_{i}$ for the activation vector of layer $i$, and $s_{i}$ the argument vector of the activation function at layer $i$, we have $s_{i}=a_{i}W_{i}+b_{i}$ and $a_{i}=f(s_{i})$.&lt;/p&gt;
-&lt;p&gt;Consider the following node output and activation:&lt;/p&gt;
-&lt;p&gt;Consider the following node output and activation:&lt;/p&gt;
-&lt;p&gt;$$s^{i}=W^{i}a^{i-1}+b_{i}$$&lt;/p&gt;
-&lt;p&gt;$$a_{i+1}=g\left(W_{i}a_{i-1}+b_{i}\right)$$&lt;/p&gt;
-&lt;p&gt;The derivative of the loss function $\mathcal{L}$ in a network with $l$ layers in terms of a weight $W_{n}$ can be written as:&lt;/p&gt;
-&lt;p&gt;$$\frac{\partial\mathcal{L}}{\partial W_{n}}=\frac{\partial s_{n}}{\partial W_{n}}\left[\underset{i=n}{\overset{l-1}{\prod}}\frac{\partial a_{i+1}}{\partial s_{i}}\frac{\partial s_{i+1}}{\partial a_{i+1}}\right]\frac{\partial a_{l}}{\partial s_{l}}\frac{\partial\mathcal{L}}{\partial a_{l}}$$&lt;/p&gt;
-&lt;p&gt;Defining a linear activation function $g(z_{i})=z_{i}$ and $W_{i}=W$, we obtain:&lt;/p&gt;
-&lt;p&gt;$$\require{cancel}\frac{\partial\mathcal{L}}{\partial W_{n}}=\frac{\partial s_{n}}{\partial W_{n}}\left[\underset{i=n}{\overset{l-1}{\prod}}\cancelto{1}{\frac{\partial a_{i+1}}{\partial s_{i}}}\cancelto{W}{\frac{\partial s_{i+1}}{\partial a_{i+1}}}\right]\frac{\partial a_{l}}{\partial s_{l}}\frac{\partial\mathcal{L}}{\partial a_{l}}$$&lt;/p&gt;
-&lt;p&gt;Thus:&lt;/p&gt;
-&lt;p&gt;$$\frac{\partial\mathcal{L}}{\partial W_{n}}=a_{n-1}W^{n-l}\frac{\partial\mathcal{L}}{\partial a_{l}}$$&lt;/p&gt;
-&lt;p&gt;So, in deep configurations, the backpropagation technique may become troublesome as a result of exploding or vanishing gradients. As the cost function is progressively derived in terms of numerically large parameters, these adjustments will likely overshoot, hampering training. Conversely, small contributions propagated through many layers may cause virtually no effect at all:&lt;/p&gt;
-&lt;p&gt;Moreover, in deep configurations, the backpropagation technique may become troublesome as a result of exploding or vanishing gradients. As the cost function is progressively derived in terms of numerically large parameters, these adjustments will likely overshoot, hampering training. Conversely, small contributions propagated through many layers may cause virtually no effect at all:&lt;/p&gt;
-&lt;p&gt;If the elements in W greater than one, and with a sufficiently large n-l value, $\frac{\partial\mathcal{L}}{\partial W_{n}}$ will tend to infinity, i.e. exploding. Conversely, for values less than one, the derivative tends to zero, i.e. vanishing.&lt;/p&gt;
-&lt;p&gt;For the case of early neural network development, a typical initialization framework presented in Erhan et al. (2009) would have parameters randomly sampled from a uniform distribution centered in zero of $[-1/\sqrt{k};1/\sqrt{k}]$ where k is the size of the previous layer of a fully-connected network. For deep architectures, many nodes would likely be initialized very close to zero, leading to the previously mentioned vanishing gradient problem. Bradley (2010, pg. 25) provides an interesting illustration of this, by analyzing the distribution of weights in the initialization of the network. As the number of layers increased, the weights got significantly peaked around zero, thus evidenciating the cause of the issue.&lt;/p&gt;
-&lt;h3 id=&#34;activation-functions-and-initialization-methods&#34;&gt;Activation functions and initialization methods&lt;/h3&gt;
-&lt;p&gt;In the following course of deep learning development, improvements introduced into networks&amp;rsquo; training and architecture led to the near abandonment of the very one technique that resurged attention onto the field: unsupervised pre-training. Such advances were a combination of modern activation functions and simpler but sophisticated initialization methods. These also helped to mitigate the vanishing gradient problem. But appart from the ackowledged need for better alternatives to pre-training, what is the problem of using the once well-adopted activation function: the sigmoid? By exploring different functions, it became apparent that the activation was one of the main contributors to the saturation issue, demonstrated through research conducted by Glorot and Bengio (2010)&lt;/p&gt;
-&lt;img src=&#34;./figures/saturation_plot.png&#34; width=&#34;100%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Mean (&lt;i&gt;lines&lt;/i&gt;) and standard deviation (&lt;i&gt;vertical bars&lt;/i&gt;) of sigmoid activation values across layers in a neural network using random initialization. The saturation is detectable in the last layer, where the activation values reach virtually zero. &lt;br&gt;Source: [Glorot and Bengio (2010)](#References)&lt;/p&gt;
-&lt;p&gt;A technique employed way before such improvements although is goes along with them are the old standardizing of inputs and parameters. LeCun et al. (1998) points out that rescaling the input reducing its mean to 0 and variance to 1 may help training. The first prevents undiserable bias towards particular directions, making it less sensible to the distinc features scales while it also prevents undesirable uniform gradient updates if the majority of the input data where of the same sign. The latter helps to even the contributions from all features, balancing the rate at which the weights connected to the input nodes learn. Additionally it also helps to not saturate too early and does not go straight to zero. Such techniques are not only important on the inputs as they are desirable characteristics for each layer within the network. So, preserving the variance throughout layers during training is a desirable property. Additionally from the backpropagation point of view, the variance of the derivative of the cost function by the weights is equally important to be mantained.&lt;/p&gt;
-&lt;p&gt;Nevertheless, expanding on &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010&lt;/a&gt; work, &lt;a href=&#34;#References&#34;&gt;Xu et al. (2016)&lt;/a&gt; draws theorical clues to indicate that in its linear regime, in comparison with other activation functions, the sigmoid is more prone to escalating the variance of layers througout training.&lt;/p&gt;
-&lt;p&gt;Considering the following notation:&lt;/p&gt;
-&lt;p&gt;$$s^i=f\left(s^{i-1}\right)W^i+b^i$$&lt;/p&gt;
-&lt;p&gt;and&lt;/p&gt;
-&lt;p&gt;$$a^{i+1}=f\left(a^{i}W^{i}+b^{i}\right)$$&lt;/p&gt;
-&lt;p&gt;where $f(s)$ and $s$ are the activation function and its argument vector, respectively; $a$ is the activation value, $W\in\mathbb{R}^{{n_i\times n_{i-1}}}$ the weight matrix and $b\in \mathbb{R}^{n_i}$ the bias vector. In a linear regime, the activation function can be modeled as:&lt;/p&gt;
-&lt;p&gt;$$f(s)=\alpha s+\beta$$&lt;/p&gt;
-&lt;p&gt;Assuming that, similar to the intialization presented in [eq:1], biases are set to 0, the variance at layer i can be defined as:&lt;/p&gt;
-&lt;p&gt;$$Var\left[a^{i}\right]=\alpha{{}^2}n_i\sigma_{i-1}^{2}\left(Var\left(a^{i-1}\right)+\beta{{}^2}I_{n_i}\right)$$&lt;/p&gt;
-&lt;p&gt;Likewise, the gradient variance, comprised during the backwards pass, is defined as:&lt;/p&gt;
-&lt;p&gt;$$Var\left(\frac{\partial cost}{\partial a^{i-1}}\right)=\alpha{{}^2}n_i\sigma_{i-1}^{2}Var\left(\frac{\partial cost}{\partial a^{i}}\right)$$&lt;/p&gt;
-&lt;p&gt;According to &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;, preserving the variance throuhgout layers and iterations is an indication that the information is flowing without loss. Furthermore, it is evident that as the variance increase, the more the activation values resort to the function&#39;s extremes, resulting in saturation. Thus, ideally:&lt;/p&gt;
-&lt;p&gt;$$Var\left(y^{i}\right)=Var\left(y^{i-1}\right)\text{ and }Var\left(\frac{\partial cost}{\partial y^{i}}\right)=Var\left(\frac{\partial cost}{\partial y^{l-1}}\right)$$&lt;/p&gt;
-&lt;p&gt;assuming $n_{i}\sigma_{i-1}^{2}\approxeq1$ and $n_{i-1}\sigma_{i-1}^{2}\approxeq 1$. So, to satisfy this condition $\alpha$ and $\beta$ must be:&lt;/p&gt;
-&lt;p&gt;$$\alpha=1\text{ and }\beta=0$$&lt;/p&gt;
-&lt;p&gt;Considering the Taylor expansions of different activation functions:&lt;/p&gt;
-&lt;p&gt;$$sigmoid(x)=\frac{1}{2}+\frac{x}{4}-\frac{x^{3}}{48}+O\left(x^{5}\right)$$&lt;/p&gt;
-&lt;p&gt;$$tanh(x)=0+x+\frac{x^{3}}{3}+O\left(x^{5}\right)$$&lt;/p&gt;
-&lt;p&gt;This approximation indicates, that in the linear regime, the tanh function satisfies the condition $\alpha=1$ while the sigmoid posesses a constant term that may explain the increase in variance throughout the feedfoward propagation. Additionally, due to the significantly small slope in comparison with the tanh, the sigmoid function requires a weight initialization 16 times greater ($\alpha^{2}$) than the tanh to maintain the gradient variance (&lt;a href=&#34;#References&#34;&gt;Xu et al. (2016)&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;mention Xu et. al and also Tishby variance&lt;/p&gt;
-&lt;h1&gt;&lt;a name=&#34;References&#34;&gt;&lt;/a&gt;References&lt;/h1&gt;
-&lt;ul style=&#34;font-size:0.8em;&#34;&gt;
-    &lt;li&gt;Bradley, D. M. (2010). Learning In Modular Systems. PhD Thesis, Carnegie Mellon University.&lt;/li&gt;
-    &lt;li&gt;Erhan, D., Manzagol, P.A., Bengio, Y., Bengio, S., and Vincent, P. (2009). The Difficulty of Training Deep Architectures and the Effect of Unsupervised Pre-Training. Artificial Intelligence and Statistics, 153-160.&lt;/li&gt;
-    &lt;li&gt;Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
-    Statistics , pages 249-256.&lt;/li&gt;
-    &lt;li&gt;Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep Learning. MIT Press.&lt;/li&gt;
-    &lt;li&gt;LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K.-R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.&lt;/li&gt;
-    &lt;li&gt;Shanmugamani, R. (2018). Deep Learning for Computer Vision.&lt;/li&gt;
-    &lt;li&gt;Xu, B., Huang, R., and Li, M. (2016). Revise Saturated Activation Functions.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Why deep learning became relevant</title>
       <link>https://artur-deluca.github.io/post/introduction/</link>
       <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
@@ -225,7 +153,7 @@ https://arxiv.org/pdf/1504.06825.pdf
 &lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;The set of observations associated with the same class forms a manifold or a set of disjoint
 manifolds, i.e. regions of lower dimension than the original space of images. When this manifold is smooth, it can be approximated locally by linear patches, tangent to the manifold. However, as the manifold becomes irregular and highly dimensional, patches become smaller and exponentially many patches, as well as data, are required to obtain a good generalization. Source: &lt;a href=&#34;#References&#34;&gt;Bengio (2009)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Note that this does not confront the ability of local kernel methods to approximate functions, rather their efficiency on approximating a function in regards to data. By contrast, neural network models are capable of dealing with intra-class variations more effortlessly. While each kernel function is activated in a small area of the input space, feature detectors of neural networks are capable of detecting certain patterns (edges or curvatures) almost independently from its orientation. The combination of these feature detectors is what makes neural network representations so efficient.&lt;/p&gt;
-&lt;p&gt;As an illustration, consider the task of representing a number from 0-8. The representation generated by local methods can be seen as a one-hot encoding, signaling that each representation is mutually exclusive, for instance, $\texttt{00000001}$ signals $1$ and $\texttt{00000010}$ signals $2$ but the representation $\texttt{00000011}$ does not convey any valid information. Conversely, a representation of a neural network can be seen as a binary representation, much more efficient: $\texttt{001}$ is equal to $1$, $\texttt{010}$ to 2 and $\texttt{011}$ to $3$.&lt;/p&gt;
+&lt;p&gt;As an illustration, consider the task of representing a number from 0-7. The representation generated by local methods can be seen as a one-hot encoding, signaling that each representation is mutually exclusive, for instance, $\texttt{0000001}$ signals $1$ and $\texttt{0000010}$ signals $2$ but the representation $\texttt{0000011}$ does not convey any valid information. Conversely, a representation of a neural network can be seen as a binary representation, much more efficient: $\texttt{001}$ is equal to $1$, $\texttt{010}$ to 2 and $\texttt{011}$ to $3$.&lt;/p&gt;
 &lt;p&gt;In terms of classification, local methods produce mutually exclusive partitions onto the feature space which it oftentimes makes it difficult to generalize for unseen instances of the problem, if the target function is not smooth. On the other hand, neural networks generate several partitions which are compositional, presenting a more efficient decision surface that can be more robust to unseen query points.&lt;/p&gt;
 &lt;img src=&#34;./figures/partitions.svg&#34; width=&#34;90%&#34;/&gt;
 &lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Sketch of a partition of the feature space produced by local methods (&lt;i&gt;left&lt;/i&gt;) and neural networks (&lt;i&gt;right&lt;/i&gt;). Note that the sub-partitions of the right figure can be combined to infer unseen instances of the problem, represented by the symbol &lt;b&gt;$?$&lt;/b&gt;. These sub-partitions can be seen as potential explanatory factors. As an illustration, these can be the color, shape, and texture in the task of detecting particular types of fruits. Conversely, the partitions on the left symbolize specific combinations of these factors that can indicate a certain fruit. Source: &lt;a href=&#34;#References&#34;&gt;Bengio (2009)&lt;/a&gt;&lt;/p&gt;
