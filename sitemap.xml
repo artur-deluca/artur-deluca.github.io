@@ -18,16 +18,48 @@
   </url>
   
   <url>
+    <loc>https://artur-deluca.github.io/tags/</loc>
+    <lastmod>2019-05-09T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://artur-deluca.github.io/post/introduction/</loc>
     <lastmod>2019-05-09T00:00:00-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://artur-deluca.github.io/authors/admin/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://artur-deluca.github.io/publication_types/3/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://artur-deluca.github.io/authors/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://artur-deluca.github.io/projects/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://artur-deluca.github.io/projects/psopt/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://artur-deluca.github.io/publication_types/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://artur-deluca.github.io/tags/source-themes/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -35,11 +67,15 @@
   </url>
   
   <url>
-    <loc>https://artur-deluca.github.io/publication_types/</loc>
+    <loc>https://artur-deluca.github.io/projects/landscapeviz/</loc>
   </url>
   
   <url>
-    <loc>https://artur-deluca.github.io/tags/</loc>
+    <loc>https://artur-deluca.github.io/projects/sac/</loc>
+  </url>
+  
+  <url>
+    <loc>https://artur-deluca.github.io/projects/malware/</loc>
   </url>
   
 </urlset>
