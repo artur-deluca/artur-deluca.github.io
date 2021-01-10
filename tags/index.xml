@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags | arturdeluca</title>
-    <link>https://artur-deluca.github.io/tags/</link>
-      <atom:link href="https://artur-deluca.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <title>Tags | </title>
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 31 Dec 1969 20:59:59 -0300</lastBuildDate>
     <image>
-      <url>https://artur-deluca.github.io/img/icon-192.png</url>
+      <url>/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png</url>
       <title>Tags</title>
-      <link>https://artur-deluca.github.io/tags/</link>
+      <link>/tags/</link>
     </image>
-    
-    <item>
-      <title>Source Themes</title>
-      <link>https://artur-deluca.github.io/tags/source-themes/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://artur-deluca.github.io/tags/source-themes/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

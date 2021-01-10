@@ -1,0 +1,1347 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="By this point in time, there&rsquo;s no need to emphasize how important deep learning has become. Yet, despite paving the way for some of the boldest and most complicated projects of this decade, much of deep learning&rsquo;s theoretical guarantees remain unexplained.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/complexity/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/complexity/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@backdeluca">
+  <meta property="twitter:creator" content="@backdeluca">
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:url" content="/post/complexity/">
+  <meta property="og:title" content="A glimpse over capacity control in deep networks | ">
+  <meta property="og:description" content="By this point in time, there&rsquo;s no need to emphasize how important deep learning has become. Yet, despite paving the way for some of the boldest and most complicated projects of this decade, much of deep learning&rsquo;s theoretical guarantees remain unexplained."><meta property="og:image" content="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-12-12T00:00:00-05:00">
+    
+    <meta property="article:modified_time" content="2020-12-12T00:00:00-05:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/complexity/"
+  },
+  "headline": "A glimpse over capacity control in deep networks",
+  
+  "datePublished": "2020-12-12T00:00:00-05:00",
+  "dateModified": "2020-12-12T00:00:00-05:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "By this point in time, there\u0026rsquo;s no need to emphasize how important deep learning has become. Yet, despite paving the way for some of the boldest and most complicated projects of this decade, much of deep learning\u0026rsquo;s theoretical guarantees remain unexplained."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+  <title>A glimpse over capacity control in deep networks | </title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+    <script>const isSiteThemeDark = false;</script>
+  
+  
+  <script src="/js/load-theme.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>A glimpse over capacity control in deep networks</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Dec 12, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    16 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>By this point in time, there&rsquo;s no need to emphasize how important deep learning has become.
+Yet, despite paving the way for some of the boldest and most complicated projects of this decade,
+much of deep learning&rsquo;s theoretical guarantees remain unexplained.</p>
+<p>According to classical statistical learning theory, the structure displayed by deep networks
+entails poor predictions over unseen instances.
+However, this is not often the case and,
+this mismatch between theory and practice is what gives deep learning a sort of magical aura.
+At the same time, this aura is besieged by researchers,
+that, in their skepticism, will constantly try to poke holes to tap into what really allows these models to perform the way they do.</p>
+<p>To proper discuss these issues, we need to formulate our setting.
+In classification problems, we typically have:</p>
+<ul>
+<li>A candidate model (or hypothesis) $h$ that maps the domain $x$ to the output $y$;</li>
+<li>A set of $n$ coupled observations $\mathcal{S_n} = \{ (x_1;y_1), &hellip;, (x_n; y_n) \}$, sampled from an unknown probability distribution $\mathcal{D}$;</li>
+<li>A target function $f$ that determines the output $y \in \{-1;1\}$ depending on the input $x$;</li>
+<li>A loss function $\ell$ that measures the prediction error of $h$ with respect to $f$.</li>
+</ul>
+<p>Considering our setting, we would like to find a model that most closely approximates the target function $f$.
+According to our sampling distribution, this entails minimizing our <em>expected risk</em>: the
+the expected value of the error with respect to our $\mathcal{D}$:</p>
+<p>$$R(h) := \mathbb{E}_{\mathcal{D}}[\ell(h, f)] \equiv \int_{\mathcal{X}} \ell(h(x), f(x))\,p(x)dx$$</p>
+<p>We go about generating models through a learning
+algorithm $\mathcal{A}$, that given a set of observations outputs a hypothesis.
+Knowing that we cannot access the sampling probability, our compass in this search is our training set.
+In other words, our proxy for the expected risk is the empirical risk:
+$$R_n(h) := \sum_{i=1}^n \ell(h(x_i), y_i),$$</p>
+<p>using the principle of Empirical Risk Minimization (ERM),
+we are assuming that the solution that minimizes the empirical risk also minimizes the expected risk.
+We say that a learning algorithm generalizes if the empirical risk approaches the expected risk as data grows to infinity.
+In other words, the generalization error, $\Delta R = R(h)-R_n(h)$ goes to zero.
+On the other hand, when this difference remains significantly large, we say the model overfits.</p>
+<p>But consider the following,
+if we could access every conceivable hypothesis,
+what guarantee could ERM provide of finding a candidate that does not overfit?
+Think of the hypothesis that memorizes all training points and output their correct classification.
+Under ERM, we&rsquo;d be finding a good candidate, since it perfectly fits our training data.
+However, when predicting an unseen observation, this model would be no better them random guessing, thus generalizing poorly.</p>
+<p>To circumvent this, we limit our search space to a certain class of hypotheses,
+by only considering models with a certain structure (e.g. linear predictors).
+Here we essentially apply a set of assumptions of our model based on some prior knowledge of the problem,
+what we call <em>inductive bias</em>.</p>
+<p>Under these circumstances, ERM is guaranteed to generalize as the number of data points grows to infinity.
+But more importantly,  if our training data is sampled iid,
+we can devise bounds that indicate, with a small probability of error $\delta$, how close we are from the true risk.</p>
+<p>$$\underset{S\sim\mathcal{D}^N}{\mathbb{P}}\left(R(h) - R_n(h) \le O\left (\frac{C(\mathcal{H})}{\sqrt{n}} \right)\right) &gt; 1- \delta$$</p>
+<p>These bounds are naturally governed by the number of data points, but also by the complexity $C$ of our hypothesis class.
+When considering finite sets of hypotheses, the complexity measure can simply be represented by the cardinality of the set.
+However, under infinte hypothesis classes, more elaborated techniques are needed.</p>
+<p>Many competing complexity measures, and consequently generalization bounds, have been developed over the last 30 years:
+VC-dimension, Rademacher complexity, covering numbers, and so on.
+If we think about the effect of complexity on the generalization gap,
+the more complex a class is, the bigger the generalization gap can be.
+Even with a large amount of data, if the complexity measure of the model is too high,
+we have fewer guarantees of avoiding overfitting.</p>
+<p>For the sake of illustration, let&rsquo;s take the number of parameters of a neural network as a measure of its complexity.
+The MNIST dataset consists of binary images of handwritten digits in a 16x16 grid and contains more than 55 thousand data points.
+A fairly simple model, as an off-the-shelf LeNet contains more than 470 thousand parameters only in its first layer, let alone in the rest of the network.
+Due to its complexity, for this model to generalize with an acceptable error and probability,
+we would need trillions and trillions of data points.
+If we took this model and train it over MNIST, our natural inclination would be to think that
+a great performance in a training set would be the result of an interpolation of the data points, due to the large over parametrization of the model
+when compared to the dataset.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img style="margin-top:0px; margin-bottom:18px" src="figures/overparametrization.png"/>
+  </div>
+  <sub>Generalization gap decreasing with increase in network capacity. Source: <a href="#References">Neyshabur et al. 2018</a>
+  </sub>
+</div>
+<p>Still, we have tons of evidence that support generalization of under these settings.
+So&hellip; what gives?</p>
+<!--http://math.huji.ac.il/~amitd/multiclass.pdf-->
+<!-- C1((d+ln(1/delta)/e)) d = (470e3)^2; delta=0.1; e=0.05 -->
+<h3 id="structured-risk-minimization-and-regularization">Structured Risk Minimization and Regularization</h3>
+<!--https://stats.stackexchange.com/questions/199024/lucid-explanation-for-numerical-stability-of-matrix-inversion-in-ridge-regress-->
+<!-- http://proceedings.mlr.press/v51/duvenaud16.pdf-->
+<!-- https://www.cs.toronto.edu/~duvenaud/talks/early-stopping-bnp.pdf -->
+<!-- http://lcsl.mit.edu/courses/regml/regml2020/slides/lect3.pdf -->
+<!-- https://www.youtube.com/watch?v=lVmwnBg3fQo -->
+<p>By observing the bounds generated over the complexity of neural networks, we may think that without tremendous amounts of data, we cannot achieve generalization.
+However, imagine we had a class of hypothesis with a hierarchical structure, i.e. $\mathcal{H} \supseteq \mathcal{H}_1 &hellip; \supseteq \mathcal{H}_n$.
+In this class, each subset $\mathcal{H_i}$ has a smaller complexity than its supersets $C(\mathcal{H}) \ge C(\mathcal{H}_1) &hellip; \ge C(\mathcal{H}_n)$.
+If we could exploit the hierarchical structure, we can devise a way to learn a function while also minimizing its complexity, thus generating reasonable bounds.
+Akin to the ERM, this principle is called Structured Risk Minimization (SRM).
+However, if we even encounter such hierarchical classes, how to make these a controllable variable?</p>
+<p>Regularization is a way to supplement the inductive bias present in our set of hypotheses by restraining the candidates to a particular condition.
+One typical example is known as weight-decay, or L2-Regularization, where we introduce a norm restriction
+on our model&rsquo;s parameters $W$, generating the following optimization problem in the <em>Ivanov form</em>.</p>
+<p>$$\textrm{minimize} \underset{\textrm{s.t. } \left\Vert W\right\Vert_2^2 \le r}{R_n(h)}$$</p>
+<p>Typically, for means of analysis, we resort to the Tikhonov form despite not being entirely
+interchangeable as we switch from a hard to a soft penalization term.</p>
+<p>$$\textrm{minimize } R_n(h) + \lambda\left\Vert W\right\Vert_2^2$$</p>
+<p>Regularization can come in different shapes and sizes.
+Besides, sometimes, regularization may come implicitly.
+This roughly refers to the learner’s preference to implicitly choosing
+certain structured solutions as if some explicit regularization term appeared in its objective function.
+For instance, it is known that introducing noise to the observations may induce the same effect as weight decay (<a href="#References">Bishop (1994)</a>).
+Another equivalent example is early stopping, i.e. stopping training once the validation loss starts to increase (<a href="#References">Goodfellow (2016)</a>).</p>
+<p>However, despite all these techniques, even &ldquo;bare-boned&rdquo; deep networks seem to achieve fairly good generalization.
+Our intuition tells us that there must be an implicit control factor on the hypothesis space when training neural nets.</p>
+<h3 id="complexity-control-via-gradient-descent">Complexity control via gradient descent</h3>
+<p>There are many competing intuitions on how deep neural nets are implicitly regularized.
+Generally, most of them point to the same factor: the training procedure, or more specifically, the gradient-based training.
+I don&rsquo;t intend to make this a comprehensive review, so instead, I&rsquo;ll provide an analysis on one of these, which is the work of Poggio et al. 2020 called <em>Complexity Control by gradient descent in deep networks</em>.</p>
+<p>Gradient descent (GD) and its variations are widely used when training neural networks.
+In short, this technique update all parameters in the direction of the largest decrease on the loss function at each iteration, hence the name.</p>
+<p>$$W_{t+1} = -\gamma(t)\nabla_{W_t} R_n$$</p>
+<p>In the analysis of <a href="#References">Poggio (2020)</a>, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
+Also, instead of adding biases to each layer, we&rsquo;ll only add them in the input layer as just another feature.
+Finally, we&rsquo;ll be studying classification tasks using the exponential loss function
+that takes values $\{-1;1\}$:</p>
+<p>$$\ell(x, y) := e^{-yf(x)}$$</p>
+<p>We use this loss function to simplify our analysis of the gradient dynamics.
+Nevertheless, these results may be also extended to other exponential loss functions, such as the cross-entropy,
+most typically employed in classification tasks.</p>
+<p>One of the advantages of this setting is to make use of the <em>homogeneity property</em> granted by ReLUs.
+This property enables us to detach the effects of scale and direction of the parameters.
+With that in mind, state our problem as follows:
+let $f(W,x)$ be a neural network composed by N layers $W_k$
+In a given iteration, we can represent this network by the normalized version of the weights at layer $k$, that is:
+$$W_k = \rho_k V_k,$$
+where $\rho_k$ is the norm of the weights at layer $k$ and $\left\Vert V_k \right\Vert$ is the unitary version of $W_k$.
+Using the homogeneity property, we can rewrite $f$ as being:
+$$f = \tilde{f}(V,x)\prod_{i=1}^N\rho_i,$$
+where $\tilde{f}$ is the normalized version of the network.</p>
+<!--For staters, one of the important pieces in complexity measure of neural networks is that the normalized weights are what actually matter.
+This has been proven by Bartelet in 1994.
+After all, for classification cases, since we use a softmax layer in the end, the normalized and unnormalized results woukld be the same-->
+<p>Our goal here is to study how the gradient behaves throughout iterations,
+and we&rsquo;ll do so through the lens of a dynamical system in the continuous space.
+That is, instead of study discrete evolutions, we&rsquo;ll focus on the rate $\dot{W}$.</p>
+<p>$$\dot{W} = \frac{dW}{dt} = -\gamma(t)\nabla_W(R_n(f)).$$</p>
+<p>For the rest of the work, we neglect the effect of the learning rate $\gamma(t)$, thus obtaining the following rate for each layer:</p>
+<p>$$\begin{aligned}
+\dot{W}_k &amp;= -\frac{\partial R_n}{\partial W_k} \\<br>
+&amp;= \sum_{i=1}^{N}\left [\frac{\partial f(x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)} \\<br>
+\end{aligned}$$</p>
+<p>Next, we&rsquo;ll break down the dynamics of $\dot{W}$ in its scalar and normalized component $\dot{\rho}$ and $\dot{V}$.</p>
+<p>$$\dot{\rho}_k = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial t} = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial W_k}\frac{\partial W_k}{\partial t}= V_k^\top\dot{W}_k.$$
+and
+$$\dot{V}_k = \frac{\partial V_k}{dt} = \frac{\partial V_k}{\partial W_k}\frac{\partial W_k}{\partial t} = -\frac{S}{\rho_k} \dot{W}_k,$$</p>
+<p>where</p>
+<p>$$S_k = I - V_kV_k^\top.$$</p>
+<p>In the following sections, we impose and relax some constraints and
+observe the effect on $\dot{V}$ and $\dot{\rho}$ under three different scenarios.</p>
+<hr>
+<h4 id="case-1-constraining-rho-and-v">Case 1: constraining $\rho$ and $V$</h4>
+<p>In the first scenario, we consider $\rho$ to remain fixed throughout iterations
+and consistent with the definition, we&rsquo;ll impose a restriction on $V_k$, such that $\left\Vert V_k \right\Vert_2^2 = 1$.
+There are several ways to impose this restriction, but for consistency, we&rsquo;ll use Lagrangian multipliers.
+Our objective function then becomes:</p>
+<p>$$\mathcal{L} = R_n(\rho \tilde{f}) + \sum_k\lambda_j \left(\left\Vert V_j \right\Vert_2^2-1\right).$$</p>
+<p>Since $R_n = \sum_i e^{-y_i \rho\tilde{f}(x_i)}$ and $\dot{W}_k = \frac{\partial \mathcal{L}}{\partial W_k}$, we get:</p>
+<p>$$
+\dot{W}_k = \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\frac{\partial \tilde{f}}{\partial W_k} + 2\lambda_k\frac{\partial \left\Vert V_k \right\Vert_2^2}{\partial W_k}
+$$</p>
+<p>Since by design, $\frac{\partial \mathcal{L}}{\partial \rho} = 0$, we focus on $\dot{V}$:</p>
+<p>$$
+\begin{align}
+\dot{V}_k
+&amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\frac{\partial \tilde{f}}{\partial V_k} - 2 \lambda_kV_k &amp;\left(\cdot\, V^\top_k\right)\\<br>
+\cancelto{0}{\dot{V}_kV_k^\top}
+&amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\overbrace{\frac{\partial \tilde{f}}{\partial V_k}V^\top_k}^{\tilde{f}(x_i)} - 2 \lambda_k\cancelto{1}{V_kV^\top_k} &amp;\\<br>
+\end{align}
+$$</p>
+<p style="text-align:right; font-size:0.6em;">
+<b>Proof:</b> $V_kV^\top_k = 1$ since $\left\Vert V_k \right\Vert_2^2 = 1$ and $\dot{V}_kV_k = 0$ due to $\frac{\partial \left\Vert V_k \right\Vert_2^2}{\partial t} = 0$.
+<br><br>
+</p>
+Setting $\lambda_k = \frac{1}{2}\sum_ie^{y_i\rho\tilde{f}(x_i)}y_i\rho\tilde{f}(x_i)$ we have:
+$$
+\begin{align}
+\dot{V}_k &=
+\rho\sum_ie^{-y_i\rho\tilde{f}(x_i)}y_i\left(\frac{\partial \tilde{f}}{\partial V_k} - \tilde{f}(x_i)V_k\right)\\\\
+&= \rho\sum_ie^{-y_i\rho\tilde{f}(x_i)}y_iS_k\frac{\partial \tilde{f}}{\partial V_k}.
+\end{align}
+$$
+<p>As so happens with over parametrized models,
+we expect to reach a point of total class separability,
+where $sgn(f(x_i)) = sgn(y_i) ,\forall (x_i, y_i) \in \mathcal{D}$.
+And this is the moment where we want to study.
+For a large enough $\rho$, since we have perfect separation in the training set,
+the greatest values will yield the smallest loss contributions (due to the negative exponential),
+thus, they will vanish first.
+Hence, it is reasonable to assume that we reach a point where all but a few data points $x_*$ will vanish,
+converging to a stationary point in $V_k$ where:</p>
+<p>$$\frac{\partial\tilde{f}(x_*)}{\partial V_k} = \tilde{f}(x_*)V_k$$</p>
+<p>What is the meaning of this stationary point?
+We will discuss this after the second and third case.</p>
+<hr>
+<h4 id="case-2-constraining-v_k">Case 2: constraining $V_k$</h4>
+<p>In this case, everything remains the same, except that we let $\rho$ vary.
+Consequently, we have the following rate $\dot{\rho}=\frac{\partial \mathcal{L}}{\partial \rho_k}$:
+$$
+\begin{align}
+\dot{\rho}_k
+&amp;= \sum_{i=1}^{N}\left [V_k^\top\frac{\partial f(W, x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)}\\<br>
+&amp;= \sum_{i=1}^{N}\left [\frac{\rho}{\rho_k}V_k^\top\frac{\partial \tilde{f}(V, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\<br>
+&amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}f(V, x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}
+\end{align}
+$$</p>
+<p>Here we notice an interesting evolution.
+Again, under total separability, the rate $\dot{\rho}$ will be always non-negative.
+Since it will march towards infinity where $R_n(\rho\tilde{f})\rightarrow 0$ we expect to have the same behavior we saw in the first scenario.</p>
+<h4 id="case-3-unconstrained-gradient-descent">Case 3: unconstrained gradient descent</h4>
+<p>Finally, we come to the typical training setting where we have no explicit restrictions over
+any parameter.
+Further expanding the gradient dynamics we saw in the definition, we have:</p>
+<p>$$
+\begin{align}
+\dot{\rho}_k
+&amp;= V_k^\top\dot{W}_k\\<br>
+&amp;= \sum_{i=1}^{N}V_k^\top\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\<br>
+&amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}\tilde{f}(x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}\\<br>
+\end{align}
+$$</p>
+<p>and,
+$$
+\begin{align}
+\dot{V}_k
+&amp;= \frac{S_k}{\rho_k}\dot{W}_k\\<br>
+&amp;= \sum_{i=1}^{N}\frac{S_k}{\rho_k}\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\<br>
+&amp;= \frac{\rho}{\rho_k^2}\sum_{i=1}^{N}y_ie^{-y_i\rho\tilde{f}(x_i)}S_k\frac{\partial \tilde{f}(x_i)}{\partial V_k}\\<br>
+\end{align}
+$$</p>
+<p>Here we see that the gradients $\dot{\rho}_k$ and $\dot{V}_k$ have identical and near-identical rates to the other scenarios,
+respectively, differing only by a factor of $\frac{1}{\rho_k^2}$.</p>
+<p>For the scalar factor $\rho$ it is quite common to see methods that have the same march to infinity
+once separability has been reached.
+Also, under the same conditions of full separability, we can see that $V_k$
+has the same stationary point in the unconstrained case,
+thus presenting a very plausible explanation on how gradient-based methods perform complexity control,
+by imposing an implicit restriction on $\left\Vert V\right\Vert$.</p>
+<p>So, in the end, gradient descent doesn&rsquo;t really care so much about the size or norm of the weights, rather its direction.
+But what is the meaning of this direction?</p>
+<h3 id="interpretation">Interpretation</h3>
+<p>Under the mentioned assumptions, these dynamics all converge to the same stationary point,
+one that maximizes the margin.
+The margin is the minimum distance between a training example of a class and the decision boundary of the classifier.
+Along this boundary the classifier impartial to the competing classes,
+so by maximizing the minimal distance from this region, we are essentially promoting a greater dichotomy of classes.</p>
+<p>As some intuition on why this happens in our case,
+think of the dynamics of $\dot{V}_k$ mentioned in Case 1.
+As $\rho$ increases, all the points where there&rsquo;s more agreement between $y_i$ and $f(x_i)$
+start to vanish.
+What we are left are the points $x^*$ where the classifier is most uncertain,
+i.e. closest to the decision boundary, much like the support vectors of an SVM.
+A guideline to a formal proof (as in <a href="#References">Banburski et al. 2019</a>) is to show that given two candidate solutions that fully separate our data,
+the one that minimizes the empirical risk has a bigger margin.</p>
+<h3 id="experiments">Experiments</h3>
+<p>To validate the dynamics here presented, we propose the following experiment.
+We use a noiseless dataset for binary classification to train models with similar architectures but different parametrizations.
+All of these are fully-connected networks with ReLU functions and no biases, all initialized with the same parameters.
+We only introduce a bias term in the first layer, as an additional input, following the theoretical setting presented.
+As a result of the layout, we can exploit the homogeneity property in the parametrization procedure.</p>
+<p>In this step, we break down the weights into two parameters: scalars $\rho$ and normalized weights $V$.
+To enforce normalization throughout training,
+we either introduce a penalization term on the $\left\Vert V\right\Vert_2$, as with Lagrangian multipliers, or we forcibly normalize $V$ after each gradient update
+<sup>2</sup>. And so we arrive at the following results.</p>
+<p style="text-align:right; font-size:0.6em;">
+<b>2</b> More details on the experiment can be found in <a href="https://github.com/artur-deluca">this repository</a>.
+<br>
+</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiment/scalar.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiment/distance.svg"/>
+  </div>
+  <sub>Evolution of $\rho$ and $V$ during training. On the left the progression $\prod_k \rho_k$
+  for all model variations, and on the right, the distance of $V$ wrt to the final solution of the baseline model.
+  The colored band indicates the region where all networks achieve full-separability on the training set.</sub>
+</div>
+<p>Despite displaying distinct dynamics, these all share important characteristics.
+For one, although in different rates, all $\rho$ increase once full separability is reached.
+What&rsquo;s more, in the Lagrangian setting, there&rsquo;s a strong relationship between the regularization factor $\lambda$
+and the growth of $\rho$.</p>
+<p>As for the normalized weights $V$, it is unlikely for all networks to yield the same solution considering their different training dynamics and the redundancy in the network.
+Nevertheless, once separability is achieved, these become closer to the baseline solution.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="60%" style="margin-top:0px; margin-bottom:18px" src="figures/experiment/margins.svg"/>
+  </div>
+  <sub>Evolution of the margin throughout training</sub>
+</div>
+<p>Finally, considering the margin $\min f(x_i)y_i ,\forall (x_i,y_i)\in\mathcal{D}$, its dynamics seem to agree with theory,
+as all margins increase after separability.
+Although there is a slight decrease in these for the highest regularization settings, that may be explained
+by an excessive penalization on $\left\Vert V \right\Vert$ and oscillations of the support vector.</p>
+<h3 id="outlook">Outlook</h3>
+<p>We&rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
+But, how does this relates to the initial topic of generalization bounds?
+The general understanding is expecting that this preference for a particular solution poses a
+limitation on the class complexity thus explaining the generalization phenomena of deep neural networks.
+In fact, there is some empirical evidence that may favor the view generalization under normalized networks.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img style="margin-top:0px; margin-bottom:18px" src="figures/generalization_normalized.png"/>
+  </div>
+  <sub>Testing loss on the CIFAR10 dataset for different initializations.
+  The figure on the left shows the original networks while the one of the right shows the same networks normalized at each layer.
+  Refer to <a href="#References">Banburski et al. 2019</a> for more details.
+  </sub>
+</div>
+<p>Furthermore, the concept of margin is already widely explored in the context of complexity measures
+(<a href="#References">Antos et al. 2002, Bartlett et al. 2017</a>)
+.
+Particularly, one of its main instruments is the estimate named <em>Rademacher complexity</em>.
+One example of such classical generalization bounds is:</p>
+<p>$$R(h) \le R_n(h) + c_1\mathbb{R}_n(\mathcal{H}) + c_2\sqrt{\frac{ln(\frac{1}{\delta})}{2n}},$$</p>
+<p>where $\mathbb{R}_n$ is the empirical estimate of the Rademacher complexity over the hypothesis class $\mathcal{H}$.
+However, making use of the homogeneity property $h = \rho\tilde{h}$ we arrive at:</p>
+<p>$$R(\rho\tilde{h}) \le R_n(\rho\tilde{h}) + \rho\mathbb{R}_n(\widetilde{\mathcal{H}}) + c_2\sqrt{\frac{ln(\frac{1}{\delta})}{2n}},$$</p>
+<p>the expectation is to decrease the class complexity while also controlling the generalization bound via $\rho$.
+However, as we already know, $\rho$ naturally increases throughout training, so even with techniques that promise to bound $\rho$
+may not be enough to explain generalization in the current settings.</p>
+<p>As of now, even though there&rsquo;s no unified or undisputed explanation on the generalization of deep networks.
+Still, this is one of the most popular and prolific topics in theoretical machine learning.
+With this standing challenge come many competing explanations but also new directions and ingenious analyses,
+all of which could be used in demystifying deep networks as well as the new endeavors about to come.</p>
+<h1><a name="References"></a>References</h1>
+<ul style="font-size:0.8em;">
+    <li>Shalev-Shwartz, S., & Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press.</li>
+    <li>Neyshabur, B., Li, Z., Bhojanapalli, S., LeCun, Y., & Srebro, N. (2018). Towards understanding the role of over-parametrization in generalization of neural networks. arXiv preprint.</li>
+    <li>Bishop, C. M. (1995). Training with noise is equivalent to Tikhonov regularization. Neural computation</li>
+    <li>Goodfellow, I., Bengio, Y., Courville, A., & Bengio, Y. (2016). Deep learning. Cambridge: MIT press.</li>
+    <li>Poggio, T., Liao, Q., & Banburski, A. (2020). Complexity control by gradient descent in deep networks. Nature communications.</li>
+    <li>Banburski, A., Liao, Q., Miranda, B., Rosasco, L., Hidary, J., & Poggio, T. (2019). Theory III: Dynamics and Generalization in Deep Networks - a simple solution. arXiv preprint.</li>
+    <li>Antos, A., Kégl, B., Linder, T., & Lugosi, G. (2002). Data-dependent margin-based generalization bounds for classification. Journal of Machine Learning Research.</li>
+    <li>Bartlett, P. L., Foster, D. J., & Telgarsky, M. J. (2017). Spectrally-normalized margin bounds for neural networks. In Advances in neural information processing systems.</li>
+</ul>
+<style>
+body {
+text-align: justify}
+</style>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/complexity/&amp;text=A%20glimpse%20over%20capacity%20control%20in%20deep%20networks" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/complexity/&amp;t=A%20glimpse%20over%20capacity%20control%20in%20deep%20networks" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=A%20glimpse%20over%20capacity%20control%20in%20deep%20networks&amp;body=/post/complexity/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/complexity/&amp;title=A%20glimpse%20over%20capacity%20control%20in%20deep%20networks" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=A%20glimpse%20over%20capacity%20control%20in%20deep%20networks%20/post/complexity/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/complexity/&amp;title=A%20glimpse%20over%20capacity%20control%20in%20deep%20networks" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <a href="/"><img class="avatar mr-3 avatar-circle" src="https://s.gravatar.com/avatar/f6c8c4a6a41a1172a087f1635c006d61?s=200')" alt=""></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/"></a></h5>
+      <h6 class="card-subtitle">Graduate Student in Artificial Intelligence and Robotics<br> at La Sapienza</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/backdeluca" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/artur-deluca" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/arturbackdeluca" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.0/mermaid.min.js" integrity="sha512-ja+hSBi4JDtjSqc4LTBsSwuBT3tdZ3oKYKd07lTVYmCnTCor56AnRql00ssqnTOR9Ss4gOP/ROGB3SfcJnZkeg==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.d9d80f811e95b4b4f6df1eaaf297b05f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

@@ -1,30 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors | arturdeluca</title>
-    <link>https://artur-deluca.github.io/authors/</link>
-      <atom:link href="https://artur-deluca.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <title>Authors | </title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 31 Dec 1969 20:59:59 -0300</lastBuildDate>
     <image>
-      <url>https://artur-deluca.github.io/img/icon-192.png</url>
+      <url>/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png</url>
       <title>Authors</title>
-      <link>https://artur-deluca.github.io/authors/</link>
+      <link>/authors/</link>
     </image>
-    
-    <item>
-      <title></title>
-      <link>https://artur-deluca.github.io/authors/admin/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://artur-deluca.github.io/authors/admin/</guid>
-      <description>&lt;p&gt;&lt;code&gt;arturbackdeluca [at] gmail [dot] com&lt;/code&gt;&lt;/p&gt;
-&lt;div style=&#34;text-align: justify&#34;&gt;
-I am a master&#39;s student in Artificial Intelligence and Robotics at the &lt;a href=&#34;https://www.diag.uniroma1.it/en&#34;&gt;University of Rome&lt;/a&gt;. I am currently looking for research programs involving questions of statistical learning and optimization within (but not restricted to) deep learning.
-&lt;br&gt;&lt;br&gt;
-&lt;p&gt;Please feel free to reach me via any of the digital mediums here available. I currently live in Rome, but I&amp;rsquo;m originally from Brazil. My favorite activities are listening to unfamiliar genres of music and running, although usually not at the same time 😃.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
     
   </channel>
 </rss>

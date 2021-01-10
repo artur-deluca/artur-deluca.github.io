@@ -1,0 +1,1117 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This work discusses the incapability of certain activation functions to work on deep neural networks under the prevailing initialization technique. As the number of layers increase, a problem known as saturation arises.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/saturation/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/saturation/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@backdeluca">
+  <meta property="twitter:creator" content="@backdeluca">
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:url" content="/post/saturation/">
+  <meta property="og:title" content="Investigation saturation | ">
+  <meta property="og:description" content="This work discusses the incapability of certain activation functions to work on deep neural networks under the prevailing initialization technique. As the number of layers increase, a problem known as saturation arises."><meta property="og:image" content="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-10-29T00:00:00-05:00">
+    
+    <meta property="article:modified_time" content="2020-10-29T00:00:00-05:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/saturation/"
+  },
+  "headline": "Investigation saturation",
+  
+  "datePublished": "2020-10-29T00:00:00-05:00",
+  "dateModified": "2020-10-29T00:00:00-05:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "This work discusses the incapability of certain activation functions to work on deep neural networks under the prevailing initialization technique. As the number of layers increase, a problem known as saturation arises."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+  <title>Investigation saturation | </title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+    <script>const isSiteThemeDark = false;</script>
+  
+  
+  <script src="/js/load-theme.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Investigation saturation</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Oct 29, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>This work discusses the incapability of certain activation functions to work on deep neural networks under the prevailing initialization technique. As the number of layers increase, a problem known as saturation arises.</p>
+<p>Saturation is seen in bounded activation functions, as the weights in certain layers of network push all the activation values (i.e. the output of the activation functions) towards its bounded extremities. Since all the outputs in a certain layer are located in plateaus, it is challenging to distinguish observations, thus learning hardly takes place.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="49%" style="margin-bottom:18px" src="figures/saturation.png"/>
+      <img width="49%" style="margin-bottom:18px" src="figures/saturation_derivative.svg"/><br>
+  </div>
+  <sub>The saturation regions of the sigmoid (left) and its derivative (right)</sub>
+</div>
+<p>Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning. Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions' extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.</p>
+<p>Traditionally, the weights of neural networks were initialized according to a technique popularized by Lecun (1998), which consists of sampling the weights from a bounded uniform distribution,</p>
+<p>$$W_{ij} \sim U\left[\frac{-1}{\sqrt{n}}, \frac{1}{\sqrt{n}}\right]$$</p>
+<p>parametrized by $n$, the number of incoming connections to the linked node.</p>
+<p>However, in settings with a great number of layers, saturation often took place. In 2006, a research direction brought forward by <a href="https://www.mitpressjournals.org/doi/10.1162/neco.2006.18.7.1527" target="_blank" rel="noopener">Hinton et. al (2006)</a>, allowed for the training of deep neural networks using unsupervised pretraining, which yielded starting points that prevented this issue.</p>
+<p>Glorot and Bengio claim that good starting points as the ones generated by pretraining could be emulated by common initialization techniques. This was laid on top of an assumption: to maintain the variance of activation values and their gradients. By creating an initialization technique with these properties, the authors would precisely tackle saturation, as very small variances are seen in saturated activation values and their gradients. With these assumptions, the authors reach the following initialization technique:</p>
+<p>$$W_{ij} \sim U\left[\frac{-6}{\sqrt{n_j + n_{j+1}}}, \frac{6}{\sqrt{n_j + n_{j+1}}}\right]$$</p>
+<p>where the $n$ are the number of incoming ($\,j\,$) and outgoing ($\,j+1\,$) connections. This initialization technique is often referred as the Xavier initialization. In the following sections, we are going to analyze the performance of this and other initialization techniques under several configurations.</p>
+<h1 id="experiments">Experiments</h1>
+<p>Here we replicate the experiments of the following paper</p>
+<blockquote>
+<p>Glorot, X. and Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 249-256.</p>
+</blockquote>
+<p>The following results were obtained by training 5-hidden layer networks with 1000 neurons each, trained over the CIFAR-10 dataset.
+The density estimations are activation values of 300 observations of the test set. The implementation can be found <a href="https://github.com/artur-deluca/saturation" target="_blank" rel="noopener">here</a>.
+Here are some of the results:</p>
+<table style="width:100%">
+  <tr>
+    <th colspan="1" width="25%">Initialization</th>
+    <th colspan="2" width="75%">Activation function</th>
+  </tr>
+  <tr>
+    <th></th>
+    <td>Sigmoid</td>
+    <td>Hyperbolic tangent</td>
+  </tr>
+  <tr>
+    <td><a href="#References">LeCun (1998)</a></td>
+    <td><img src="./figures/sigmoid_lecun.gif"></td>
+    <td><img src="./figures/tanh_lecun.gif"></td>
+  </tr>
+  <tr>
+    <td><a href="#References">Glorot and Bengio (2010)</a></td>
+    <td><img src="./figures/sigmoid_glorot.gif"></td>
+    <td><img src="./figures/tanh_glorot.gif"></td>
+  </tr>
+</table>
+<p>First off, the different distributions between activation functions can be explained by their different scale, as the sigmoid has a (0,1) range and the tanh (-1,1). As we can observe, regardless of the method of initialization employed, the activation values of the fifth hidden layer in the sigmoid spike around zero. These results are in accordance with the ones shown in the paper.</p>
+<p>The authors indicate that this abrupt shift can perhaps be explained by an attempt of the system to suppress the meaningless information fed by the previous layers, thus basically relying on its bias to make the classification. With this result, the authors show the unsuitability of the sigmoid in deep networks.</p>
+<p>However, the results of the hyperbolic tangent function have shown to deviate from the original findings. Despite similar results in the baseline initialization (<a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf" target="_blank" rel="noopener">LeCun (1998)</a>), these drastically differ in face of the initialization method proposed by the authors. The technique that allegedly inhibits saturation actually made it occur slightly faster.</p>
+<div align="center" style="margin-bottom:18px">
+    <img width="60%" style="margin-top: 4px; margin-bottom:8px" src="figures/results_paper.png"/>
+    <sub>Activation values of the hyperbolic tangent during initialization using <a href="#References">Lecun (1998)</a> (top) and the proposed technique (below). Source: <a href="#References">Glorot and Bengio (2010)</a></sub>
+</div>
+<p>Furthermore, contrasting with the original work, the replicated activation values using the CIFAR-10 dataset have not shown any qualitative differences between the then go-to and the proposed initialization.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+    <img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_glorot_initial.png"/>
+    <img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_lecun_initial.png"/>
+  </div>
+    <sub>Activation values across two different initialization techniques: Lecun (1998) on the left and Glorot and Bengio (2010) on the right</sub>
+</div>
+<h1 id="additional-experiments">Additional experiments</h1>
+<h2 id="unsupervised-pretraining">Unsupervised pretraining</h2>
+<p>Besides the aforementioned techniques, the same analysis was performed on a network trained using unsupervised pretraining. Different from the Restricted Boltzmann Machine proposed by Hinton, we use a Denoising Autoencoder (<a href="https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf" target="_blank" rel="noopener">Vincent et al. (2008)</a>) to train each layer of the network for 100 epochs before the gradient-based stage.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+    <img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/sigmoid_pretrain.gif"/>
+    <img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_pretrain.gif"/>
+  </div>
+    <sub>Activation values using unsupervised pretraining: sigmoid on the left and tanh on the right.</sub>
+</div>
+<p>Here we notice that the early stages of training slowly push the activation values towards the extremities. Despite not having a great effect on the sigmoid, which after the process demonstrated a similar behavior, the unsupervised pretraining caused a great change in the hyperbolic tangent setting. Instead of continuing to spike around the extremities, the last layer of the network has settled in zero, a quite unstable point for the activation function. We conjecture that this behavior can be explained as the authors have done for the sigmoid: The high peak in the last layer on zero is an attempt to suppress useless information from previous layers.</p>
+<h2 id="dynamic-variance-comparison">Dynamic variance comparison</h2>
+<p>In order to verify if the assumptions made by authors would hold during training, we compared the variance of the activation values across three different cases using the hyperbolic tangent:</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+    <img width="32%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_lecun.svg"/>
+    <img width="32%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_glorot.svg"/>
+    <img width="32%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_pretrain.svg"/>
+  </div>
+    <sub>Variance of activation values across three different initialization techniques. From left to right: <a href="#References">LeCun (1998)</a>, <a href="#References">Glorot and Bengio (2010)</a> and <a href="#References">Vincent et al. (2008)</a></sub>
+</div>
+<p>Here we noticed that the first and second results do not vary greatly. This by itself does not mean that the assumptions do not hold. However, when analyzing the behavior of the curves, we notice the abrupt growth in the early stages of training, which is later bounded by the function range. Despite &ldquo;stabilizing&rdquo; in later stages of training, this more likely has to do with the restrictions of the activation function, rather than the well-behaved, expected, performance.</p>
+<p>Furthermore, a similar result can be seen in the pretraining stage, only slower. The surges seen can be justified by the sampling procedure adopted during the pretraining phase, executed every 5 epochs, instead of every epoch as in gradient-based training. As mentioned in the last section and different from the other settings, here we can also notice the null-gradient in the last layer of the network.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Finally, in qualitative terms, no configuration was immune to saturation and the discrepancies here showed may have potential reasons. The main dataset used by the authors was a syntactic Shapeset-3x2, while most of our analyses were performed by using the CIFAR-10 dataset. However, note that some of these analyses were also extended to the MNIST dataset, as suggested by the authors. Yet, they have yielded similar results like the ones here shown.</p>
+<p>More details on the historical perspective of saturation, as well as an overview of unsupervised pretraining, can be seen <a href="https://artur-deluca.github.io/post/pretraining/" target="_blank" rel="noopener">here</a></p>
+<hr>
+<h4 id="ps">P.S.</h4>
+<p>The activation plots slightly extrapolate the precise output limits.
+That doesn&rsquo;t invalidate the conclusions but in influences the shape of the estimated distributions.</p>
+<hr>
+<h1><a name="References"></a>References</h1>
+<ul style="font-size:0.8em;">
+    <li>Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
+    Statistics , pages 249-256.</li>
+    <li>LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K. R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.</li>
+    <li>Hinton, G. E., Osindero S., and Teh Y. (2006). A Fast Learning Algorithm for Deep Belief Nets. Neural Computation 18:7, 1527-1554</li>
+    <li>Vincent, P., Larochelle, H., Bengio, Y., & Manzagol, P. A. (2008). Extracting and composing robust features with denoising autoencoders. In Proceedings of the 25th international conference on Machine learning (pp. 1096-1103).</li>
+</ul>
+<style>
+body {
+text-align: justify}
+</style>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/saturation/&amp;text=Investigation%20saturation" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/saturation/&amp;t=Investigation%20saturation" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Investigation%20saturation&amp;body=/post/saturation/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/saturation/&amp;title=Investigation%20saturation" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Investigation%20saturation%20/post/saturation/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/saturation/&amp;title=Investigation%20saturation" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      <a href="/"><img class="avatar mr-3 avatar-circle" src="https://s.gravatar.com/avatar/f6c8c4a6a41a1172a087f1635c006d61?s=200')" alt=""></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/"></a></h5>
+      <h6 class="card-subtitle">Graduate Student in Artificial Intelligence and Robotics<br> at La Sapienza</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/backdeluca" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/artur-deluca" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/arturbackdeluca" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.0/mermaid.min.js" integrity="sha512-ja+hSBi4JDtjSqc4LTBsSwuBT3tdZ3oKYKd07lTVYmCnTCor56AnRql00ssqnTOR9Ss4gOP/ROGB3SfcJnZkeg==" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.d9d80f811e95b4b4f6df1eaaf297b05f.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
