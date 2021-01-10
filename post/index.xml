@@ -5,7 +5,7 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 12 Dec 2020 00:00:00 -0500</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Jan 2021 00:00:00 -0500</lastBuildDate>
     <image>
       <url>/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
@@ -13,9 +13,9 @@
     </image>
     
     <item>
-      <title>A glimpse over capacity control in deep networks</title>
+      <title>A glimpse over capacity control in neural networks</title>
       <link>/post/complexity/</link>
-      <pubDate>Sat, 12 Dec 2020 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 10 Jan 2021 00:00:00 -0500</pubDate>
       <guid>/post/complexity/</guid>
       <description>&lt;p&gt;By this point in time, there&amp;rsquo;s no need to emphasize how important deep learning has become.
 Yet, despite paving the way for some of the boldest and most complicated projects of this decade,
@@ -277,7 +277,7 @@ To enforce normalization throughout training,
 we either introduce a penalization term on the $\left\Vert V\right\Vert_2$, as with Lagrangian multipliers, or we forcibly normalize $V$ after each gradient update
 &lt;sup&gt;2&lt;/sup&gt;. And so we arrive at the following results.&lt;/p&gt;
 &lt;p style=&#34;text-align:right; font-size:0.6em;&#34;&gt;
-&lt;b&gt;2&lt;/b&gt; More details on the experiment can be found in &lt;a href=&#34;https://github.com/artur-deluca&#34;&gt;this repository&lt;/a&gt;.
+&lt;b&gt;2&lt;/b&gt; More details on the experiment can be found in &lt;a href=&#34;https://github.com/artur-deluca/normalized_networks&#34;&gt;this repository&lt;/a&gt;.
 &lt;br&gt;
 &lt;/p&gt;
 &lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
