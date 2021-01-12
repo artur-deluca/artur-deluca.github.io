@@ -637,8 +637,8 @@ the expected value of the error with respect to our $\mathcal{D}$:</p>
 algorithm $\mathcal{A}$, that given a set of observations outputs a hypothesis.
 Knowing that we cannot access the sampling probability, our compass in this search is our training set.
 In other words, our proxy for the expected risk is the empirical risk:
-$$R_n(h) := \sum_{i=1}^n \ell(h(x_i), y_i),$$</p>
-<p>using the principle of Empirical Risk Minimization (ERM),
+$$R_n(h) := \sum_{i=1}^n \ell(h(x_i), y_i).$$</p>
+<p>Using the principle of Empirical Risk Minimization (ERM),
 we are assuming that the solution that minimizes the empirical risk also minimizes the expected risk.
 We say that a learning algorithm generalizes if the empirical risk approaches the expected risk as data grows to infinity.
 In other words, the generalization error, $\Delta R = R(h)-R_n(h)$ goes to zero.
@@ -672,7 +672,7 @@ A fairly simple model, as an off-the-shelf LeNet contains more than 470 thousand
 Due to its complexity, for this model to generalize with an acceptable error and probability,
 we would need trillions and trillions of data points.
 If we took this model and train it over MNIST, our natural inclination would be to think that
-a great performance in a training set would be the result of an interpolation of the data points, due to the large over parametrization of the model
+a great performance in a training set would be the result of an interpolation of the data points, due to the large overparametrization of the model
 when compared to the dataset.</p>
 <div align="center" style="margin-bottom:18px">
   <div align="center", style="display: flex">
@@ -701,7 +701,7 @@ However, if we even encounter such hierarchical classes, how to make these a con
 One typical example is known as weight-decay, or L2-Regularization, where we introduce a norm restriction
 on our model&rsquo;s parameters $W$, generating the following optimization problem in the <em>Ivanov form</em>.</p>
 <p>$$\textrm{minimize} \underset{\textrm{s.t. } \left\Vert W\right\Vert_2^2 \le r}{R_n(h)}$$</p>
-<p>Typically, for means of analysis, we resort to the Tikhonov form despite not being entirely
+<p>Typically, for means of analysis, we resort to the Tikhonov form despite them not being entirely
 interchangeable as we switch from a hard to a soft penalization term.</p>
 <p>$$\textrm{minimize } R_n(h) + \lambda\left\Vert W\right\Vert_2^2$$</p>
 <p>Regularization can come in different shapes and sizes.
@@ -749,7 +749,7 @@ That is, instead of study discrete evolutions, we&rsquo;ll focus on the rate $\d
 \dot{W}_k &amp;= -\frac{\partial R_n}{\partial W_k} \\<br>
 &amp;= \sum_{i=1}^{N}\left [\frac{\partial f(x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)} \\<br>
 \end{aligned}$$</p>
-<p>Next, we&rsquo;ll break down the dynamics of $\dot{W}$ in its scalar and normalized component $\dot{\rho}$ and $\dot{V}$.</p>
+<p>Next, we&rsquo;ll break down the dynamics of $\dot{W}$ in its scalar $\dot{\rho}$ and normalized component $\dot{V}$.</p>
 <p>$$\dot{\rho}_k = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial t} = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial W_k}\frac{\partial W_k}{\partial t}= V_k^\top\dot{W}_k.$$
 and
 $$\dot{V}_k = \frac{\partial V_k}{dt} = \frac{\partial V_k}{\partial W_k}\frac{\partial W_k}{\partial t} = -\frac{S}{\rho_k} \dot{W}_k,$$</p>
@@ -789,10 +789,10 @@ $$
 &= \rho\sum_ie^{-y_i\rho\tilde{f}(x_i)}y_iS_k\frac{\partial \tilde{f}}{\partial V_k}.
 \end{align}
 $$
-<p>As so happens with over parametrized models,
-we expect to reach a point of total class separability,
+<p>As so happens with overparametrized models,
+we expect to reach total class separability,
 where $sgn(f(x_i)) = sgn(y_i) ,\forall (x_i, y_i) \in \mathcal{D}$.
-And this is the moment where we want to study.
+And this is the moment we want to study.
 For a large enough $\rho$, since we have perfect separation in the training set,
 the greatest values will yield the smallest loss contributions (due to the negative exponential),
 thus, they will vanish first.
@@ -896,7 +896,7 @@ However, in this case, soon after full separability is achieved, the rate of gro
   </div>
   <sub>Progression of the distance of $V$ wrt to the final solution of the baseline model.</sub>
 </div>
-<p>As for the normalized weights $V$, these all become closer training progresses.
+<p>As for the normalized weights $V$, these all become closer as training progresses.
 Particularly all the parametrized settings seem to converge to the same solution.
 Again, in deeper setting, the solutions are further separated, most likely a result of increasing overparametrization.</p>
 <div align="center" style="margin-bottom:18px">
@@ -910,7 +910,7 @@ Again, in deeper setting, the solutions are further separated, most likely a res
 as all margins increase after separability.
 The oscilations of margin during training are most likely a result of non-smooth decision boundaries
 which are corrected during training, when we see a change in the support vector, here represented by dots along the lines.</p>
-<h3 id="outlook">Outlook</h3>
+<h3 id="what-about-generalization">What about generalization?</h3>
 <p>We&rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
 But, how does this relates to the initial topic of generalization bounds?
 The general understanding is expecting that this preference for a particular solution poses a
