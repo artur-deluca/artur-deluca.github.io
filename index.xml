@@ -282,29 +282,39 @@ we either introduce a penalization term on the $\left\Vert V\right\Vert_2$, as w
 &lt;/p&gt;
 &lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
   &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiment/scalar.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiment/distance.svg&#34;/&gt;
+      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/2/scalar.svg&#34;/&gt;
+      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/5/scalar.svg&#34;/&gt;
   &lt;/div&gt;
-  &lt;sub&gt;Evolution of $\rho$ and $V$ during training. On the left the progression $\prod_k \rho_k$
-  for all model variations, and on the right, the distance of $V$ wrt to the final solution of the baseline model.
+  &lt;sub&gt;Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
   The colored band indicates the region where all networks achieve full-separability on the training set.&lt;/sub&gt;
 &lt;/div&gt;
-&lt;p&gt;Despite displaying distinct dynamics, these all share important characteristics.
+&lt;p&gt;Despite having different magnitudes, the dynamics of the scalars all display similar characteristics.
 For one, although in different rates, all $\rho$ increase once full separability is reached.
 What&amp;rsquo;s more, in the Lagrangian setting, there&amp;rsquo;s a strong relationship between the regularization factor $\lambda$
-and the growth of $\rho$.&lt;/p&gt;
-&lt;p&gt;As for the normalized weights $V$, it is unlikely for all networks to yield the same solution considering their different training dynamics and the redundancy in the network.
-Nevertheless, once separability is achieved, these become closer to the baseline solution.&lt;/p&gt;
+and the growth of $\rho$.
+The difference in magnitude between two and five layers can be explained by the additional number of parameters in the latter.
+However, in this case, soon after full separability is achieved, the rate of growth rapidly decreases nearly to a plateau.&lt;/p&gt;
 &lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
   &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;60%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiment/margins.svg&#34;/&gt;
+      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/2/distance.svg&#34;/&gt;
+      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/5/distance.svg&#34;/&gt;
+  &lt;/div&gt;
+  &lt;sub&gt;Progression of the distance of $V$ wrt to the final solution of the baseline model.&lt;/sub&gt;
+&lt;/div&gt;
+&lt;p&gt;As for the normalized weights $V$, these all become closer training progresses.
+Particularly all the parametrized settings seem to converge to the same solution.
+Again, in deeper setting, the solutions are further separated, most likely a result of increasing overparametrization.&lt;/p&gt;
+&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
+  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
+      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/2/margins.svg&#34;/&gt;
+      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/5/margins.svg&#34;/&gt;
   &lt;/div&gt;
   &lt;sub&gt;Evolution of the margin throughout training&lt;/sub&gt;
 &lt;/div&gt;
 &lt;p&gt;Finally, considering the margin $\min f(x_i)y_i ,\forall (x_i,y_i)\in\mathcal{D}$, its dynamics seem to agree with theory,
 as all margins increase after separability.
-Although there is a slight decrease in these for the highest regularization settings, that may be explained
-by an excessive penalization on $\left\Vert V \right\Vert$ and oscillations of the support vector.&lt;/p&gt;
+The oscilations of margin during training are most likely a result of non-smooth decision boundaries
+which are corrected during training, when we see a change in the support vector, here represented by dots along the lines.&lt;/p&gt;
 &lt;h3 id=&#34;outlook&#34;&gt;Outlook&lt;/h3&gt;
 &lt;p&gt;We&amp;rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
 But, how does this relates to the initial topic of generalization bounds?

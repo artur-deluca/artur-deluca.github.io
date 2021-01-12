@@ -877,29 +877,39 @@ we either introduce a penalization term on the $\left\Vert V\right\Vert_2$, as w
 </p>
 <div align="center" style="margin-bottom:18px">
   <div align="center", style="display: flex">
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiment/scalar.svg"/>
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiment/distance.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/2/scalar.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/5/scalar.svg"/>
   </div>
-  <sub>Evolution of $\rho$ and $V$ during training. On the left the progression $\prod_k \rho_k$
-  for all model variations, and on the right, the distance of $V$ wrt to the final solution of the baseline model.
+  <sub>Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
   The colored band indicates the region where all networks achieve full-separability on the training set.</sub>
 </div>
-<p>Despite displaying distinct dynamics, these all share important characteristics.
+<p>Despite having different magnitudes, the dynamics of the scalars all display similar characteristics.
 For one, although in different rates, all $\rho$ increase once full separability is reached.
 What&rsquo;s more, in the Lagrangian setting, there&rsquo;s a strong relationship between the regularization factor $\lambda$
-and the growth of $\rho$.</p>
-<p>As for the normalized weights $V$, it is unlikely for all networks to yield the same solution considering their different training dynamics and the redundancy in the network.
-Nevertheless, once separability is achieved, these become closer to the baseline solution.</p>
+and the growth of $\rho$.
+The difference in magnitude between two and five layers can be explained by the additional number of parameters in the latter.
+However, in this case, soon after full separability is achieved, the rate of growth rapidly decreases nearly to a plateau.</p>
 <div align="center" style="margin-bottom:18px">
   <div align="center", style="display: flex">
-      <img width="60%" style="margin-top:0px; margin-bottom:18px" src="figures/experiment/margins.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/2/distance.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/5/distance.svg"/>
+  </div>
+  <sub>Progression of the distance of $V$ wrt to the final solution of the baseline model.</sub>
+</div>
+<p>As for the normalized weights $V$, these all become closer training progresses.
+Particularly all the parametrized settings seem to converge to the same solution.
+Again, in deeper setting, the solutions are further separated, most likely a result of increasing overparametrization.</p>
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/2/margins.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/5/margins.svg"/>
   </div>
   <sub>Evolution of the margin throughout training</sub>
 </div>
 <p>Finally, considering the margin $\min f(x_i)y_i ,\forall (x_i,y_i)\in\mathcal{D}$, its dynamics seem to agree with theory,
 as all margins increase after separability.
-Although there is a slight decrease in these for the highest regularization settings, that may be explained
-by an excessive penalization on $\left\Vert V \right\Vert$ and oscillations of the support vector.</p>
+The oscilations of margin during training are most likely a result of non-smooth decision boundaries
+which are corrected during training, when we see a change in the support vector, here represented by dots along the lines.</p>
 <h3 id="outlook">Outlook</h3>
 <p>We&rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
 But, how does this relates to the initial topic of generalization bounds?
