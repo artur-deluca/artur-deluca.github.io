@@ -674,9 +674,9 @@ we would need trillions and trillions of data points.
 If we took this model and train it over MNIST, our natural inclination would be to think that
 a great performance in a training set would be the result of an interpolation of the data points, due to the large overparametrization of the model
 when compared to the dataset.</p>
-<div align="center" style="margin-bottom:18px">
-  <div align="center", style="display: flex">
-      <img style="margin-top:0px; margin-bottom:18px" src="figures/overparametrization.png"/>
+<div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+  <div align="center", style="margin-top:0px">
+      <img width="100%" style="margin-top:0px; margin-bottom:0.1em; height: auto !important;" src="figures/overparametrization.png"/>
   </div>
   <sub>Generalization gap decreasing with increase in network capacity. Source: <a href="#References">Neyshabur et al. 2018</a>
   </sub>
@@ -875,10 +875,10 @@ we either introduce a penalization term on the $\left\Vert V\right\Vert_2$, as w
 <b>2</b> More details on the experiment can be found in <a href="https://github.com/artur-deluca/normalized_networks">this repository</a>.
 <br>
 </p>
-<div align="center" style="margin-bottom:18px">
+<div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
   <div align="center", style="display: flex">
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/2/scalar.svg"/>
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/5/scalar.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/2/scalar.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/5/scalar.svg"/>
   </div>
   <sub>Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
   The colored band indicates the region where all networks achieve full-separability on the training set.</sub>
@@ -889,20 +889,20 @@ What&rsquo;s more, in the Lagrangian setting, there&rsquo;s a strong relationshi
 and the growth of $\rho$.
 The difference in magnitude between two and five layers can be explained by the additional number of parameters in the latter.
 However, in this case, soon after full separability is achieved, the rate of growth rapidly decreases nearly to a plateau.</p>
-<div align="center" style="margin-bottom:18px">
+<div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
   <div align="center", style="display: flex">
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/2/distance.svg"/>
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/5/distance.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/2/distance.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/5/distance.svg"/>
   </div>
   <sub>Progression of the distance of $V$ wrt to the final solution of the baseline model.</sub>
 </div>
 <p>As for the normalized weights $V$, these all become closer as training progresses.
 Particularly all the parametrized settings seem to converge to the same solution.
 Again, in deeper setting, the solutions are further separated, most likely a result of increasing overparametrization.</p>
-<div align="center" style="margin-bottom:18px">
+<div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
   <div align="center", style="display: flex">
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/2/margins.svg"/>
-      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/5/margins.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/2/margins.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/5/margins.svg"/>
   </div>
   <sub>Evolution of the margin throughout training</sub>
 </div>
@@ -910,15 +910,46 @@ Again, in deeper setting, the solutions are further separated, most likely a res
 as all margins increase after separability.
 The oscilations of margin during training are most likely a result of non-smooth decision boundaries
 which are corrected during training, when we see a change in the support vector, here represented by dots along the lines.</p>
+<!--
+#### SGD or Exponential loss? 
+
+Here
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/2/scalar.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/5/scalar.svg"/>
+  </div>
+  <sub>Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
+  The colored band indicates the region where all networks achieve full-separability on the training set.</sub>
+</div>
+
+Here
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/2/distance.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/5/distance.svg"/>
+  </div>
+  <sub>Progression of the distance of $V$ wrt to the final solution of the baseline model.</sub>
+</div>
+Here
+
+<div align="center" style="margin-bottom:18px">
+  <div align="center", style="display: flex">
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/2/margins.svg"/>
+      <img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/5/margins.svg"/>
+  </div>
+  <sub>Evolution of the margin throughout training</sub>
+</div>
+-->
 <h3 id="what-about-generalization">What about generalization?</h3>
 <p>We&rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
 But, how does this relates to the initial topic of generalization bounds?
 The general understanding is expecting that this preference for a particular solution poses a
 limitation on the class complexity thus explaining the generalization phenomena of deep neural networks.
 In fact, there is some empirical evidence that may favor the view generalization under normalized networks.</p>
-<div align="center" style="margin-bottom:18px">
-  <div align="center", style="display: flex">
-      <img style="margin-top:0px; margin-bottom:18px" src="figures/generalization_normalized.png"/>
+<div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+  <div align="center">
+      <img width="100%" style="margin-top:0px; margin-bottom:0.2em height: auto !important;" src="figures/generalization_normalized.png"/>
   </div>
   <sub>Testing loss on the CIFAR10 dataset for different initializations.
   The figure on the left shows the original networks while the one of the right shows the same networks normalized at each layer.
