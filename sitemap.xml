@@ -1,113 +1,66 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>/</loc>
     <lastmod>2021-01-10T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/post/complexity/</loc>
     <lastmod>2021-01-10T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/post/</loc>
     <lastmod>2021-01-10T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/post/saturation/</loc>
     <lastmod>2020-10-29T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/exploring_vagueness/</loc>
-    <lastmod>2020-04-12T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/post/pretraining/</loc>
     <lastmod>2019-05-09T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/deep_learning/</loc>
-    <lastmod>2019-05-09T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/author/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/publication-type/4/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/authors/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
+    <loc>/projects/ecg_gans/</loc>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/projects/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/publication_types/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/tag/source-themes/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/tags/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/projects/lth/</loc>
-    <lastmod>1969-12-31T20:59:59-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:59-05:00</lastmod>
+  </url><url>
     <loc>/projects/landscapeviz/</loc>
-    <lastmod>1969-12-31T20:59:58-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:58-05:00</lastmod>
+  </url><url>
     <loc>/projects/psopt/</loc>
-    <lastmod>1969-12-31T20:59:57-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:57-05:00</lastmod>
+  </url><url>
     <loc>/projects/sonify/</loc>
-    <lastmod>1969-12-31T20:59:56-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:56-05:00</lastmod>
+  </url><url>
     <loc>/projects/sac/</loc>
-    <lastmod>1969-12-31T20:59:55-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:55-05:00</lastmod>
+  </url><url>
     <loc>/projects/snowman_slide/</loc>
-    <lastmod>1969-12-31T20:59:54-03:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>1969-12-31T18:59:54-05:00</lastmod>
+  </url><url>
     <loc>/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/publication/</loc>
   </url>
-  
 </urlset>
