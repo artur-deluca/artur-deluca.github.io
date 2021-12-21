@@ -618,10 +618,9 @@ much of deep learning&rsquo;s theoretical guarantees remain unexplained.</p>
 <p>According to classical statistical learning theory, the structure displayed by deep networks
 entails poor predictions over unseen instances.
 However, this is not often the case and,
-this mismatch between theory and practice is what gives deep learning a sort of magical aura.
-At the same time, this aura is besieged by researchers,
-that, in their skepticism, will constantly try to poke holes to tap into what really allows these models to perform the way they do.</p>
-<p>To proper discuss these issues, we need to formulate our setting.
+this mismatch between theory and practice is what gives deep learning a sort of magical appearance.
+Meanwhile, this aura is besieged by researchers that will try to tap into what really allows these models to perform so well.</p>
+<p>To discuss this issue more closely, we need to formulate its setting.
 In classification problems, we typically have:</p>
 <ul>
 <li>A candidate model (or hypothesis) $h$ that maps the domain $x$ to the output $y$;</li>
@@ -629,11 +628,11 @@ In classification problems, we typically have:</p>
 <li>A target function $f$ that determines the output $y \in \{-1;1\}$ depending on the input $x$;</li>
 <li>A loss function $\ell$ that measures the prediction error of $h$ with respect to $f$.</li>
 </ul>
-<p>Considering our setting, we would like to find a model that most closely approximates the target function $f$.
+<p>In this setting, we would like to find a model that most closely approximates the target function $f$.
 According to our sampling distribution, this entails minimizing our <em>expected risk</em>: the
 the expected value of the error with respect to our $\mathcal{D}$:</p>
 <p>$$R(h) := \mathbb{E}_{\mathcal{D}}[\ell(h, f)] \equiv \int_{\mathcal{X}} \ell(h(x), f(x))\,p(x)dx$$</p>
-<p>We go about generating models through a learning
+<p>We generate these candidates through a learning
 algorithm $\mathcal{A}$, that given a set of observations outputs a hypothesis.
 Knowing that we cannot access the sampling probability, our compass in this search is our training set.
 In other words, our proxy for the expected risk is the empirical risk:
@@ -667,7 +666,7 @@ the more complex a class is, the bigger the generalization gap can be.
 Even with a large amount of data, if the complexity measure of the model is too high,
 we have fewer guarantees of avoiding overfitting.</p>
 <p>For the sake of illustration, let&rsquo;s take the number of parameters of a neural network as a measure of its complexity.
-The MNIST dataset consists of binary images of handwritten digits in a 16x16 grid and contains more than 55 thousand data points.
+The MNIST dataset consists of images of handwritten digits in a 28x28 grid and contains more than 55 thousand data points.
 A fairly simple model, as an off-the-shelf LeNet contains more than 470 thousand parameters only in its first layer, let alone in the rest of the network.
 Due to its complexity, for this model to generalize with an acceptable error and probability,
 we would need trillions and trillions of data points.
@@ -746,8 +745,8 @@ That is, instead of study discrete evolutions, we&rsquo;ll focus on the rate $\d
 <p>$$\dot{W} = \frac{dW}{dt} = -\gamma(t)\nabla_W(R_n(f)).$$</p>
 <p>For the rest of the work, we neglect the effect of the learning rate $\gamma(t)$, thus obtaining the following rate for each layer:</p>
 <p>$$\begin{aligned}
-\dot{W}_k &amp;= -\frac{\partial R_n}{\partial W_k} \\<br>
-&amp;= \sum_{i=1}^{N}\left [\frac{\partial f(x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)} \\<br>
+\dot{W}_k &amp;= -\frac{\partial R_n}{\partial W_k} \\
+&amp;= \sum_{i=1}^{N}\left [\frac{\partial f(x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)} \\
 \end{aligned}$$</p>
 <p>Next, we&rsquo;ll break down the dynamics of $\dot{W}$ in its scalar $\dot{\rho}$ and normalized component $\dot{V}$.</p>
 <p>$$\dot{\rho}_k = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial t} = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial W_k}\frac{\partial W_k}{\partial t}= V_k^\top\dot{W}_k.$$
@@ -772,9 +771,9 @@ $$</p>
 <p>$$
 \begin{align}
 \dot{V}_k
-&amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\frac{\partial \tilde{f}}{\partial V_k} - 2 \lambda_kV_k &amp;\left(\cdot\, V^\top_k\right)\\<br>
+&amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\frac{\partial \tilde{f}}{\partial V_k} - 2 \lambda_kV_k &amp;\left(\cdot\, V^\top_k\right)\\
 \cancelto{0}{\dot{V}_kV_k^\top}
-&amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\overbrace{\frac{\partial \tilde{f}}{\partial V_k}V^\top_k}^{\tilde{f}(x_i)} - 2 \lambda_k\cancelto{1}{V_kV^\top_k} &amp;\\<br>
+&amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\overbrace{\frac{\partial \tilde{f}}{\partial V_k}V^\top_k}^{\tilde{f}(x_i)} - 2 \lambda_k\cancelto{1}{V_kV^\top_k} &amp;\\
 \end{align}
 $$</p>
 <p style="text-align:right; font-size:0.6em;">
@@ -798,7 +797,7 @@ the greatest values will yield the smallest loss contributions (due to the negat
 thus, they will vanish first.
 Hence, it is reasonable to assume that we reach a point where all but a few data points $x_*$ will vanish,
 converging to a stationary point in $V_k$ where:</p>
-<p>$$\frac{\partial\tilde{f}(x_*)}{\partial V_k} = \tilde{f}(x_*)V_k$$</p>
+<p>$$\frac{\partial\tilde{f}(x_<em>)}{\partial V_k} = \tilde{f}(x_</em>)V_k$$</p>
 <p>What is the meaning of this stationary point?
 We will discuss this after the second and third case.</p>
 <hr>
@@ -808,8 +807,8 @@ Consequently, we have the following rate $\dot{\rho}=\frac{\partial \mathcal{L}}
 $$
 \begin{align}
 \dot{\rho}_k
-&amp;= \sum_{i=1}^{N}\left [V_k^\top\frac{\partial f(W, x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)}\\<br>
-&amp;= \sum_{i=1}^{N}\left [\frac{\rho}{\rho_k}V_k^\top\frac{\partial \tilde{f}(V, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\<br>
+&amp;= \sum_{i=1}^{N}\left [V_k^\top\frac{\partial f(W, x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)}\\
+&amp;= \sum_{i=1}^{N}\left [\frac{\rho}{\rho_k}V_k^\top\frac{\partial \tilde{f}(V, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\
 &amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}f(V, x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}
 \end{align}
 $$</p>
@@ -823,18 +822,18 @@ Further expanding the gradient dynamics we saw in the definition, we have:</p>
 <p>$$
 \begin{align}
 \dot{\rho}_k
-&amp;= V_k^\top\dot{W}_k\\<br>
-&amp;= \sum_{i=1}^{N}V_k^\top\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\<br>
-&amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}\tilde{f}(x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}\\<br>
+&amp;= V_k^\top\dot{W}_k\\
+&amp;= \sum_{i=1}^{N}V_k^\top\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\
+&amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}\tilde{f}(x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}\\
 \end{align}
 $$</p>
 <p>and,
 $$
 \begin{align}
 \dot{V}_k
-&amp;= \frac{S_k}{\rho_k}\dot{W}_k\\<br>
-&amp;= \sum_{i=1}^{N}\frac{S_k}{\rho_k}\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\<br>
-&amp;= \frac{\rho}{\rho_k^2}\sum_{i=1}^{N}y_ie^{-y_i\rho\tilde{f}(x_i)}S_k\frac{\partial \tilde{f}(x_i)}{\partial V_k}\\<br>
+&amp;= \frac{S_k}{\rho_k}\dot{W}_k\\
+&amp;= \sum_{i=1}^{N}\frac{S_k}{\rho_k}\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\
+&amp;= \frac{\rho}{\rho_k^2}\sum_{i=1}^{N}y_ie^{-y_i\rho\tilde{f}(x_i)}S_k\frac{\partial \tilde{f}(x_i)}{\partial V_k}\\
 \end{align}
 $$</p>
 <p>Here we see that the gradients $\dot{\rho}_k$ and $\dot{V}_k$ have identical and near-identical rates to the other scenarios,
