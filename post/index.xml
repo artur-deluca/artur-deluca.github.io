@@ -123,7 +123,7 @@ I don&amp;rsquo;t intend to make this a comprehensive review, so instead, I&amp;
 &lt;p&gt;Gradient descent (GD) and its variations are widely used when training neural networks.
 In short, this technique update all parameters in the direction of the largest decrease on the loss function at each iteration, hence the name.&lt;/p&gt;
 &lt;p&gt;$$W_{t+1} = -\gamma(t)\nabla_{W_t} R_n$$&lt;/p&gt;
-&lt;p&gt;In the analysis of &lt;a href=&#34;#References&#34;&gt;Poggio (2020)&lt;/a&gt;, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
+&lt;p&gt;In the analysis of &lt;a href=&#34;#References&#34;&gt;Poggio (2020)&lt;/a&gt;, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \max(0, z)$.
 Also, instead of adding biases to each layer, we&amp;rsquo;ll only add them in the input layer as just another feature.
 Finally, we&amp;rsquo;ll be studying classification tasks using the exponential loss function
 that takes values $\{-1;1\}$:&lt;/p&gt;
@@ -131,7 +131,7 @@ that takes values $\{-1;1\}$:&lt;/p&gt;
 &lt;p&gt;We use this loss function to simplify our analysis of the gradient dynamics.
 Nevertheless, these results may be also extended to other exponential loss functions, such as the cross-entropy,
 most typically employed in classification tasks.&lt;/p&gt;
-&lt;p&gt;One of the advantages of this setting is to make use of the &lt;em&gt;homogeneity property&lt;/em&gt; granted by ReLUs.
+&lt;p&gt;One of the advantages of this setting is to make use of the &lt;em&gt;homogeneity property&lt;/em&gt; granted by ReLUs, that is $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
 This property enables us to detach the effects of scale and direction of the parameters.
 With that in mind, state our problem as follows:
 let $f(W,x)$ be a neural network composed by N layers $W_k$
@@ -202,7 +202,7 @@ the greatest values will yield the smallest loss contributions (due to the negat
 thus, they will vanish first.
 Hence, it is reasonable to assume that we reach a point where all but a few data points $x_*$ will vanish,
 converging to a stationary point in $V_k$ where:&lt;/p&gt;
-&lt;p&gt;$$\frac{\partial\tilde{f}(x_&lt;em&gt;)}{\partial V_k} = \tilde{f}(x_&lt;/em&gt;)V_k$$&lt;/p&gt;
+&lt;p&gt;$$\frac{\partial\tilde{f}(x_{*})}{\partial V_k} = \tilde{f}(x_{*})V_k$$&lt;/p&gt;
 &lt;p&gt;What is the meaning of this stationary point?
 We will discuss this after the second and third case.&lt;/p&gt;
 &lt;hr&gt;

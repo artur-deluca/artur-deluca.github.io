@@ -718,7 +718,7 @@ I don&rsquo;t intend to make this a comprehensive review, so instead, I&rsquo;ll
 <p>Gradient descent (GD) and its variations are widely used when training neural networks.
 In short, this technique update all parameters in the direction of the largest decrease on the loss function at each iteration, hence the name.</p>
 <p>$$W_{t+1} = -\gamma(t)\nabla_{W_t} R_n$$</p>
-<p>In the analysis of <a href="#References">Poggio (2020)</a>, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
+<p>In the analysis of <a href="#References">Poggio (2020)</a>, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \max(0, z)$.
 Also, instead of adding biases to each layer, we&rsquo;ll only add them in the input layer as just another feature.
 Finally, we&rsquo;ll be studying classification tasks using the exponential loss function
 that takes values $\{-1;1\}$:</p>
@@ -726,7 +726,7 @@ that takes values $\{-1;1\}$:</p>
 <p>We use this loss function to simplify our analysis of the gradient dynamics.
 Nevertheless, these results may be also extended to other exponential loss functions, such as the cross-entropy,
 most typically employed in classification tasks.</p>
-<p>One of the advantages of this setting is to make use of the <em>homogeneity property</em> granted by ReLUs.
+<p>One of the advantages of this setting is to make use of the <em>homogeneity property</em> granted by ReLUs, that is $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
 This property enables us to detach the effects of scale and direction of the parameters.
 With that in mind, state our problem as follows:
 let $f(W,x)$ be a neural network composed by N layers $W_k$
@@ -797,7 +797,7 @@ the greatest values will yield the smallest loss contributions (due to the negat
 thus, they will vanish first.
 Hence, it is reasonable to assume that we reach a point where all but a few data points $x_*$ will vanish,
 converging to a stationary point in $V_k$ where:</p>
-<p>$$\frac{\partial\tilde{f}(x_<em>)}{\partial V_k} = \tilde{f}(x_</em>)V_k$$</p>
+<p>$$\frac{\partial\tilde{f}(x_{*})}{\partial V_k} = \tilde{f}(x_{*})V_k$$</p>
 <p>What is the meaning of this stationary point?
 We will discuss this after the second and third case.</p>
 <hr>
