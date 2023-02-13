@@ -408,7 +408,7 @@ text-align: justify}
   &lt;/div&gt;
   &lt;sub&gt;The saturation regions of the sigmoid (left) and its derivative (right)&lt;/sub&gt;
 &lt;/div&gt;
-&lt;p&gt;Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning. Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions&#39; extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.&lt;/p&gt;
+&lt;p&gt;Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning. Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions&amp;rsquo; extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.&lt;/p&gt;
 &lt;p&gt;Traditionally, the weights of neural networks were initialized according to a technique popularized by Lecun (1998), which consists of sampling the weights from a bounded uniform distribution,&lt;/p&gt;
 &lt;p&gt;$$W_{ij} \sim U\left[\frac{-1}{\sqrt{n}}, \frac{1}{\sqrt{n}}\right]$$&lt;/p&gt;
 &lt;p&gt;parametrized by $n$, the number of incoming connections to the linked node.&lt;/p&gt;
