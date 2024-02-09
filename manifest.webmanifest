@@ -1,15 +1,15 @@
 {
-  "name": "",
-  "short_name": "",
+  "name": "Artur Back de Luca",
+  "short_name": "Artur Back de Luca",
   "lang": "en-us",
   "theme_color": "#2962ff",
   "background_color": "#2962ff",
   "icons": [{
-    "src": "/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_192x192_fill_lanczos_center_3.png",
+    "src": "/images/icon_hu1911db1dd596f728d6b75460d24fd98f_495_192x192_fill_lanczos_center_3.png",
     "sizes": "192x192",
     "type": "image/png"
     }, {
-    "src": "/images/icon_hu10bc745d44039a0eb9ecd32521c93606_9335_512x512_fill_lanczos_center_3.png",
+    "src": "/images/icon_hu1911db1dd596f728d6b75460d24fd98f_495_512x512_fill_lanczos_center_3.png",
     "sizes": "512x512",
     "type": "image/png"
      }],
