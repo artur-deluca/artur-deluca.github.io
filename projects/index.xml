@@ -5,7 +5,7 @@
     <link>/projects/</link>
       <atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 31 Dec 1969 18:59:59 -0500</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Jan 1970 00:59:59 +0100</lastBuildDate>
     <image>
       <url>/images/icon_hu1911db1dd596f728d6b75460d24fd98f_495_512x512_fill_lanczos_center_3.png</url>
       <title>Projects</title>
@@ -15,7 +15,7 @@
     <item>
       <title>ECG GANs</title>
       <link>/projects/ecg_gans/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:59 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:59 +0100</pubDate>
       <guid>/projects/ecg_gans/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -29,7 +29,7 @@
     <item>
       <title>Testing the Lottery Ticket Hypothesis</title>
       <link>/projects/lth/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:59 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:59 +0100</pubDate>
       <guid>/projects/lth/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -43,7 +43,7 @@
     <item>
       <title>Landscapeviz</title>
       <link>/projects/landscapeviz/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:58 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:58 +0100</pubDate>
       <guid>/projects/landscapeviz/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -57,7 +57,7 @@
     <item>
       <title>PSOpt - Particle swarm optimizer</title>
       <link>/projects/psopt/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:57 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:57 +0100</pubDate>
       <guid>/projects/psopt/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -71,7 +71,7 @@
     <item>
       <title>EEG Sonify</title>
       <link>/projects/sonify/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:56 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:56 +0100</pubDate>
       <guid>/projects/sonify/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -85,7 +85,7 @@
     <item>
       <title>Soft Actor-Critic in MXNet</title>
       <link>/projects/sac/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:55 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:55 +0100</pubDate>
       <guid>/projects/sac/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
@@ -99,7 +99,7 @@
     <item>
       <title>Snowman slide</title>
       <link>/projects/snowman_slide/</link>
-      <pubDate>Wed, 31 Dec 1969 18:59:54 -0500</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:59:54 +0100</pubDate>
       <guid>/projects/snowman_slide/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
