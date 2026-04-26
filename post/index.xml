@@ -1,137 +1,118 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts | Artur Back de Luca</title>
-    <link>/post/</link>
-      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Jan 2021 00:00:00 -0500</lastBuildDate>
-    <image>
-      <url>/images/icon_hu1911db1dd596f728d6b75460d24fd98f_495_512x512_fill_lanczos_center_3.png</url>
-      <title>Posts</title>
-      <link>/post/</link>
-    </image>
-    
-    <item>
-      <title>A glimpse over capacity control in neural networks</title>
-      <link>/post/complexity/</link>
-      <pubDate>Sun, 10 Jan 2021 00:00:00 -0500</pubDate>
-      <guid>/post/complexity/</guid>
-      <description>&lt;p&gt;By this point in time, there&amp;rsquo;s no need to emphasize how important deep learning has become.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts | Artur Back de Luca</title><link>/post/</link><atom:link href="/post/index.xml" rel="self" type="application/rss+xml"/><description>Posts</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Jan 2021 00:00:00 -0500</lastBuildDate><image><url>/images/icon_hu1911db1dd596f728d6b75460d24fd98f_495_512x512_fill_lanczos_center_3.png</url><title>Posts</title><link>/post/</link></image><item><title>A glimpse over capacity control in neural networks</title><link>/post/complexity/</link><pubDate>Sun, 10 Jan 2021 00:00:00 -0500</pubDate><guid>/post/complexity/</guid><description>&lt;p>By this point in time, there&amp;rsquo;s no need to emphasize how important deep learning has become.
 Yet, despite paving the way for some of the boldest and most complicated projects of this decade,
-much of deep learning&amp;rsquo;s theoretical guarantees remain unexplained.&lt;/p&gt;
-&lt;p&gt;According to classical statistical learning theory, the structure displayed by deep networks
+much of deep learning&amp;rsquo;s theoretical guarantees remain unexplained.&lt;/p>
+&lt;p>According to classical statistical learning theory, the structure displayed by deep networks
 entails poor predictions over unseen instances.
 However, this is not often the case and,
 this mismatch between theory and practice is what gives deep learning a sort of magical appearance.
-Meanwhile, this aura is besieged by researchers that will try to tap into what really allows these models to perform so well.&lt;/p&gt;
-&lt;p&gt;To discuss this issue more closely, we need to formulate its setting.
-In classification problems, we typically have:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A candidate model (or hypothesis) $h$ that maps the domain $x$ to the output $y$;&lt;/li&gt;
-&lt;li&gt;A set of $n$ coupled observations $\mathcal{S_n} = \{ (x_1;y_1), &amp;hellip;, (x_n; y_n) \}$, sampled from an unknown probability distribution $\mathcal{D}$;&lt;/li&gt;
-&lt;li&gt;A target function $f$ that determines the output $y \in \{-1;1\}$ depending on the input $x$;&lt;/li&gt;
-&lt;li&gt;A loss function $\ell$ that measures the prediction error of $h$ with respect to $f$.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In this setting, we would like to find a model that most closely approximates the target function $f$.
-According to our sampling distribution, this entails minimizing our &lt;em&gt;expected risk&lt;/em&gt;: the
-the expected value of the error with respect to our $\mathcal{D}$:&lt;/p&gt;
-&lt;p&gt;$$R(h) := \mathbb{E}_{\mathcal{D}}[\ell(h, f)] \equiv \int_{\mathcal{X}} \ell(h(x), f(x))\,p(x)dx$$&lt;/p&gt;
-&lt;p&gt;We generate these candidates through a learning
+Meanwhile, this aura is besieged by researchers that will try to tap into what really allows these models to perform so well.&lt;/p>
+&lt;p>To discuss this issue more closely, we need to formulate its setting.
+In classification problems, we typically have:&lt;/p>
+&lt;ul>
+&lt;li>A candidate model (or hypothesis) $h$ that maps the domain $x$ to the output $y$;&lt;/li>
+&lt;li>A set of $n$ coupled observations $\mathcal{S_n} = \{ (x_1;y_1), &amp;hellip;, (x_n; y_n) \}$, sampled from an unknown probability distribution $\mathcal{D}$;&lt;/li>
+&lt;li>A target function $f$ that determines the output $y \in \{-1;1\}$ depending on the input $x$;&lt;/li>
+&lt;li>A loss function $\ell$ that measures the prediction error of $h$ with respect to $f$.&lt;/li>
+&lt;/ul>
+&lt;p>In this setting, we would like to find a model that most closely approximates the target function $f$.
+According to our sampling distribution, this entails minimizing our &lt;em>expected risk&lt;/em>: the
+the expected value of the error with respect to our $\mathcal{D}$:&lt;/p>
+&lt;p>$$R(h) := \mathbb{E}_{\mathcal{D}}[\ell(h, f)] \equiv \int_{\mathcal{X}} \ell(h(x), f(x))\,p(x)dx$$&lt;/p>
+&lt;p>We generate these candidates through a learning
 algorithm $\mathcal{A}$, that given a set of observations outputs a hypothesis.
 Knowing that we cannot access the sampling probability, our compass in this search is our training set.
 In other words, our proxy for the expected risk is the empirical risk:
-$$R_n(h) := \sum_{i=1}^n \ell(h(x_i), y_i).$$&lt;/p&gt;
-&lt;p&gt;Using the principle of Empirical Risk Minimization (ERM),
+$$R_n(h) := \sum_{i=1}^n \ell(h(x_i), y_i).$$&lt;/p>
+&lt;p>Using the principle of Empirical Risk Minimization (ERM),
 we are assuming that the solution that minimizes the empirical risk also minimizes the expected risk.
 We say that a learning algorithm generalizes if the empirical risk approaches the expected risk as data grows to infinity.
 In other words, the generalization error, $\Delta R = R(h)-R_n(h)$ goes to zero.
-On the other hand, when this difference remains significantly large, we say the model overfits.&lt;/p&gt;
-&lt;p&gt;But consider the following,
+On the other hand, when this difference remains significantly large, we say the model overfits.&lt;/p>
+&lt;p>But consider the following,
 if we could access every conceivable hypothesis,
 what guarantee could ERM provide of finding a candidate that does not overfit?
 Think of the hypothesis that memorizes all training points and output their correct classification.
 Under ERM, we&amp;rsquo;d be finding a good candidate, since it perfectly fits our training data.
-However, when predicting an unseen observation, this model would be no better them random guessing, thus generalizing poorly.&lt;/p&gt;
-&lt;p&gt;To circumvent this, we limit our search space to a certain class of hypotheses,
+However, when predicting an unseen observation, this model would be no better them random guessing, thus generalizing poorly.&lt;/p>
+&lt;p>To circumvent this, we limit our search space to a certain class of hypotheses,
 by only considering models with a certain structure (e.g. linear predictors).
 Here we essentially apply a set of assumptions of our model based on some prior knowledge of the problem,
-what we call &lt;em&gt;inductive bias&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Under these circumstances, ERM is guaranteed to generalize as the number of data points grows to infinity.
-But more importantly,  if our training data is sampled iid,
-we can devise bounds that indicate, with a small probability of error $\delta$, how close we are from the true risk.&lt;/p&gt;
-&lt;p&gt;$$\underset{S\sim\mathcal{D}^N}{\mathbb{P}}\left(R(h) - R_n(h) \le O\left (\frac{C(\mathcal{H})}{\sqrt{n}} \right)\right) &amp;gt; 1- \delta$$&lt;/p&gt;
-&lt;p&gt;These bounds are naturally governed by the number of data points, but also by the complexity $C$ of our hypothesis class.
+what we call &lt;em>inductive bias&lt;/em>.&lt;/p>
+&lt;p>Under these circumstances, ERM is guaranteed to generalize as the number of data points grows to infinity.
+But more importantly, if our training data is sampled iid,
+we can devise bounds that indicate, with a small probability of error $\delta$, how close we are from the true risk.&lt;/p>
+&lt;p>$$\underset{S\sim\mathcal{D}^N}{\mathbb{P}}\left(R(h) - R_n(h) \le O\left (\frac{C(\mathcal{H})}{\sqrt{n}} \right)\right) &amp;gt; 1- \delta$$&lt;/p>
+&lt;p>These bounds are naturally governed by the number of data points, but also by the complexity $C$ of our hypothesis class.
 When considering finite sets of hypotheses, the complexity measure can simply be represented by the cardinality of the set.
-However, under infinte hypothesis classes, more elaborated techniques are needed.&lt;/p&gt;
-&lt;p&gt;Many competing complexity measures, and consequently generalization bounds, have been developed over the last 30 years:
+However, under infinte hypothesis classes, more elaborated techniques are needed.&lt;/p>
+&lt;p>Many competing complexity measures, and consequently generalization bounds, have been developed over the last 30 years:
 VC-dimension, Rademacher complexity, covering numbers, and so on.
 If we think about the effect of complexity on the generalization gap,
 the more complex a class is, the bigger the generalization gap can be.
 Even with a large amount of data, if the complexity measure of the model is too high,
-we have fewer guarantees of avoiding overfitting.&lt;/p&gt;
-&lt;p&gt;For the sake of illustration, let&amp;rsquo;s take the number of parameters of a neural network as a measure of its complexity.
+we have fewer guarantees of avoiding overfitting.&lt;/p>
+&lt;p>For the sake of illustration, let&amp;rsquo;s take the number of parameters of a neural network as a measure of its complexity.
 The MNIST dataset consists of images of handwritten digits in a 28x28 grid and contains more than 55 thousand data points.
 A fairly simple model, as an off-the-shelf LeNet contains more than 470 thousand parameters only in its first layer, let alone in the rest of the network.
 Due to its complexity, for this model to generalize with an acceptable error and probability,
 we would need trillions and trillions of data points.
 If we took this model and train it over MNIST, our natural inclination would be to think that
 a great performance in a training set would be the result of an interpolation of the data points, due to the large overparametrization of the model
-when compared to the dataset.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-top: 0.5em; margin-bottom:0.5em&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;margin-top:0px&#34;&gt;
-      &lt;img width=&#34;100%&#34; style=&#34;margin-top:0px; margin-bottom:0.1em; height: auto !important;&#34; src=&#34;figures/overparametrization.png&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Generalization gap decreasing with increase in network capacity. Source: &lt;a href=&#34;#References&#34;&gt;Neyshabur et al. 2018&lt;/a&gt;
-  &lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Still, we have tons of evidence that support generalization of under these settings.
-So&amp;hellip; what gives?&lt;/p&gt;
-&lt;!--http://math.huji.ac.il/~amitd/multiclass.pdf--&gt;
-&lt;!-- C1((d+ln(1/delta)/e)) d = (470e3)^2; delta=0.1; e=0.05 --&gt;
-&lt;h3 id=&#34;structured-risk-minimization-and-regularization&#34;&gt;Structured Risk Minimization and Regularization&lt;/h3&gt;
-&lt;!--https://stats.stackexchange.com/questions/199024/lucid-explanation-for-numerical-stability-of-matrix-inversion-in-ridge-regress--&gt;
-&lt;!-- http://proceedings.mlr.press/v51/duvenaud16.pdf--&gt;
-&lt;!-- https://www.cs.toronto.edu/~duvenaud/talks/early-stopping-bnp.pdf --&gt;
-&lt;!-- http://lcsl.mit.edu/courses/regml/regml2020/slides/lect3.pdf --&gt;
-&lt;!-- https://www.youtube.com/watch?v=lVmwnBg3fQo --&gt;
-&lt;p&gt;By observing the bounds generated over the complexity of neural networks, we may think that without tremendous amounts of data, we cannot achieve generalization.
+when compared to the dataset.&lt;/p>
+&lt;div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+&lt;div align="center", style="margin-top:0px">
+&lt;img width="100%" style="margin-top:0px; margin-bottom:0.1em; height: auto !important;" src="figures/overparametrization.png"/>
+&lt;/div>
+&lt;sub>Generalization gap decreasing with increase in network capacity. Source: &lt;a href="#References">Neyshabur et al. 2018&lt;/a>
+&lt;/sub>
+&lt;/div>
+&lt;p>Still, we have tons of evidence that support generalization of under these settings.
+So&amp;hellip; what gives?&lt;/p>
+&lt;!--http://math.huji.ac.il/~amitd/multiclass.pdf-->
+&lt;!-- C1((d+ln(1/delta)/e)) d = (470e3)^2; delta=0.1; e=0.05 -->
+&lt;h3 id="structured-risk-minimization-and-regularization">Structured Risk Minimization and Regularization&lt;/h3>
+&lt;!--https://stats.stackexchange.com/questions/199024/lucid-explanation-for-numerical-stability-of-matrix-inversion-in-ridge-regress-->
+&lt;!-- http://proceedings.mlr.press/v51/duvenaud16.pdf-->
+&lt;!-- https://www.cs.toronto.edu/~duvenaud/talks/early-stopping-bnp.pdf -->
+&lt;!-- http://lcsl.mit.edu/courses/regml/regml2020/slides/lect3.pdf -->
+&lt;!-- https://www.youtube.com/watch?v=lVmwnBg3fQo -->
+&lt;p>By observing the bounds generated over the complexity of neural networks, we may think that without tremendous amounts of data, we cannot achieve generalization.
 However, imagine we had a class of hypothesis with a hierarchical structure, i.e. $\mathcal{H} \supseteq \mathcal{H}_1 &amp;hellip; \supseteq \mathcal{H}_n$.
 In this class, each subset $\mathcal{H_i}$ has a smaller complexity than its supersets $C(\mathcal{H}) \ge C(\mathcal{H}_1) &amp;hellip; \ge C(\mathcal{H}_n)$.
 If we could exploit the hierarchical structure, we can devise a way to learn a function while also minimizing its complexity, thus generating reasonable bounds.
 Akin to the ERM, this principle is called Structured Risk Minimization (SRM).
-However, if we even encounter such hierarchical classes, how to make these a controllable variable?&lt;/p&gt;
-&lt;p&gt;Regularization is a way to supplement the inductive bias present in our set of hypotheses by restraining the candidates to a particular condition.
+However, if we even encounter such hierarchical classes, how to make these a controllable variable?&lt;/p>
+&lt;p>Regularization is a way to supplement the inductive bias present in our set of hypotheses by restraining the candidates to a particular condition.
 One typical example is known as weight-decay, or L2-Regularization, where we introduce a norm restriction
-on our model&amp;rsquo;s parameters $W$, generating the following optimization problem in the &lt;em&gt;Ivanov form&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;$$\textrm{minimize} \underset{\textrm{s.t. } \left\Vert W\right\Vert_2^2 \le r}{R_n(h)}$$&lt;/p&gt;
-&lt;p&gt;Typically, for means of analysis, we resort to the Tikhonov form despite them not being entirely
-interchangeable as we switch from a hard to a soft penalization term.&lt;/p&gt;
-&lt;p&gt;$$\textrm{minimize } R_n(h) + \lambda\left\Vert W\right\Vert_2^2$$&lt;/p&gt;
-&lt;p&gt;Regularization can come in different shapes and sizes.
+on our model&amp;rsquo;s parameters $W$, generating the following optimization problem in the &lt;em>Ivanov form&lt;/em>.&lt;/p>
+&lt;p>$$\textrm{minimize} \underset{\textrm{s.t. } \left\Vert W\right\Vert_2^2 \le r}{R_n(h)}$$&lt;/p>
+&lt;p>Typically, for means of analysis, we resort to the Tikhonov form despite them not being entirely
+interchangeable as we switch from a hard to a soft penalization term.&lt;/p>
+&lt;p>$$\textrm{minimize } R_n(h) + \lambda\left\Vert W\right\Vert_2^2$$&lt;/p>
+&lt;p>Regularization can come in different shapes and sizes.
 Besides, sometimes, regularization may come implicitly.
 This roughly refers to the learner’s preference to implicitly choosing
 certain structured solutions as if some explicit regularization term appeared in its objective function.
-For instance, it is known that introducing noise to the observations may induce the same effect as weight decay (&lt;a href=&#34;#References&#34;&gt;Bishop (1994)&lt;/a&gt;).
-Another equivalent example is early stopping, i.e. stopping training once the validation loss starts to increase (&lt;a href=&#34;#References&#34;&gt;Goodfellow (2016)&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;However, despite all these techniques, even &amp;ldquo;bare-boned&amp;rdquo; deep networks seem to achieve fairly good generalization.
-Our intuition tells us that there must be an implicit control factor on the hypothesis space when training neural nets.&lt;/p&gt;
-&lt;h3 id=&#34;complexity-control-via-gradient-descent&#34;&gt;Complexity control via gradient descent&lt;/h3&gt;
-&lt;p&gt;There are many competing intuitions on how deep neural nets are implicitly regularized.
+For instance, it is known that introducing noise to the observations may induce the same effect as weight decay (&lt;a href="#References">Bishop (1994)&lt;/a>).
+Another equivalent example is early stopping, i.e. stopping training once the validation loss starts to increase (&lt;a href="#References">Goodfellow (2016)&lt;/a>).&lt;/p>
+&lt;p>However, despite all these techniques, even &amp;ldquo;bare-boned&amp;rdquo; deep networks seem to achieve fairly good generalization.
+Our intuition tells us that there must be an implicit control factor on the hypothesis space when training neural nets.&lt;/p>
+&lt;h3 id="complexity-control-via-gradient-descent">Complexity control via gradient descent&lt;/h3>
+&lt;p>There are many competing intuitions on how deep neural nets are implicitly regularized.
 Generally, most of them point to the same factor: the training procedure, or more specifically, the gradient-based training.
-I don&amp;rsquo;t intend to make this a comprehensive review, so instead, I&amp;rsquo;ll provide an analysis on one of these, which is the work of Poggio et al. 2020 called &lt;em&gt;Complexity Control by gradient descent in deep networks&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Gradient descent (GD) and its variations are widely used when training neural networks.
-In short, this technique update all parameters in the direction of the largest decrease on the loss function at each iteration, hence the name.&lt;/p&gt;
-&lt;p&gt;$$W_{t+1} = -\gamma(t)\nabla_{W_t} R_n$$&lt;/p&gt;
-&lt;p&gt;In the analysis of &lt;a href=&#34;#References&#34;&gt;Poggio (2020)&lt;/a&gt;, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \max(0, z)$.
+I don&amp;rsquo;t intend to make this a comprehensive review, so instead, I&amp;rsquo;ll provide an analysis on one of these, which is the work of Poggio et al. 2020 called &lt;em>Complexity Control by gradient descent in deep networks&lt;/em>.&lt;/p>
+&lt;p>Gradient descent (GD) and its variations are widely used when training neural networks.
+In short, this technique update all parameters in the direction of the largest decrease on the loss function at each iteration, hence the name.&lt;/p>
+&lt;p>$$W_{t+1} = -\gamma(t)\nabla_{W_t} R_n$$&lt;/p>
+&lt;p>In the analysis of &lt;a href="#References">Poggio (2020)&lt;/a>, we use deep networks with ReLU (Rectified Linear Unit) activation functions: $\sigma(z) = \max(0, z)$.
 Also, instead of adding biases to each layer, we&amp;rsquo;ll only add them in the input layer as just another feature.
 Finally, we&amp;rsquo;ll be studying classification tasks using the exponential loss function
-that takes values $\{-1;1\}$:&lt;/p&gt;
-&lt;p&gt;$$\ell(x, y) := e^{-yf(x)}$$&lt;/p&gt;
-&lt;p&gt;We use this loss function to simplify our analysis of the gradient dynamics.
+that takes values $\{-1;1\}$:&lt;/p>
+&lt;p>$$\ell(x, y) := e^{-yf(x)}$$&lt;/p>
+&lt;p>We use this loss function to simplify our analysis of the gradient dynamics.
 Nevertheless, these results may be also extended to other exponential loss functions, such as the cross-entropy,
-most typically employed in classification tasks.&lt;/p&gt;
-&lt;p&gt;One of the advantages of this setting is to make use of the &lt;em&gt;homogeneity property&lt;/em&gt; granted by ReLUs, that is $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
+most typically employed in classification tasks.&lt;/p>
+&lt;p>One of the advantages of this setting is to make use of the &lt;em>homogeneity property&lt;/em> granted by ReLUs, that is $\sigma(z) = \frac{\partial\sigma}{\partial z}z$.
 This property enables us to detach the effects of scale and direction of the parameters.
 With that in mind, state our problem as follows:
 let $f(W,x)$ be a neural network composed by N layers $W_k$
@@ -140,51 +121,51 @@ $$W_k = \rho_k V_k,$$
 where $\rho_k$ is the norm of the weights at layer $k$ and $\left\Vert V_k \right\Vert$ is the unitary version of $W_k$.
 Using the homogeneity property, we can rewrite $f$ as being:
 $$f = \tilde{f}(V,x)\prod_{i=1}^N\rho_i,$$
-where $\tilde{f}$ is the normalized version of the network.&lt;/p&gt;
+where $\tilde{f}$ is the normalized version of the network.&lt;/p>
 &lt;!--For staters, one of the important pieces in complexity measure of neural networks is that the normalized weights are what actually matter.
 This has been proven by Bartelet in 1994.
-After all, for classification cases, since we use a softmax layer in the end, the normalized and unnormalized results woukld be the same--&gt;
-&lt;p&gt;Our goal here is to study how the gradient behaves throughout iterations,
+After all, for classification cases, since we use a softmax layer in the end, the normalized and unnormalized results woukld be the same-->
+&lt;p>Our goal here is to study how the gradient behaves throughout iterations,
 and we&amp;rsquo;ll do so through the lens of a dynamical system in the continuous space.
-That is, instead of study discrete evolutions, we&amp;rsquo;ll focus on the rate $\dot{W}$.&lt;/p&gt;
-&lt;p&gt;$$\dot{W} = \frac{dW}{dt} = -\gamma(t)\nabla_W(R_n(f)).$$&lt;/p&gt;
-&lt;p&gt;For the rest of the work, we neglect the effect of the learning rate $\gamma(t)$, thus obtaining the following rate for each layer:&lt;/p&gt;
-&lt;p&gt;$$\begin{aligned}
+That is, instead of study discrete evolutions, we&amp;rsquo;ll focus on the rate $\dot{W}$.&lt;/p>
+&lt;p>$$\dot{W} = \frac{dW}{dt} = -\gamma(t)\nabla_W(R_n(f)).$$&lt;/p>
+&lt;p>For the rest of the work, we neglect the effect of the learning rate $\gamma(t)$, thus obtaining the following rate for each layer:&lt;/p>
+&lt;p>$$\begin{aligned}
 \dot{W}_k &amp;amp;= -\frac{\partial R_n}{\partial W_k} \\
 &amp;amp;= \sum_{i=1}^{N}\left [\frac{\partial f(x_i)}{\partial W_k}\right]y_ie^{-y_if(x_i)} \\
-\end{aligned}$$&lt;/p&gt;
-&lt;p&gt;Next, we&amp;rsquo;ll break down the dynamics of $\dot{W}$ in its scalar $\dot{\rho}$ and normalized component $\dot{V}$.&lt;/p&gt;
-&lt;p&gt;$$\dot{\rho}_k = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial t} = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial W_k}\frac{\partial W_k}{\partial t}= V_k^\top\dot{W}_k.$$
+\end{aligned}$$&lt;/p>
+&lt;p>Next, we&amp;rsquo;ll break down the dynamics of $\dot{W}$ in its scalar $\dot{\rho}$ and normalized component $\dot{V}$.&lt;/p>
+&lt;p>$$\dot{\rho}_k = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial t} = \frac{\partial \left\Vert W_k\right\Vert_2}{\partial W_k}\frac{\partial W_k}{\partial t}= V_k^\top\dot{W}_k.$$
 and
-$$\dot{V}_k = \frac{\partial V_k}{dt} = \frac{\partial V_k}{\partial W_k}\frac{\partial W_k}{\partial t} = -\frac{S}{\rho_k} \dot{W}_k,$$&lt;/p&gt;
-&lt;p&gt;where&lt;/p&gt;
-&lt;p&gt;$$S_k = I - V_kV_k^\top.$$&lt;/p&gt;
-&lt;p&gt;In the following sections, we impose and relax some constraints and
-observe the effect on $\dot{V}$ and $\dot{\rho}$ under three different scenarios.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h4 id=&#34;case-1-constraining-rho-and-v&#34;&gt;Case 1: constraining $\rho$ and $V$&lt;/h4&gt;
-&lt;p&gt;In the first scenario, we consider $\rho$ to remain fixed throughout iterations
+$$\dot{V}_k = \frac{\partial V_k}{dt} = \frac{\partial V_k}{\partial W_k}\frac{\partial W_k}{\partial t} = -\frac{S}{\rho_k} \dot{W}_k,$$&lt;/p>
+&lt;p>where&lt;/p>
+&lt;p>$$S_k = I - V_kV_k^\top.$$&lt;/p>
+&lt;p>In the following sections, we impose and relax some constraints and
+observe the effect on $\dot{V}$ and $\dot{\rho}$ under three different scenarios.&lt;/p>
+&lt;hr>
+&lt;h4 id="case-1-constraining-rho-and-v">Case 1: constraining $\rho$ and $V$&lt;/h4>
+&lt;p>In the first scenario, we consider $\rho$ to remain fixed throughout iterations
 and consistent with the definition, we&amp;rsquo;ll impose a restriction on $V_k$, such that $\left\Vert V_k \right\Vert_2^2 = 1$.
 There are several ways to impose this restriction, but for consistency, we&amp;rsquo;ll use Lagrangian multipliers.
-Our objective function then becomes:&lt;/p&gt;
-&lt;p&gt;$$\mathcal{L} = R_n(\rho \tilde{f}) + \sum_k\lambda_j \left(\left\Vert V_j \right\Vert_2^2-1\right).$$&lt;/p&gt;
-&lt;p&gt;Since $R_n = \sum_i e^{-y_i \rho\tilde{f}(x_i)}$ and $\dot{W}_k = \frac{\partial \mathcal{L}}{\partial W_k}$, we get:&lt;/p&gt;
-&lt;p&gt;$$
+Our objective function then becomes:&lt;/p>
+&lt;p>$$\mathcal{L} = R_n(\rho \tilde{f}) + \sum_k\lambda_j \left(\left\Vert V_j \right\Vert_2^2-1\right).$$&lt;/p>
+&lt;p>Since $R_n = \sum_i e^{-y_i \rho\tilde{f}(x_i)}$ and $\dot{W}_k = \frac{\partial \mathcal{L}}{\partial W_k}$, we get:&lt;/p>
+&lt;p>$$
 \dot{W}_k = \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\frac{\partial \tilde{f}}{\partial W_k} + 2\lambda_k\frac{\partial \left\Vert V_k \right\Vert_2^2}{\partial W_k}
-$$&lt;/p&gt;
-&lt;p&gt;Since by design, $\frac{\partial \mathcal{L}}{\partial \rho} = 0$, we focus on $\dot{V}$:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;/p>
+&lt;p>Since by design, $\frac{\partial \mathcal{L}}{\partial \rho} = 0$, we focus on $\dot{V}$:&lt;/p>
+&lt;p>$$
 \begin{align}
 \dot{V}_k
 &amp;amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\frac{\partial \tilde{f}}{\partial V_k} - 2 \lambda_kV_k &amp;amp;\left(\cdot\, V^\top_k\right)\\
 \cancelto{0}{\dot{V}_kV_k^\top}
 &amp;amp;= \sum_i e^{-y_i \rho\tilde{f}(x_i)}y_i\rho\overbrace{\frac{\partial \tilde{f}}{\partial V_k}V^\top_k}^{\tilde{f}(x_i)} - 2 \lambda_k\cancelto{1}{V_kV^\top_k} &amp;amp;\\
 \end{align}
-$$&lt;/p&gt;
-&lt;p style=&#34;text-align:right; font-size:0.6em;&#34;&gt;
-&lt;b&gt;Proof:&lt;/b&gt; $V_kV^\top_k = 1$ since $\left\Vert V_k \right\Vert_2^2 = 1$ and $\dot{V}_kV_k = 0$ due to $\frac{\partial \left\Vert V_k \right\Vert_2^2}{\partial t} = 0$.
-&lt;br&gt;&lt;br&gt;
-&lt;/p&gt;
+$$&lt;/p>
+&lt;p style="text-align:right; font-size:0.6em;">
+&lt;b>Proof:&lt;/b> $V_kV^\top_k = 1$ since $\left\Vert V_k \right\Vert_2^2 = 1$ and $\dot{V}_kV_k = 0$ due to $\frac{\partial \left\Vert V_k \right\Vert_2^2}{\partial t} = 0$.
+&lt;br>&lt;br>
+&lt;/p>
 Setting $\lambda_k = \frac{1}{2}\sum_ie^{y_i\rho\tilde{f}(x_i)}y_i\rho\tilde{f}(x_i)$ we have:
 $$
 \begin{align}
@@ -193,7 +174,7 @@ $$
 &amp;= \rho\sum_ie^{-y_i\rho\tilde{f}(x_i)}y_iS_k\frac{\partial \tilde{f}}{\partial V_k}.
 \end{align}
 $$
-&lt;p&gt;As so happens with overparametrized models,
+&lt;p>As so happens with overparametrized models,
 we expect to reach total class separability,
 where $sgn(f(x_i)) = sgn(y_i) ,\forall (x_i, y_i) \in \mathcal{D}$.
 And this is the moment we want to study.
@@ -201,13 +182,13 @@ For a large enough $\rho$, since we have perfect separation in the training set,
 the greatest values will yield the smallest loss contributions (due to the negative exponential),
 thus, they will vanish first.
 Hence, it is reasonable to assume that we reach a point where all but a few data points $x_*$ will vanish,
-converging to a stationary point in $V_k$ where:&lt;/p&gt;
-&lt;p&gt;$$\frac{\partial\tilde{f}(x_{*})}{\partial V_k} = \tilde{f}(x_{*})V_k$$&lt;/p&gt;
-&lt;p&gt;What is the meaning of this stationary point?
-We will discuss this after the second and third case.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h4 id=&#34;case-2-constraining-v_k&#34;&gt;Case 2: constraining $V_k$&lt;/h4&gt;
-&lt;p&gt;In this case, everything remains the same, except that we let $\rho$ vary.
+converging to a stationary point in $V_k$ where:&lt;/p>
+&lt;p>$$\frac{\partial\tilde{f}(x_{*})}{\partial V_k} = \tilde{f}(x_{*})V_k$$&lt;/p>
+&lt;p>What is the meaning of this stationary point?
+We will discuss this after the second and third case.&lt;/p>
+&lt;hr>
+&lt;h4 id="case-2-constraining-v_k">Case 2: constraining $V_k$&lt;/h4>
+&lt;p>In this case, everything remains the same, except that we let $\rho$ vary.
 Consequently, we have the following rate $\dot{\rho}=\frac{\partial \mathcal{L}}{\partial \rho_k}$:
 $$
 \begin{align}
@@ -216,23 +197,23 @@ $$
 &amp;amp;= \sum_{i=1}^{N}\left [\frac{\rho}{\rho_k}V_k^\top\frac{\partial \tilde{f}(V, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\
 &amp;amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}f(V, x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}
 \end{align}
-$$&lt;/p&gt;
-&lt;p&gt;Here we notice an interesting evolution.
+$$&lt;/p>
+&lt;p>Here we notice an interesting evolution.
 Again, under total separability, the rate $\dot{\rho}$ will be always non-negative.
-Since it will march towards infinity where $R_n(\rho\tilde{f})\rightarrow 0$ we expect to have the same behavior we saw in the first scenario.&lt;/p&gt;
-&lt;h4 id=&#34;case-3-unconstrained-gradient-descent&#34;&gt;Case 3: unconstrained gradient descent&lt;/h4&gt;
-&lt;p&gt;Finally, we come to the typical training setting where we have no explicit restrictions over
+Since it will march towards infinity where $R_n(\rho\tilde{f})\rightarrow 0$ we expect to have the same behavior we saw in the first scenario.&lt;/p>
+&lt;h4 id="case-3-unconstrained-gradient-descent">Case 3: unconstrained gradient descent&lt;/h4>
+&lt;p>Finally, we come to the typical training setting where we have no explicit restrictions over
 any parameter.
-Further expanding the gradient dynamics we saw in the definition, we have:&lt;/p&gt;
-&lt;p&gt;$$
+Further expanding the gradient dynamics we saw in the definition, we have:&lt;/p>
+&lt;p>$$
 \begin{align}
 \dot{\rho}_k
 &amp;amp;= V_k^\top\dot{W}_k\\
 &amp;amp;= \sum_{i=1}^{N}V_k^\top\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\
 &amp;amp;= \frac{\rho}{\rho_k}\sum_{i=1}^{N}\tilde{f}(x_i)y_ie^{-y_i\rho\tilde{f}(x_i)}\\
 \end{align}
-$$&lt;/p&gt;
-&lt;p&gt;and,
+$$&lt;/p>
+&lt;p>and,
 $$
 \begin{align}
 \dot{V}_k
@@ -240,377 +221,349 @@ $$
 &amp;amp;= \sum_{i=1}^{N}\frac{S_k}{\rho_k}\left [\frac{\partial f(W, x_i)}{\partial V_k}\right]y_ie^{-y_if(x_i)}\\
 &amp;amp;= \frac{\rho}{\rho_k^2}\sum_{i=1}^{N}y_ie^{-y_i\rho\tilde{f}(x_i)}S_k\frac{\partial \tilde{f}(x_i)}{\partial V_k}\\
 \end{align}
-$$&lt;/p&gt;
-&lt;p&gt;Here we see that the gradients $\dot{\rho}_k$ and $\dot{V}_k$ have identical and near-identical rates to the other scenarios,
-respectively, differing only by a factor of $\frac{1}{\rho_k^2}$.&lt;/p&gt;
-&lt;p&gt;For the scalar factor $\rho$ it is quite common to see methods that have the same march to infinity
+$$&lt;/p>
+&lt;p>Here we see that the gradients $\dot{\rho}_k$ and $\dot{V}_k$ have identical and near-identical rates to the other scenarios,
+respectively, differing only by a factor of $\frac{1}{\rho_k^2}$.&lt;/p>
+&lt;p>For the scalar factor $\rho$ it is quite common to see methods that have the same march to infinity
 once separability has been reached.
 Also, under the same conditions of full separability, we can see that $V_k$
 has the same stationary point in the unconstrained case,
 thus presenting a very plausible explanation on how gradient-based methods perform complexity control,
-by imposing an implicit restriction on $\left\Vert V\right\Vert$.&lt;/p&gt;
-&lt;p&gt;So, in the end, gradient descent doesn&amp;rsquo;t really care so much about the size or norm of the weights, rather its direction.
-But what is the meaning of this direction?&lt;/p&gt;
-&lt;h3 id=&#34;interpretation&#34;&gt;Interpretation&lt;/h3&gt;
-&lt;p&gt;Under the mentioned assumptions, these dynamics all converge to the same stationary point,
+by imposing an implicit restriction on $\left\Vert V\right\Vert$.&lt;/p>
+&lt;p>So, in the end, gradient descent doesn&amp;rsquo;t really care so much about the size or norm of the weights, rather its direction.
+But what is the meaning of this direction?&lt;/p>
+&lt;h3 id="interpretation">Interpretation&lt;/h3>
+&lt;p>Under the mentioned assumptions, these dynamics all converge to the same stationary point,
 one that maximizes the margin.
 The margin is the minimum distance between a training example of a class and the decision boundary of the classifier.
 Along this boundary the classifier impartial to the competing classes,
-so by maximizing the minimal distance from this region, we are essentially promoting a greater dichotomy of classes.&lt;/p&gt;
-&lt;p&gt;As some intuition on why this happens in our case,
+so by maximizing the minimal distance from this region, we are essentially promoting a greater dichotomy of classes.&lt;/p>
+&lt;p>As some intuition on why this happens in our case,
 think of the dynamics of $\dot{V}_k$ mentioned in Case 1.
 As $\rho$ increases, all the points where there&amp;rsquo;s more agreement between $y_i$ and $f(x_i)$
 start to vanish.
 What we are left are the points $x^*$ where the classifier is most uncertain,
 i.e. closest to the decision boundary, much like the support vectors of an SVM.
-A guideline to a formal proof (as in &lt;a href=&#34;#References&#34;&gt;Banburski et al. 2019&lt;/a&gt;) is to show that given two candidate solutions that fully separate our data,
-the one that minimizes the empirical risk has a bigger margin.&lt;/p&gt;
-&lt;h3 id=&#34;experiments&#34;&gt;Experiments&lt;/h3&gt;
-&lt;p&gt;To validate the dynamics here presented, we propose the following experiment.
+A guideline to a formal proof (as in &lt;a href="#References">Banburski et al. 2019&lt;/a>) is to show that given two candidate solutions that fully separate our data,
+the one that minimizes the empirical risk has a bigger margin.&lt;/p>
+&lt;h3 id="experiments">Experiments&lt;/h3>
+&lt;p>To validate the dynamics here presented, we propose the following experiment.
 We use a noiseless dataset for binary classification to train models with similar architectures but different parametrizations.
 All of these are fully-connected networks with ReLU functions and no biases, all initialized with the same parameters.
 We only introduce a bias term in the first layer, as an additional input, following the theoretical setting presented.
-As a result of the layout, we can exploit the homogeneity property in the parametrization procedure.&lt;/p&gt;
-&lt;p&gt;In this step, we break down the weights into two parameters: scalars $\rho$ and normalized weights $V$.
+As a result of the layout, we can exploit the homogeneity property in the parametrization procedure.&lt;/p>
+&lt;p>In this step, we break down the weights into two parameters: scalars $\rho$ and normalized weights $V$.
 To enforce normalization throughout training,
 we either introduce a penalization term on the $\left\Vert V\right\Vert_2$, as with Lagrangian multipliers, or we forcibly normalize $V$ after each gradient update
-&lt;sup&gt;2&lt;/sup&gt;. And so we arrive at the following results.&lt;/p&gt;
-&lt;p style=&#34;text-align:right; font-size:0.6em;&#34;&gt;
-&lt;b&gt;2&lt;/b&gt; More details on the experiment can be found in &lt;a href=&#34;https://github.com/artur-deluca/normalized_networks&#34;&gt;this repository&lt;/a&gt;.
-&lt;br&gt;
-&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-top: 0.5em; margin-bottom:0.5em&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em; height: auto !important;&#34; src=&#34;figures/experiments/exponential/2/scalar.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em; height: auto !important;&#34; src=&#34;figures/experiments/exponential/5/scalar.svg&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
-  The colored band indicates the region where all networks achieve full-separability on the training set.&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Despite having different magnitudes, the dynamics of the scalars all display similar characteristics.
+&lt;sup>2&lt;/sup>. And so we arrive at the following results.&lt;/p>
+&lt;p style="text-align:right; font-size:0.6em;">
+&lt;b>2&lt;/b> More details on the experiment can be found in &lt;a href="https://github.com/artur-deluca/normalized_networks">this repository&lt;/a>.
+&lt;br>
+&lt;/p>
+&lt;div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+&lt;div align="center", style="display: flex">
+&lt;img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/2/scalar.svg"/>
+&lt;img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/5/scalar.svg"/>
+&lt;/div>
+&lt;sub>Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
+The colored band indicates the region where all networks achieve full-separability on the training set.&lt;/sub>
+&lt;/div>
+&lt;p>Despite having different magnitudes, the dynamics of the scalars all display similar characteristics.
 For one, although in different rates, all $\rho$ increase once full separability is reached.
 What&amp;rsquo;s more, in the Lagrangian setting, there&amp;rsquo;s a strong relationship between the regularization factor $\lambda$
 and the growth of $\rho$.
 The difference in magnitude between two and five layers can be explained by the additional number of parameters in the latter.
-However, in this case, soon after full separability is achieved, the rate of growth rapidly decreases nearly to a plateau.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-top: 0.5em; margin-bottom:0.5em&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em; height: auto !important;&#34; src=&#34;figures/experiments/exponential/2/distance.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em; height: auto !important;&#34; src=&#34;figures/experiments/exponential/5/distance.svg&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Progression of the distance of $V$ wrt to the final solution of the baseline model.&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;As for the normalized weights $V$, these all become closer as training progresses.
+However, in this case, soon after full separability is achieved, the rate of growth rapidly decreases nearly to a plateau.&lt;/p>
+&lt;div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+&lt;div align="center", style="display: flex">
+&lt;img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/2/distance.svg"/>
+&lt;img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/5/distance.svg"/>
+&lt;/div>
+&lt;sub>Progression of the distance of $V$ wrt to the final solution of the baseline model.&lt;/sub>
+&lt;/div>
+&lt;p>As for the normalized weights $V$, these all become closer as training progresses.
 Particularly all the parametrized settings seem to converge to the same solution.
-Again, in deeper setting, the solutions are further separated, most likely a result of increasing overparametrization.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-top: 0.5em; margin-bottom:0.5em&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em; height: auto !important;&#34; src=&#34;figures/experiments/exponential/2/margins.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em; height: auto !important;&#34; src=&#34;figures/experiments/exponential/5/margins.svg&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Evolution of the margin throughout training&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Finally, considering the margin $\min f(x_i)y_i ,\forall (x_i,y_i)\in\mathcal{D}$, its dynamics seem to agree with theory,
+Again, in deeper setting, the solutions are further separated, most likely a result of increasing overparametrization.&lt;/p>
+&lt;div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+&lt;div align="center", style="display: flex">
+&lt;img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/2/margins.svg"/>
+&lt;img width="50%" style="margin-top:0px; margin-bottom:0.2em; height: auto !important;" src="figures/experiments/exponential/5/margins.svg"/>
+&lt;/div>
+&lt;sub>Evolution of the margin throughout training&lt;/sub>
+&lt;/div>
+&lt;p>Finally, considering the margin $\min f(x_i)y_i ,\forall (x_i,y_i)\in\mathcal{D}$, its dynamics seem to agree with theory,
 as all margins increase after separability.
 The oscilations of margin during training are most likely a result of non-smooth decision boundaries
-which are corrected during training, when we see a change in the support vector, here represented by dots along the lines.&lt;/p&gt;
+which are corrected during training, when we see a change in the support vector, here represented by dots along the lines.&lt;/p>
 &lt;!--
-#### SGD or Exponential loss? 
-
+#### SGD or Exponential loss?
 Here
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/square/2/scalar.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/square/5/scalar.svg&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
-  The colored band indicates the region where all networks achieve full-separability on the training set.&lt;/sub&gt;
-&lt;/div&gt;
-
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/2/scalar.svg"/>
+&lt;img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/5/scalar.svg"/>
+&lt;/div>
+&lt;sub>Evolution of $\prod_k \rho_k$ throughout training for all model variations of two (left) and five (layers).
+The colored band indicates the region where all networks achieve full-separability on the training set.&lt;/sub>
+&lt;/div>
 Here
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/square/2/distance.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/square/5/distance.svg&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Progression of the distance of $V$ wrt to the final solution of the baseline model.&lt;/sub&gt;
-&lt;/div&gt;
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/2/distance.svg"/>
+&lt;img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/5/distance.svg"/>
+&lt;/div>
+&lt;sub>Progression of the distance of $V$ wrt to the final solution of the baseline model.&lt;/sub>
+&lt;/div>
 Here
-
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/square/2/margins.svg&#34;/&gt;
-      &lt;img width=&#34;50%&#34; style=&#34;margin-top:0px; margin-bottom:18px&#34; src=&#34;figures/experiments/square/5/margins.svg&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Evolution of the margin throughout training&lt;/sub&gt;
-&lt;/div&gt;
---&gt;
-&lt;h3 id=&#34;what-about-generalization&#34;&gt;What about generalization?&lt;/h3&gt;
-&lt;p&gt;We&amp;rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/2/margins.svg"/>
+&lt;img width="50%" style="margin-top:0px; margin-bottom:18px" src="figures/experiments/square/5/margins.svg"/>
+&lt;/div>
+&lt;sub>Evolution of the margin throughout training&lt;/sub>
+&lt;/div>
+-->
+&lt;h3 id="what-about-generalization">What about generalization?&lt;/h3>
+&lt;p>We&amp;rsquo;ve seen a lot of technical details regarding the dynamics of the parameters during training.
 But, how does this relates to the initial topic of generalization bounds?
 The general understanding is expecting that this preference for a particular solution poses a
 limitation on the class complexity thus explaining the generalization phenomena of deep neural networks.
-In fact, there is some empirical evidence that may favor the view generalization under normalized networks.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-top: 0.5em; margin-bottom:0.5em&#34;&gt;
-  &lt;div align=&#34;center&#34;&gt;
-      &lt;img width=&#34;100%&#34; style=&#34;margin-top:0px; margin-bottom:0.2em height: auto !important;&#34; src=&#34;figures/generalization_normalized.png&#34;/&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;Testing loss on the CIFAR10 dataset for different initializations.
-  The figure on the left shows the original networks while the one of the right shows the same networks normalized at each layer.
-  Refer to &lt;a href=&#34;#References&#34;&gt;Banburski et al. 2019&lt;/a&gt; for more details.
-  &lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Furthermore, the concept of margin is already widely explored in the context of complexity measures
-(&lt;a href=&#34;#References&#34;&gt;Antos et al. 2002, Bartlett et al. 2017&lt;/a&gt;)
+In fact, there is some empirical evidence that may favor the view generalization under normalized networks.&lt;/p>
+&lt;div align="center" style="margin-top: 0.5em; margin-bottom:0.5em">
+&lt;div align="center">
+&lt;img width="100%" style="margin-top:0px; margin-bottom:0.2em height: auto !important;" src="figures/generalization_normalized.png"/>
+&lt;/div>
+&lt;sub>Testing loss on the CIFAR10 dataset for different initializations.
+The figure on the left shows the original networks while the one of the right shows the same networks normalized at each layer.
+Refer to &lt;a href="#References">Banburski et al. 2019&lt;/a> for more details.
+&lt;/sub>
+&lt;/div>
+&lt;p>Furthermore, the concept of margin is already widely explored in the context of complexity measures
+(&lt;a href="#References">Antos et al. 2002, Bartlett et al. 2017&lt;/a>)
 .
-Particularly, one of its main instruments is the estimate named &lt;em&gt;Rademacher complexity&lt;/em&gt;.
-One example of such classical generalization bounds is:&lt;/p&gt;
-&lt;p&gt;$$R(h) \le R_n(h) + c_1\mathbb{R}_n(\mathcal{H}) + c_2\sqrt{\frac{ln(\frac{1}{\delta})}{2n}},$$&lt;/p&gt;
-&lt;p&gt;where $\mathbb{R}_n$ is the empirical estimate of the Rademacher complexity over the hypothesis class $\mathcal{H}$.
-However, making use of the homogeneity property $h = \rho\tilde{h}$ we arrive at:&lt;/p&gt;
-&lt;p&gt;$$R(\rho\tilde{h}) \le R_n(\rho\tilde{h}) + \rho\mathbb{R}_n(\widetilde{\mathcal{H}}) + c_2\sqrt{\frac{ln(\frac{1}{\delta})}{2n}},$$&lt;/p&gt;
-&lt;p&gt;the expectation is to decrease the class complexity while also controlling the generalization bound via $\rho$.
+Particularly, one of its main instruments is the estimate named &lt;em>Rademacher complexity&lt;/em>.
+One example of such classical generalization bounds is:&lt;/p>
+&lt;p>$$R(h) \le R_n(h) + c_1\mathbb{R}_n(\mathcal{H}) + c_2\sqrt{\frac{ln(\frac{1}{\delta})}{2n}},$$&lt;/p>
+&lt;p>where $\mathbb{R}_n$ is the empirical estimate of the Rademacher complexity over the hypothesis class $\mathcal{H}$.
+However, making use of the homogeneity property $h = \rho\tilde{h}$ we arrive at:&lt;/p>
+&lt;p>$$R(\rho\tilde{h}) \le R_n(\rho\tilde{h}) + \rho\mathbb{R}_n(\widetilde{\mathcal{H}}) + c_2\sqrt{\frac{ln(\frac{1}{\delta})}{2n}},$$&lt;/p>
+&lt;p>the expectation is to decrease the class complexity while also controlling the generalization bound via $\rho$.
 However, as we already know, $\rho$ naturally increases throughout training, so even with techniques that promise to bound $\rho$
-may not be enough to explain generalization in the current settings.&lt;/p&gt;
-&lt;p&gt;As of now, even though there&amp;rsquo;s no unified or undisputed explanation on the generalization of deep networks.
+may not be enough to explain generalization in the current settings.&lt;/p>
+&lt;p>As of now, even though there&amp;rsquo;s no unified or undisputed explanation on the generalization of deep networks.
 Still, this is one of the most popular and prolific topics in theoretical machine learning.
 With this standing challenge come many competing explanations but also new directions and ingenious analyses,
-all of which could be used in demystifying deep networks as well as the new endeavors about to come.&lt;/p&gt;
-&lt;h1&gt;&lt;a name=&#34;References&#34;&gt;&lt;/a&gt;References&lt;/h1&gt;
-&lt;ul style=&#34;font-size:0.8em;&#34;&gt;
-    &lt;li&gt;Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press.&lt;/li&gt;
-    &lt;li&gt;Neyshabur, B., Li, Z., Bhojanapalli, S., LeCun, Y., &amp; Srebro, N. (2018). Towards understanding the role of over-parametrization in generalization of neural networks. arXiv preprint.&lt;/li&gt;
-    &lt;li&gt;Bishop, C. M. (1995). Training with noise is equivalent to Tikhonov regularization. Neural computation&lt;/li&gt;
-    &lt;li&gt;Goodfellow, I., Bengio, Y., Courville, A., &amp; Bengio, Y. (2016). Deep learning. Cambridge: MIT press.&lt;/li&gt;
-    &lt;li&gt;Poggio, T., Liao, Q., &amp; Banburski, A. (2020). Complexity control by gradient descent in deep networks. Nature communications.&lt;/li&gt;
-    &lt;li&gt;Banburski, A., Liao, Q., Miranda, B., Rosasco, L., Hidary, J., &amp; Poggio, T. (2019). Theory III: Dynamics and Generalization in Deep Networks - a simple solution. arXiv preprint.&lt;/li&gt;
-    &lt;li&gt;Antos, A., Kégl, B., Linder, T., &amp; Lugosi, G. (2002). Data-dependent margin-based generalization bounds for classification. Journal of Machine Learning Research.&lt;/li&gt;
-    &lt;li&gt;Bartlett, P. L., Foster, D. J., &amp; Telgarsky, M. J. (2017). Spectrally-normalized margin bounds for neural networks. In Advances in neural information processing systems.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;style&gt;
+all of which could be used in demystifying deep networks as well as the new endeavors about to come.&lt;/p>
+&lt;h1>&lt;a name="References">&lt;/a>References&lt;/h1>
+&lt;ul style="font-size:0.8em;">
+&lt;li>Shalev-Shwartz, S., &amp; Ben-David, S. (2014). Understanding machine learning: From theory to algorithms. Cambridge university press.&lt;/li>
+&lt;li>Neyshabur, B., Li, Z., Bhojanapalli, S., LeCun, Y., &amp; Srebro, N. (2018). Towards understanding the role of over-parametrization in generalization of neural networks. arXiv preprint.&lt;/li>
+&lt;li>Bishop, C. M. (1995). Training with noise is equivalent to Tikhonov regularization. Neural computation&lt;/li>
+&lt;li>Goodfellow, I., Bengio, Y., Courville, A., &amp; Bengio, Y. (2016). Deep learning. Cambridge: MIT press.&lt;/li>
+&lt;li>Poggio, T., Liao, Q., &amp; Banburski, A. (2020). Complexity control by gradient descent in deep networks. Nature communications.&lt;/li>
+&lt;li>Banburski, A., Liao, Q., Miranda, B., Rosasco, L., Hidary, J., &amp; Poggio, T. (2019). Theory III: Dynamics and Generalization in Deep Networks - a simple solution. arXiv preprint.&lt;/li>
+&lt;li>Antos, A., Kégl, B., Linder, T., &amp; Lugosi, G. (2002). Data-dependent margin-based generalization bounds for classification. Journal of Machine Learning Research.&lt;/li>
+&lt;li>Bartlett, P. L., Foster, D. J., &amp; Telgarsky, M. J. (2017). Spectrally-normalized margin bounds for neural networks. In Advances in neural information processing systems.&lt;/li>
+&lt;/ul>
+&lt;style>
 body {
 text-align: justify}
-&lt;/style&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Investigation saturation</title>
-      <link>/post/saturation/</link>
-      <pubDate>Thu, 29 Oct 2020 00:00:00 -0500</pubDate>
-      <guid>/post/saturation/</guid>
-      <description>&lt;p&gt;This work discusses the incapability of certain activation functions to work on deep neural networks under the prevailing initialization technique. As the number of layers increase, a problem known as saturation arises.&lt;/p&gt;
-&lt;p&gt;Saturation is seen in bounded activation functions, as the weights in certain layers of network push all the activation values (i.e. the output of the activation functions) towards its bounded extremities. Since all the outputs in a certain layer are located in plateaus, it is challenging to distinguish observations, thus learning hardly takes place.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-      &lt;img width=&#34;49%&#34; style=&#34;margin-bottom:18px&#34; src=&#34;figures/saturation.png&#34;/&gt;
-      &lt;img width=&#34;49%&#34; style=&#34;margin-bottom:18px&#34; src=&#34;figures/saturation_derivative.svg&#34;/&gt;&lt;br&gt;
-  &lt;/div&gt;
-  &lt;sub&gt;The saturation regions of the sigmoid (left) and its derivative (right)&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning. Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions&amp;rsquo; extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.&lt;/p&gt;
-&lt;p&gt;Traditionally, the weights of neural networks were initialized according to a technique popularized by Lecun (1998), which consists of sampling the weights from a bounded uniform distribution,&lt;/p&gt;
-&lt;p&gt;$$W_{ij} \sim U\left[\frac{-1}{\sqrt{n}}, \frac{1}{\sqrt{n}}\right]$$&lt;/p&gt;
-&lt;p&gt;parametrized by $n$, the number of incoming connections to the linked node.&lt;/p&gt;
-&lt;p&gt;However, in settings with a great number of layers, saturation often took place. In 2006, a research direction brought forward by &lt;a href=&#34;https://www.mitpressjournals.org/doi/10.1162/neco.2006.18.7.1527&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hinton et. al (2006)&lt;/a&gt;, allowed for the training of deep neural networks using unsupervised pretraining, which yielded starting points that prevented this issue.&lt;/p&gt;
-&lt;p&gt;Glorot and Bengio claim that good starting points as the ones generated by pretraining could be emulated by common initialization techniques. This was laid on top of an assumption: to maintain the variance of activation values and their gradients. By creating an initialization technique with these properties, the authors would precisely tackle saturation, as very small variances are seen in saturated activation values and their gradients. With these assumptions, the authors reach the following initialization technique:&lt;/p&gt;
-&lt;p&gt;$$W_{ij} \sim U\left[\frac{-6}{\sqrt{n_j + n_{j+1}}}, \frac{6}{\sqrt{n_j + n_{j+1}}}\right]$$&lt;/p&gt;
-&lt;p&gt;where the $n$ are the number of incoming ($\,j\,$) and outgoing ($\,j+1\,$) connections. This initialization technique is often referred as the Xavier initialization. In the following sections, we are going to analyze the performance of this and other initialization techniques under several configurations.&lt;/p&gt;
-&lt;h1 id=&#34;experiments&#34;&gt;Experiments&lt;/h1&gt;
-&lt;p&gt;Here we replicate the experiments of the following paper&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Glorot, X. and Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 249-256.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The following results were obtained by training 5-hidden layer networks with 1000 neurons each, trained over the CIFAR-10 dataset.
-The density estimations are activation values of 300 observations of the test set. The implementation can be found &lt;a href=&#34;https://github.com/artur-deluca/saturation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.
-Here are some of the results:&lt;/p&gt;
-&lt;table style=&#34;width:100%&#34;&gt;
-  &lt;tr&gt;
-    &lt;th colspan=&#34;1&#34; width=&#34;25%&#34;&gt;Initialization&lt;/th&gt;
-    &lt;th colspan=&#34;2&#34; width=&#34;75%&#34;&gt;Activation function&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;th&gt;&lt;/th&gt;
-    &lt;td&gt;Sigmoid&lt;/td&gt;
-    &lt;td&gt;Hyperbolic tangent&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;&lt;a href=&#34;#References&#34;&gt;LeCun (1998)&lt;/a&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;img src=&#34;./figures/sigmoid_lecun.gif&#34;&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;img src=&#34;./figures/tanh_lecun.gif&#34;&gt;&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;&lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;img src=&#34;./figures/sigmoid_glorot.gif&#34;&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;img src=&#34;./figures/tanh_glorot.gif&#34;&gt;&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-&lt;p&gt;First off, the different distributions between activation functions can be explained by their different scale, as the sigmoid has a (0,1) range and the tanh (-1,1). As we can observe, regardless of the method of initialization employed, the activation values of the fifth hidden layer in the sigmoid spike around zero. These results are in accordance with the ones shown in the paper.&lt;/p&gt;
-&lt;p&gt;The authors indicate that this abrupt shift can perhaps be explained by an attempt of the system to suppress the meaningless information fed by the previous layers, thus basically relying on its bias to make the classification. With this result, the authors show the unsuitability of the sigmoid in deep networks.&lt;/p&gt;
-&lt;p&gt;However, the results of the hyperbolic tangent function have shown to deviate from the original findings. Despite similar results in the baseline initialization (&lt;a href=&#34;http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LeCun (1998)&lt;/a&gt;), these drastically differ in face of the initialization method proposed by the authors. The technique that allegedly inhibits saturation actually made it occur slightly faster.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-    &lt;img width=&#34;60%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/results_paper.png&#34;/&gt;
-    &lt;sub&gt;Activation values of the hyperbolic tangent during initialization using &lt;a href=&#34;#References&#34;&gt;Lecun (1998)&lt;/a&gt; (top) and the proposed technique (below). Source: &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Furthermore, contrasting with the original work, the replicated activation values using the CIFAR-10 dataset have not shown any qualitative differences between the then go-to and the proposed initialization.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-    &lt;img width=&#34;49%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/tanh_glorot_initial.png&#34;/&gt;
-    &lt;img width=&#34;49%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/tanh_lecun_initial.png&#34;/&gt;
-  &lt;/div&gt;
-    &lt;sub&gt;Activation values across two different initialization techniques: Lecun (1998) on the left and Glorot and Bengio (2010) on the right&lt;/sub&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;additional-experiments&#34;&gt;Additional experiments&lt;/h1&gt;
-&lt;h2 id=&#34;unsupervised-pretraining&#34;&gt;Unsupervised pretraining&lt;/h2&gt;
-&lt;p&gt;Besides the aforementioned techniques, the same analysis was performed on a network trained using unsupervised pretraining. Different from the Restricted Boltzmann Machine proposed by Hinton, we use a Denoising Autoencoder (&lt;a href=&#34;https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Vincent et al. (2008)&lt;/a&gt;) to train each layer of the network for 100 epochs before the gradient-based stage.&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-    &lt;img width=&#34;49%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/sigmoid_pretrain.gif&#34;/&gt;
-    &lt;img width=&#34;49%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/tanh_pretrain.gif&#34;/&gt;
-  &lt;/div&gt;
-    &lt;sub&gt;Activation values using unsupervised pretraining: sigmoid on the left and tanh on the right.&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Here we notice that the early stages of training slowly push the activation values towards the extremities. Despite not having a great effect on the sigmoid, which after the process demonstrated a similar behavior, the unsupervised pretraining caused a great change in the hyperbolic tangent setting. Instead of continuing to spike around the extremities, the last layer of the network has settled in zero, a quite unstable point for the activation function. We conjecture that this behavior can be explained as the authors have done for the sigmoid: The high peak in the last layer on zero is an attempt to suppress useless information from previous layers.&lt;/p&gt;
-&lt;h2 id=&#34;dynamic-variance-comparison&#34;&gt;Dynamic variance comparison&lt;/h2&gt;
-&lt;p&gt;In order to verify if the assumptions made by authors would hold during training, we compared the variance of the activation values across three different cases using the hyperbolic tangent:&lt;/p&gt;
-&lt;div align=&#34;center&#34; style=&#34;margin-bottom:18px&#34;&gt;
-  &lt;div align=&#34;center&#34;, style=&#34;display: flex&#34;&gt;
-    &lt;img width=&#34;32%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/tanh_lecun.svg&#34;/&gt;
-    &lt;img width=&#34;32%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/tanh_glorot.svg&#34;/&gt;
-    &lt;img width=&#34;32%&#34; style=&#34;margin-top: 4px; margin-bottom:8px&#34; src=&#34;figures/tanh_pretrain.svg&#34;/&gt;
-  &lt;/div&gt;
-    &lt;sub&gt;Variance of activation values across three different initialization techniques. From left to right: &lt;a href=&#34;#References&#34;&gt;LeCun (1998)&lt;/a&gt;, &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt; and &lt;a href=&#34;#References&#34;&gt;Vincent et al. (2008)&lt;/a&gt;&lt;/sub&gt;
-&lt;/div&gt;
-&lt;p&gt;Here we noticed that the first and second results do not vary greatly. This by itself does not mean that the assumptions do not hold. However, when analyzing the behavior of the curves, we notice the abrupt growth in the early stages of training, which is later bounded by the function range. Despite &amp;ldquo;stabilizing&amp;rdquo; in later stages of training, this more likely has to do with the restrictions of the activation function, rather than the well-behaved, expected, performance.&lt;/p&gt;
-&lt;p&gt;Furthermore, a similar result can be seen in the pretraining stage, only slower. The surges seen can be justified by the sampling procedure adopted during the pretraining phase, executed every 5 epochs, instead of every epoch as in gradient-based training. As mentioned in the last section and different from the other settings, here we can also notice the null-gradient in the last layer of the network.&lt;/p&gt;
-&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;Finally, in qualitative terms, no configuration was immune to saturation and the discrepancies here showed may have potential reasons. The main dataset used by the authors was a syntactic Shapeset-3x2, while most of our analyses were performed by using the CIFAR-10 dataset. However, note that some of these analyses were also extended to the MNIST dataset, as suggested by the authors. Yet, they have yielded similar results like the ones here shown.&lt;/p&gt;
-&lt;p&gt;More details on the historical perspective of saturation, as well as an overview of unsupervised pretraining, can be seen &lt;a href=&#34;https://artur-deluca.github.io/post/pretraining/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h4 id=&#34;ps&#34;&gt;P.S.&lt;/h4&gt;
-&lt;p&gt;The activation plots slightly extrapolate the precise output limits.
-That doesn&amp;rsquo;t invalidate the conclusions but in influences the shape of the estimated distributions.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1&gt;&lt;a name=&#34;References&#34;&gt;&lt;/a&gt;References&lt;/h1&gt;
-&lt;ul style=&#34;font-size:0.8em;&#34;&gt;
-    &lt;li&gt;Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
-    Statistics , pages 249-256.&lt;/li&gt;
-    &lt;li&gt;LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K. R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.&lt;/li&gt;
-    &lt;li&gt;Hinton, G. E., Osindero S., and Teh Y. (2006). A Fast Learning Algorithm for Deep Belief Nets. Neural Computation 18:7, 1527-1554&lt;/li&gt;
-    &lt;li&gt;Vincent, P., Larochelle, H., Bengio, Y., &amp; Manzagol, P. A. (2008). Extracting and composing robust features with denoising autoencoders. In Proceedings of the 25th international conference on Machine learning (pp. 1096-1103).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;style&gt;
+&lt;/style></description></item><item><title>Investigation saturation</title><link>/post/saturation/</link><pubDate>Thu, 29 Oct 2020 00:00:00 -0500</pubDate><guid>/post/saturation/</guid><description>&lt;p>This work discusses the incapability of certain activation functions to work on deep neural networks under the prevailing initialization technique. As the number of layers increase, a problem known as saturation arises.&lt;/p>
+&lt;p>Saturation is seen in bounded activation functions, as the weights in certain layers of network push all the activation values (i.e. the output of the activation functions) towards its bounded extremities. Since all the outputs in a certain layer are located in plateaus, it is challenging to distinguish observations, thus learning hardly takes place.&lt;/p>
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="49%" style="margin-bottom:18px" src="figures/saturation.png"/>
+&lt;img width="49%" style="margin-bottom:18px" src="figures/saturation_derivative.svg"/>&lt;br>
+&lt;/div>
+&lt;sub>The saturation regions of the sigmoid (left) and its derivative (right)&lt;/sub>
+&lt;/div>
+&lt;p>Saturation in activation functions such as the sigmoid and the hyperbolic tangent also present another predicament in gradient-based learning. Since the aforementioned functions have symmetric derivatives around zero, as the observations migrate to the functions&amp;rsquo; extremes, their corresponding values in the derivative of activation function tend to zero. This in turn makes it harder for the system to steer towards optimal solutions as the parameter updates get smaller.&lt;/p>
+&lt;p>Traditionally, the weights of neural networks were initialized according to a technique popularized by Lecun (1998), which consists of sampling the weights from a bounded uniform distribution,&lt;/p>
+&lt;p>$$W_{ij} \sim U\left[\frac{-1}{\sqrt{n}}, \frac{1}{\sqrt{n}}\right]$$&lt;/p>
+&lt;p>parametrized by $n$, the number of incoming connections to the linked node.&lt;/p>
+&lt;p>However, in settings with a great number of layers, saturation often took place. In 2006, a research direction brought forward by &lt;a href="https://www.mitpressjournals.org/doi/10.1162/neco.2006.18.7.1527" target="_blank" rel="noopener">Hinton et. al (2006)&lt;/a>, allowed for the training of deep neural networks using unsupervised pretraining, which yielded starting points that prevented this issue.&lt;/p>
+&lt;p>Glorot and Bengio claim that good starting points as the ones generated by pretraining could be emulated by common initialization techniques. This was laid on top of an assumption: to maintain the variance of activation values and their gradients. By creating an initialization technique with these properties, the authors would precisely tackle saturation, as very small variances are seen in saturated activation values and their gradients. With these assumptions, the authors reach the following initialization technique:&lt;/p>
+&lt;p>$$W_{ij} \sim U\left[\frac{-6}{\sqrt{n_j + n_{j+1}}}, \frac{6}{\sqrt{n_j + n_{j+1}}}\right]$$&lt;/p>
+&lt;p>where the $n$ are the number of incoming ($\,j\,$) and outgoing ($\,j+1\,$) connections. This initialization technique is often referred as the Xavier initialization. In the following sections, we are going to analyze the performance of this and other initialization techniques under several configurations.&lt;/p>
+&lt;h1 id="experiments">Experiments&lt;/h1>
+&lt;p>Here we replicate the experiments of the following paper&lt;/p>
+&lt;blockquote>
+&lt;p>Glorot, X. and Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 249-256.&lt;/p>
+&lt;/blockquote>
+&lt;p>The following results were obtained by training 5-hidden layer networks with 1000 neurons each, trained over the CIFAR-10 dataset.
+The density estimations are activation values of 300 observations of the test set. The implementation can be found &lt;a href="https://github.com/artur-deluca/saturation" target="_blank" rel="noopener">here&lt;/a>.
+Here are some of the results:&lt;/p>
+&lt;table style="width:100%">
+&lt;tr>
+&lt;th colspan="1" width="25%">Initialization&lt;/th>
+&lt;th colspan="2" width="75%">Activation function&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;td>Sigmoid&lt;/td>
+&lt;td>Hyperbolic tangent&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a href="#References">LeCun (1998)&lt;/a>&lt;/td>
+&lt;td>&lt;img src="./figures/sigmoid_lecun.gif">&lt;/td>
+&lt;td>&lt;img src="./figures/tanh_lecun.gif">&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a href="#References">Glorot and Bengio (2010)&lt;/a>&lt;/td>
+&lt;td>&lt;img src="./figures/sigmoid_glorot.gif">&lt;/td>
+&lt;td>&lt;img src="./figures/tanh_glorot.gif">&lt;/td>
+&lt;/tr>
+&lt;/table>
+&lt;p>First off, the different distributions between activation functions can be explained by their different scale, as the sigmoid has a (0,1) range and the tanh (-1,1). As we can observe, regardless of the method of initialization employed, the activation values of the fifth hidden layer in the sigmoid spike around zero. These results are in accordance with the ones shown in the paper.&lt;/p>
+&lt;p>The authors indicate that this abrupt shift can perhaps be explained by an attempt of the system to suppress the meaningless information fed by the previous layers, thus basically relying on its bias to make the classification. With this result, the authors show the unsuitability of the sigmoid in deep networks.&lt;/p>
+&lt;p>However, the results of the hyperbolic tangent function have shown to deviate from the original findings. Despite similar results in the baseline initialization (&lt;a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf" target="_blank" rel="noopener">LeCun (1998)&lt;/a>), these drastically differ in face of the initialization method proposed by the authors. The technique that allegedly inhibits saturation actually made it occur slightly faster.&lt;/p>
+&lt;div align="center" style="margin-bottom:18px">
+&lt;img width="60%" style="margin-top: 4px; margin-bottom:8px" src="figures/results_paper.png"/>
+&lt;sub>Activation values of the hyperbolic tangent during initialization using &lt;a href="#References">Lecun (1998)&lt;/a> (top) and the proposed technique (below). Source: &lt;a href="#References">Glorot and Bengio (2010)&lt;/a>&lt;/sub>
+&lt;/div>
+&lt;p>Furthermore, contrasting with the original work, the replicated activation values using the CIFAR-10 dataset have not shown any qualitative differences between the then go-to and the proposed initialization.&lt;/p>
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_glorot_initial.png"/>
+&lt;img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_lecun_initial.png"/>
+&lt;/div>
+&lt;sub>Activation values across two different initialization techniques: Lecun (1998) on the left and Glorot and Bengio (2010) on the right&lt;/sub>
+&lt;/div>
+&lt;h1 id="additional-experiments">Additional experiments&lt;/h1>
+&lt;h2 id="unsupervised-pretraining">Unsupervised pretraining&lt;/h2>
+&lt;p>Besides the aforementioned techniques, the same analysis was performed on a network trained using unsupervised pretraining. Different from the Restricted Boltzmann Machine proposed by Hinton, we use a Denoising Autoencoder (&lt;a href="https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf" target="_blank" rel="noopener">Vincent et al. (2008)&lt;/a>) to train each layer of the network for 100 epochs before the gradient-based stage.&lt;/p>
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/sigmoid_pretrain.gif"/>
+&lt;img width="49%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_pretrain.gif"/>
+&lt;/div>
+&lt;sub>Activation values using unsupervised pretraining: sigmoid on the left and tanh on the right.&lt;/sub>
+&lt;/div>
+&lt;p>Here we notice that the early stages of training slowly push the activation values towards the extremities. Despite not having a great effect on the sigmoid, which after the process demonstrated a similar behavior, the unsupervised pretraining caused a great change in the hyperbolic tangent setting. Instead of continuing to spike around the extremities, the last layer of the network has settled in zero, a quite unstable point for the activation function. We conjecture that this behavior can be explained as the authors have done for the sigmoid: The high peak in the last layer on zero is an attempt to suppress useless information from previous layers.&lt;/p>
+&lt;h2 id="dynamic-variance-comparison">Dynamic variance comparison&lt;/h2>
+&lt;p>In order to verify if the assumptions made by authors would hold during training, we compared the variance of the activation values across three different cases using the hyperbolic tangent:&lt;/p>
+&lt;div align="center" style="margin-bottom:18px">
+&lt;div align="center", style="display: flex">
+&lt;img width="32%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_lecun.svg"/>
+&lt;img width="32%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_glorot.svg"/>
+&lt;img width="32%" style="margin-top: 4px; margin-bottom:8px" src="figures/tanh_pretrain.svg"/>
+&lt;/div>
+&lt;sub>Variance of activation values across three different initialization techniques. From left to right: &lt;a href="#References">LeCun (1998)&lt;/a>, &lt;a href="#References">Glorot and Bengio (2010)&lt;/a> and &lt;a href="#References">Vincent et al. (2008)&lt;/a>&lt;/sub>
+&lt;/div>
+&lt;p>Here we noticed that the first and second results do not vary greatly. This by itself does not mean that the assumptions do not hold. However, when analyzing the behavior of the curves, we notice the abrupt growth in the early stages of training, which is later bounded by the function range. Despite &amp;ldquo;stabilizing&amp;rdquo; in later stages of training, this more likely has to do with the restrictions of the activation function, rather than the well-behaved, expected, performance.&lt;/p>
+&lt;p>Furthermore, a similar result can be seen in the pretraining stage, only slower. The surges seen can be justified by the sampling procedure adopted during the pretraining phase, executed every 5 epochs, instead of every epoch as in gradient-based training. As mentioned in the last section and different from the other settings, here we can also notice the null-gradient in the last layer of the network.&lt;/p>
+&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;p>Finally, in qualitative terms, no configuration was immune to saturation and the discrepancies here showed may have potential reasons. The main dataset used by the authors was a syntactic Shapeset-3x2, while most of our analyses were performed by using the CIFAR-10 dataset. However, note that some of these analyses were also extended to the MNIST dataset, as suggested by the authors. Yet, they have yielded similar results like the ones here shown.&lt;/p>
+&lt;p>More details on the historical perspective of saturation, as well as an overview of unsupervised pretraining, can be seen &lt;a href="https://artur-deluca.github.io/post/pretraining/" target="_blank" rel="noopener">here&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h4 id="ps">P.S.&lt;/h4>
+&lt;p>The activation plots slightly extrapolate the precise output limits.
+That doesn&amp;rsquo;t invalidate the conclusions but in influences the shape of the estimated distributions.&lt;/p>
+&lt;hr>
+&lt;h1>&lt;a name="References">&lt;/a>References&lt;/h1>
+&lt;ul style="font-size:0.8em;">
+&lt;li>Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
+Statistics , pages 249-256.&lt;/li>
+&lt;li>LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K. R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.&lt;/li>
+&lt;li>Hinton, G. E., Osindero S., and Teh Y. (2006). A Fast Learning Algorithm for Deep Belief Nets. Neural Computation 18:7, 1527-1554&lt;/li>
+&lt;li>Vincent, P., Larochelle, H., Bengio, Y., &amp; Manzagol, P. A. (2008). Extracting and composing robust features with denoising autoencoders. In Proceedings of the 25th international conference on Machine learning (pp. 1096-1103).&lt;/li>
+&lt;/ul>
+&lt;style>
 body {
 text-align: justify}
-&lt;/style&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Unsupervised pretraining</title>
-      <link>/post/pretraining/</link>
-      <pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate>
-      <guid>/post/pretraining/</guid>
-      <description>&lt;p&gt;In the early development of neural networks, the initialization of parameters was performed by sampling a uniform distribution bounded to a predetermined interval. In this process, the weights and biases produced solutions that would generally lie far from an optimum set of parameters, requiring many training iterations to readjust. Shallow networks did not suffer too much from this due to the smaller number of parameters, hence presenting an easier system to optimize. However, as the depth of networks increased, so did the difficulty to train such models using this initialization procedure.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt; promoted a study to understand why random initialization performed so poorly in deep networks. In this investigation, the authors considered one common initialization heuristic, introduced by &lt;a href=&#34;#References&#34;&gt;LeCun et al. (1998)&lt;/a&gt;, that defines the biases at 0 and the weights via sampling according to the following uniform distribution:&lt;/p&gt;
-&lt;p&gt;$$W_{ij}\sim U\left[-\frac{1}{\sqrt{n}},\frac{1}{\sqrt{n}}\right]$$&lt;/p&gt;
-&lt;p&gt;where $n$ is the number of inputs to the unit. The authors then verified that in deep configurations of 4 to 5 layers, activation values on the last layers got stuck in plateaus situated at the extremes of the activation function, a case otherwise known as saturation.&lt;/p&gt;
-&lt;img src=&#34;./figures/saturation.png&#34; width=&#34;80%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Saturation regions on the sigmoid function. In the case observed by &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;, the saturation occurred in the 5th and last layer of the network, with activation values converging to zero.&lt;/p&gt;
-&lt;p&gt;One hypothesis that explains saturation on sigmoid-equipped deep networks is that the random initialization does not provide useful information to the last layer of the network, that starts to suppress the previous contributions and rely more on its biases, which, in turn, are trained faster than its weights.&lt;/p&gt;
-&lt;img src=&#34;./figures/saturation_plot.png&#34; width=&#34;100%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Mean (&lt;i&gt;lines&lt;/i&gt;) and standard deviation (&lt;i&gt;vertical bars&lt;/i&gt;) of sigmoid activation values across layers in a neural network using random initialization. The saturation is detectable in the last layer, where the activation values reach virtually zero. Source: &lt;a href=&#34;#References&#34;&gt;Glorot and Bengio (2010)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Gradually but rapidly, the error gradient tends to push the activations towards zero in an attempt to suppress the influence of the previous layers. Eventually, the saturation may be overcome but the overall result would be of poor generalization.&lt;/p&gt;
-&lt;h3 id=&#34;unsupervised-pre-training&#34;&gt;Unsupervised pre-training&lt;/h3&gt;
-&lt;p&gt;Layer saturation was one of the biggest technical hurdles that limited the progress of deep learning in the dawn of the millennium. However, in 2006, inspired by a well-established procedure, &lt;a href=&#34;#References&#34;&gt;Hinton et al. (2006)&lt;/a&gt; developed a novel approach to initialize the parameters of a Deep Belief Network — a class of neural networks — that overcame the saturation issue and surpassed state of the art performance in deep architectures. These results not only re-sparked but drastically expanded researchers’ interest in this field.&lt;/p&gt;
-&lt;img src=&#34;./figures/deep_belief_net.svg&#34; width=&#34;80%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;A Deep Belief Network (DBN) can be seen as a stack of smaller unsupervised learning algorithms named Restricted Boltzmann Machines. This configuration can then be bundled with a classical multi-layer perceptron for supervised learning tasks&lt;/p&gt;
-&lt;p&gt;This initialization procedure encompassed an unprecedented process: an unsupervised greedy layer-wise pre-training step&lt;sup&gt;1&lt;/sup&gt;. Prior to the conventional supervised training, each layer is trained with its anterior neighboring layer identically to a Restricted Boltzmann Machine, using an unsupervised learning algorithm named Contrastive Divergence. This process starts with the input and first layer, and progressively advances one layer at a time until it sweeps all layers.&lt;/p&gt;
-&lt;p&gt;A Boltzmann Machine is an unsupervised generative algorithm that learns the data representation by associating the patterns identified in the inputs to probabilistic configurations within its parameters. A Restricted Boltzmann Machine is a variation of such a model that reproduces a similar behavior but with significantly fewer connections.&lt;/p&gt;
-&lt;p style=&#34;font-size:0.6em;&#34;&gt;
-&lt;b&gt;1&lt;/b&gt; Despite the imprecision, unsupervised pre-training is here used interchangeably
-&lt;/p&gt;
-&lt;img src=&#34;./figures/BM_RBM.svg&#34; width=&#34;80%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;A Boltzmann Machine (&lt;i&gt;left&lt;/i&gt;) and a Restricted Boltzmann Machine (&lt;i&gt;right&lt;/i&gt;)&lt;/p&gt;
-&lt;p&gt;Many other unsupervised pre-training algorithms were developed concomitantly or immediately after, such as autoencoders (&lt;a href=&#34;#References&#34;&gt;Bengio et al. (2007)&lt;/a&gt;), denoising autoencoders (&lt;a href=&#34;#References&#34;&gt;Vincent et al. (2008)&lt;/a&gt;), contractive autoencoders (&lt;a href=&#34;#References&#34;&gt;Rifai et al. (2011)&lt;/a&gt;), among others.&lt;/p&gt;
-&lt;img src=&#34;./figures/pretraining_improvement_comparison.png&#34; width=&#34;100%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Comparison of performance between networks running without pre-training (&lt;i&gt;left&lt;/i&gt;) and with pre-training (&lt;i&gt;right&lt;/i&gt;) &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010, pg. 636)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Why does this unsupervised learning methods help training deep architectures? Much of the explanation remains uncertain. Nonetheless, &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010)&lt;/a&gt; provide some clarifications through considerable experimentation. The claims of the authors reside on two possible but not mutually exclusive reasons: &lt;i&gt;optimization&lt;/i&gt; and &lt;i&gt;regularization&lt;/i&gt;.&lt;/p&gt;
-&lt;p&gt;Deep neural networks are composed of many parameters whose values are used to compute an approximation of a function. Due to its substantial nonlinear nature, this approximation yields a non-convex function that poses a challenge on searching the best combination of weights and biases.&lt;sup&gt;2&lt;/sup&gt;&lt;/p&gt;
-&lt;img src=&#34;./figures/convex_nonconvex.png&#34; width=&#34;100%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;A convex (left) and non-convex (right) function. Note that, contrarily to the convex function, the non-convex function possesses multiple local optima. Source: [Zadeh (2016)](#References)&lt;/p&gt;
-&lt;p style=&#34;font-size:0.6em;&#34;&gt;
-&lt;b&gt;2&lt;/b&gt; Many discussions today in academia evolve around the particular shape of loss landscape in deep neural networks, since many of the local minima appear to have equally good qualities, suggesting that the critical solutions reached during training are actually saddle points. This discussion will be reserved to &lt;a href=&#34;https://github.com/artur-deluca/landscapeviz&#34;&gt;further studies&lt;/a&gt;.
-&lt;/p&gt;
-&lt;p&gt;Gradient-based methods employed in training eventually converge to their pre-selected basin of attraction, a region of the function space, such that any point in it eventually is iterated into the attractor (roughly speaking, a valley in the loss function). Unsupervised pre-training may work towards optimization by favoring a basin of attraction that might yield a lower training error. Thus, since the gradients are very prompt to abrupt changes, backpropagation is only used at a local search level, from an already favorable starting point &lt;a href=&#34;#References&#34;&gt;(Hinton (2012, lecture 14b))&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;As for &lt;i&gt;regularization&lt;/i&gt;, one may commonly associate it with explicit techniques, such as the L1 or L2 norm:&lt;/p&gt;
-&lt;p&gt;$$C=-\frac{1}{n}\sum_{j}\left[y_j\ln a_j^{L}+\left(1-y_j\right)\ln\left(1-a_j^{L}\right)\right]+\frac{\lambda}{2n}\sum_iw_i{{}^2}$$&lt;/p&gt;
-&lt;p&gt;By adding the &lt;i&gt;L2 regularization&lt;/i&gt; factor in the cross-entropy cost function, presented in the equation above, one can penalize overly complex models, that would result in poor generalization, i.e. &lt;i&gt;high testing error&lt;/i&gt;. However, the regularization employed by pre-training is implicit. In attempt to model how such technique would work explicitly, &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2009)&lt;/a&gt; defines a regularization term such as:&lt;/p&gt;
-&lt;p&gt;$$regularizer=-log\thinspace P\left(\theta\right)$$&lt;/p&gt;
-&lt;p&gt;The function $P\left(\theta\right)$ describes the probability that the weights of the neural network are initialized as $\theta$. So, if a configuration shows to be highly improbable, the regularizer term will hurt the cost function strongly. Furthermore, if the probability of landing such set of parameters is high, the regularizer will then reward the cost function. This probability is governed by the initialization methods employed. Considering two instances with and without pre-training, we obtain:&lt;/p&gt;
-&lt;p&gt;$$P_{{\text{pre-training}}}(\theta) = \sum_k\frac{1_{\theta \in R_k}\pi_k}{v_k}$$&lt;/p&gt;
-&lt;p&gt;and&lt;/p&gt;
-&lt;p&gt;$$P_{{\text{no pre-training}}}(\theta) = \sum_k\frac{1_{\theta \in R_k}r_k}{v_k}$$&lt;/p&gt;
-&lt;br&gt;
-&lt;p&gt;where $R_k$ is the basin of attraction that contains $\theta$, and $1_{\theta \in R_k}$ is the identifier function – unitary for all $\theta$ in $R_k$, otherwise null. Additionally, $\pi_k$ and $r_k$ are the probabilities of landing in the basin of attraction $R_k$, which has a volume $v_k$. Since the basins of attraction are disjunct sets, the probability density function of the set of parameters located in $R_k$ is uniform, calculated by taking the probability of landing in the k-th basin ($\pi_k$ or $r_k$) and dividing by its volume.&lt;/p&gt;
-&lt;p&gt;Pre-training the parameters of the network conditions the network initialization to land on regions of better generalization. This is hypothetically achieved by increasing the $\pi_k$&amp;rsquo;s where the network parameters represent meaningful variations of the input, contributing to predict the output. For this reason, pre-training also reduces the variance upon parameter initialization.&lt;/p&gt;
-&lt;img src=&#34;./figures/trajectories.png&#34; width=&#34;70%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;2-D visualization of parameters&#39; trajectory of 100 neural networks with and without the unsupervised pre-training step. The color gradient from dark-blue to cyan symbolizes the progression of iterations. &lt;br&gt;Source: &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010, pg. 541)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The visualization of the parameters’ trajectory may demonstrate the effects of optimization and regularization. As mentioned through the former, it may select a basin of attraction with lower training errors. Conversely, regularization may bound the parameter interval to a range that yields good generalization. Also, it is crucial to notice that both training and testing errors collected in the experiments of &lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010)&lt;/a&gt; support these hypotheses, but do favor the latter.&lt;/p&gt;
-&lt;p&gt;Furthermore, once established within the solution space, the parameters do not drastically change during the gradient-based adjustment process. This process is also denominated fine-tuning, as it only modifies the features slightly to get the category boundaries, rather than discovering new relationships (&lt;a href=&#34;#References&#34;&gt;Hinton (2012, lecture 14b)&lt;/a&gt;).&lt;/p&gt;
-&lt;img src=&#34;./figures/trained_filters.svg&#34; width=&#34;90%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Visualization of filters of a Deep Belief Network used to recognize digits form the MNIST data-set after the different training processes; from left to right: units from the first, second and third layers, respectively.&lt;br&gt;Source:&lt;a href=&#34;#References&#34;&gt;Erhan et al. (2010, pg. 638-639)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;But how can one conceptually understand the effects of unsupervised learning? Apart from the regularization and optimization hypothesis, the layer-wise pre-training resembles the underlying distribution of the input. Ideally, this representation, by combining the different features and mapping their inner relationships, can unveil, and more importantly, disentangle causal elements that influence the output. If those inputs can be transformed into uncorrelated features, it is possible to solve for a particular parameter disregarding its influence over the others.&lt;/p&gt;
-&lt;p&gt;As mentioned in &lt;a href=&#34;#References&#34;&gt;Goodfellow et al. (2016, pg. 541)&lt;/a&gt;, this hypothesis justify approaches in which one first seeks a good representation for $p(x)$ before training with the output. If the output is closely related to factors captured by the input, an initialization that captures the distribution of x is useful for predicting the desired output distribution $p\left(y|x\right)$.&lt;/p&gt;
-&lt;p&gt;Furthermore, unsupervised pretraining can be related with the recent work of &lt;a href=&#34;#References&#34;&gt;Schwartz-Ziv and Tishby (2017)&lt;/a&gt; on studying neural networks from an information theory perspective. Essentially, the authors claim that the learning process of a neural network model is based on the maximizing the mutual information between the inputs and the outputs. Mutual information can be defined as:&lt;/p&gt;
-&lt;p&gt;$$I(X,Y) = H(X)-H(X|Y)$$&lt;/p&gt;
-&lt;p&gt;where $H$ is the entropy of the variable $X$:&lt;/p&gt;
-&lt;p&gt;$$H(X) = \mathbb{E}[-\log\thinspace(P(X)]$$&lt;/p&gt;
-&lt;p&gt;Entropy essentially measures the amount of information, i.e. the degree of uncertainty one has over a random variable. Moreover, when provided another random variable Y, we can measure the conditional entropy of X given Y:&lt;/p&gt;
-&lt;p&gt;$$H(Y|X)=-\sum _{x\in {\mathcal {X}},y\in {\mathcal {Y}}}p(x,y)\log {\frac {p(x,y)}{p(x)}}
-$$&lt;/p&gt;
-&lt;p&gt;Thus, mutual information is a statistical measurement between two random variables that indicate how much knowing one of these variables reduces uncertainty about the other. This, in turn, may have a connection with training neural networks as one begins the training stage knowing to little about the input and output, hence, having low mutual information stored in the neural network layers.&lt;/p&gt;
-&lt;img src=&#34;./figures/tishby_anim.gif&#34; width=&#34;100%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Mutual information measurements on 100-layer neural networks. Layer ordering ranges from green (initial layers) to orange (final layers). Source:&lt;a href=&#34;#References&#34;&gt;Schwartz-Ziv and Tishby (2017)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;However, as the training phase starts, the layers slowing move towards higher mutual information over $X$ and then towards $Y$. What happens in principle is that in the beginning, the network layers learn different representations over the input space, which in turn carry a lot of information over the input, but also some information about the output. As the training phase continues, the network layers, particularly the deeper ones, then discard some of the irrelevant information of $X$ which is not predictive of $Y$.&lt;/p&gt;
-&lt;img src=&#34;./figures/tishby.png&#34; width=&#34;100%&#34;/&gt;
-&lt;p style=&#34;font-size:0.8em;&#34; align=&#34;center&#34;&gt;Snapshot of mutual information measurements along layers in different trainig epohcs. On the left, the neural network is at epoch zero, on the center at epoch 400, and the on right at epoch 9000. Source:&lt;a href=&#34;#References&#34;&gt;Schwartz-Ziv and Tishby (2017)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The pretraining procedure can be related to the theory, particularly in the first part. By using an unsupervised learning algorithm, we may find a combination of parameters for each layer along with the network that shares higher mutual information with the input variable $X$ and consequently some with the output variable $Y$. As the gradient-based learning process continues, some of this information gets refined, as previously mentioned.&lt;/p&gt;
-&lt;p&gt;However, despite the aforementioned advantages, unsupervised pre-training presents noteworthy drawbacks, such as establishing two separate learning stages (unsupervised and supervised). As a consequence, there is a long delay between adjusting hyperparameters on the first stage utilizing feedback from the second. Additionally, although pre-training being considered a valuable regularizer, its strength adjustment is troublesome, requiring a somewhat unclear modification of far too many hyperparameters — contrasting with explicit regularization techniques that can be adjusted by a single one.&lt;/p&gt;
-&lt;p&gt;For the reasons mentioned above, unsupervised pre-training is not so popularly used today, as other techniques discovered yielded the same benefits but much more efficiently.
-These may be explained in a follow-up post, where we delve into initialization methods that not only tackle saturation but also a different obstacle: vanishing gradients.&lt;/p&gt;
-&lt;h1&gt;&lt;a name=&#34;References&#34;&gt;&lt;/a&gt;References&lt;/h1&gt;
-&lt;ul style=&#34;font-size:0.6em;&#34;&gt;
-    &lt;li&gt;Bengio, Y. (2009). Learning Deep Architectures for AI. Foundations and Trends in Machine Learning. 1-127.&lt;/li&gt;
-    &lt;li&gt;Bengio, Y., Lamblin, P., Popovici, D., and Larochelle, H. (2007). Greedy Layer-Wise Training of Deep Networks. In Advances in Neural Information Processing Systems 19, 153-160.&lt;/li&gt;
-    &lt;li&gt;Erhan, D., Bengio, Y., Courville, A., Manzagol, P.A., Vincent, P., and Bengio, S. (2010). Why Does Unsupervised Pre-training Help Deep Learning? Journal of Machine Learning Research, 11-36.&lt;/li&gt;
-    &lt;li&gt;Erhan, D., Manzagol, P.A., Bengio, Y., Bengio, S., and Vincent, P. (2009). The Difficulty of Training Deep Architectures and the Effect of Unsupervised Pre-Training. Artificial Intelligence and Statistics, 153-160.&lt;/li&gt;
-    &lt;li&gt;Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
-    Statistics , pages 249-256.&lt;/li&gt;
-    &lt;li&gt;Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep Learning. MIT Press.&lt;/li&gt;
-    &lt;li&gt;Hinton, G. (2012). Neural Networks for Machine Learning. Coursera Online Course.&lt;/li&gt;
-    &lt;li&gt;Hinton, G. E., Osindero, S., and Teh, Y.-W. (2006). A Fast Learning Algorithm for Deep Belief Nets. Neural Computation , 1527-1554.&lt;/li&gt;
-    &lt;li&gt;LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K.-R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.&lt;/li&gt;
-    &lt;li&gt;Rifai, S., Vincent, P., Muller, X., Glorot, X., and Bengio, Y. (2011).
-    Contractive Auto-encoders: Explicit Invariance During Feature Extraction. Proceedings of the 28th International Conference 
-    on Machine Learning, 833-840.&lt;/li&gt;
-    &lt;li&gt;Vincent, P., Larochelle, H., Bengio, Y., and Manzagol, P.-A. (2008).
-    Extracting and Composing Robust Features with Denoising Autoencoders. Proceedings of the 25th International Conference, 1096-1103.&lt;/li&gt;
-    &lt;li&gt;Zadeh, R. (2016). The hard thing about deep learning. O&#39;Reilly Media.&lt;/li&gt;
-    &lt;li&gt;Schwartz-Ziv, R. and Tishby, N. (2017). Opening the black box of Deep Neural Networks via Information. Featured on: Why &amp; When Deep Learning Works: Looking Inside Deep Learning. arXiv:1703.00810v3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;style&gt;
-    h1 {
-        text-align: left;
-    }
-
-    body {
-        text-align: justify;
-    }
-
-&lt;/style&gt;
-</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;/style></description></item><item><title>Unsupervised pretraining</title><link>/post/pretraining/</link><pubDate>Thu, 09 May 2019 00:00:00 -0500</pubDate><guid>/post/pretraining/</guid><description>&lt;p>In the early development of neural networks, the initialization of parameters was performed by sampling a uniform distribution bounded to a predetermined interval. In this process, the weights and biases produced solutions that would generally lie far from an optimum set of parameters, requiring many training iterations to readjust. Shallow networks did not suffer too much from this due to the smaller number of parameters, hence presenting an easier system to optimize. However, as the depth of networks increased, so did the difficulty to train such models using this initialization procedure.&lt;/p>
+&lt;p>&lt;a href="#References">Glorot and Bengio (2010)&lt;/a> promoted a study to understand why random initialization performed so poorly in deep networks. In this investigation, the authors considered one common initialization heuristic, introduced by &lt;a href="#References">LeCun et al. (1998)&lt;/a>, that defines the biases at 0 and the weights via sampling according to the following uniform distribution:&lt;/p>
+&lt;p>$$W_{ij}\sim U\left[-\frac{1}{\sqrt{n}},\frac{1}{\sqrt{n}}\right]$$&lt;/p>
+&lt;p>where $n$ is the number of inputs to the unit. The authors then verified that in deep configurations of 4 to 5 layers, activation values on the last layers got stuck in plateaus situated at the extremes of the activation function, a case otherwise known as saturation.&lt;/p>
+&lt;img src="./figures/saturation.png" width="80%"/>
+&lt;p style="font-size:0.8em;" align="center">Saturation regions on the sigmoid function. In the case observed by &lt;a href="#References">Glorot and Bengio (2010)&lt;/a>, the saturation occurred in the 5th and last layer of the network, with activation values converging to zero.&lt;/p>
+&lt;p>One hypothesis that explains saturation on sigmoid-equipped deep networks is that the random initialization does not provide useful information to the last layer of the network, that starts to suppress the previous contributions and rely more on its biases, which, in turn, are trained faster than its weights.&lt;/p>
+&lt;img src="./figures/saturation_plot.png" width="100%"/>
+&lt;p style="font-size:0.8em;" align="center">Mean (&lt;i>lines&lt;/i>) and standard deviation (&lt;i>vertical bars&lt;/i>) of sigmoid activation values across layers in a neural network using random initialization. The saturation is detectable in the last layer, where the activation values reach virtually zero. Source: &lt;a href="#References">Glorot and Bengio (2010)&lt;/a>&lt;/p>
+&lt;p>Gradually but rapidly, the error gradient tends to push the activations towards zero in an attempt to suppress the influence of the previous layers. Eventually, the saturation may be overcome but the overall result would be of poor generalization.&lt;/p>
+&lt;h3 id="unsupervised-pre-training">Unsupervised pre-training&lt;/h3>
+&lt;p>Layer saturation was one of the biggest technical hurdles that limited the progress of deep learning in the dawn of the millennium. However, in 2006, inspired by a well-established procedure, &lt;a href="#References">Hinton et al. (2006)&lt;/a> developed a novel approach to initialize the parameters of a Deep Belief Network — a class of neural networks — that overcame the saturation issue and surpassed state of the art performance in deep architectures. These results not only re-sparked but drastically expanded researchers’ interest in this field.&lt;/p>
+&lt;img src="./figures/deep_belief_net.svg" width="80%"/>
+&lt;p style="font-size:0.8em;" align="center">A Deep Belief Network (DBN) can be seen as a stack of smaller unsupervised learning algorithms named Restricted Boltzmann Machines. This configuration can then be bundled with a classical multi-layer perceptron for supervised learning tasks&lt;/p>
+&lt;p>This initialization procedure encompassed an unprecedented process: an unsupervised greedy layer-wise pre-training step&lt;sup>1&lt;/sup>. Prior to the conventional supervised training, each layer is trained with its anterior neighboring layer identically to a Restricted Boltzmann Machine, using an unsupervised learning algorithm named Contrastive Divergence. This process starts with the input and first layer, and progressively advances one layer at a time until it sweeps all layers.&lt;/p>
+&lt;p>A Boltzmann Machine is an unsupervised generative algorithm that learns the data representation by associating the patterns identified in the inputs to probabilistic configurations within its parameters. A Restricted Boltzmann Machine is a variation of such a model that reproduces a similar behavior but with significantly fewer connections.&lt;/p>
+&lt;p style="font-size:0.6em;">
+&lt;b>1&lt;/b> Despite the imprecision, unsupervised pre-training is here used interchangeably
+&lt;/p>
+&lt;img src="./figures/BM_RBM.svg" width="80%"/>
+&lt;p style="font-size:0.8em;" align="center">A Boltzmann Machine (&lt;i>left&lt;/i>) and a Restricted Boltzmann Machine (&lt;i>right&lt;/i>)&lt;/p>
+&lt;p>Many other unsupervised pre-training algorithms were developed concomitantly or immediately after, such as autoencoders (&lt;a href="#References">Bengio et al. (2007)&lt;/a>), denoising autoencoders (&lt;a href="#References">Vincent et al. (2008)&lt;/a>), contractive autoencoders (&lt;a href="#References">Rifai et al. (2011)&lt;/a>), among others.&lt;/p>
+&lt;img src="./figures/pretraining_improvement_comparison.png" width="100%"/>
+&lt;p style="font-size:0.8em;" align="center">Comparison of performance between networks running without pre-training (&lt;i>left&lt;/i>) and with pre-training (&lt;i>right&lt;/i>) &lt;br>Source: &lt;a href="#References">Erhan et al. (2010, pg. 636)&lt;/a>&lt;/p>
+&lt;p>Why does this unsupervised learning methods help training deep architectures? Much of the explanation remains uncertain. Nonetheless, &lt;a href="#References">Erhan et al. (2010)&lt;/a> provide some clarifications through considerable experimentation. The claims of the authors reside on two possible but not mutually exclusive reasons: &lt;i>optimization&lt;/i> and &lt;i>regularization&lt;/i>.&lt;/p>
+&lt;p>Deep neural networks are composed of many parameters whose values are used to compute an approximation of a function. Due to its substantial nonlinear nature, this approximation yields a non-convex function that poses a challenge on searching the best combination of weights and biases.&lt;sup>2&lt;/sup>&lt;/p>
+&lt;img src="./figures/convex_nonconvex.png" width="100%"/>
+&lt;p style="font-size:0.8em;" align="center">A convex (left) and non-convex (right) function. Note that, contrarily to the convex function, the non-convex function possesses multiple local optima. Source: [Zadeh (2016)](#References)&lt;/p>
+&lt;p style="font-size:0.6em;">
+&lt;b>2&lt;/b> Many discussions today in academia evolve around the particular shape of loss landscape in deep neural networks, since many of the local minima appear to have equally good qualities, suggesting that the critical solutions reached during training are actually saddle points. This discussion will be reserved to &lt;a href="https://github.com/artur-deluca/landscapeviz">further studies&lt;/a>.
+&lt;/p>
+&lt;p>Gradient-based methods employed in training eventually converge to their pre-selected basin of attraction, a region of the function space, such that any point in it eventually is iterated into the attractor (roughly speaking, a valley in the loss function). Unsupervised pre-training may work towards optimization by favoring a basin of attraction that might yield a lower training error. Thus, since the gradients are very prompt to abrupt changes, backpropagation is only used at a local search level, from an already favorable starting point &lt;a href="#References">(Hinton (2012, lecture 14b))&lt;/a>.&lt;/p>
+&lt;p>As for &lt;i>regularization&lt;/i>, one may commonly associate it with explicit techniques, such as the L1 or L2 norm:&lt;/p>
+&lt;p>$$C=-\frac{1}{n}\sum_{j}\left[y_j\ln a_j^{L}+\left(1-y_j\right)\ln\left(1-a_j^{L}\right)\right]+\frac{\lambda}{2n}\sum_iw_i{{}^2}$$&lt;/p>
+&lt;p>By adding the &lt;i>L2 regularization&lt;/i> factor in the cross-entropy cost function, presented in the equation above, one can penalize overly complex models, that would result in poor generalization, i.e. &lt;i>high testing error&lt;/i>. However, the regularization employed by pre-training is implicit. In attempt to model how such technique would work explicitly, &lt;a href="#References">Erhan et al. (2009)&lt;/a> defines a regularization term such as:&lt;/p>
+&lt;p>$$regularizer=-log\thinspace P\left(\theta\right)$$&lt;/p>
+&lt;p>The function $P\left(\theta\right)$ describes the probability that the weights of the neural network are initialized as $\theta$. So, if a configuration shows to be highly improbable, the regularizer term will hurt the cost function strongly. Furthermore, if the probability of landing such set of parameters is high, the regularizer will then reward the cost function. This probability is governed by the initialization methods employed. Considering two instances with and without pre-training, we obtain:&lt;/p>
+&lt;p>$$P_{{\text{pre-training}}}(\theta) = \sum_k\frac{1_{\theta \in R_k}\pi_k}{v_k}$$&lt;/p>
+&lt;p>and&lt;/p>
+&lt;p>$$P_{{\text{no pre-training}}}(\theta) = \sum_k\frac{1_{\theta \in R_k}r_k}{v_k}$$&lt;/p>
+&lt;br>
+&lt;p>where $R_k$ is the basin of attraction that contains $\theta$, and $1_{\theta \in R_k}$ is the identifier function – unitary for all $\theta$ in $R_k$, otherwise null. Additionally, $\pi_k$ and $r_k$ are the probabilities of landing in the basin of attraction $R_k$, which has a volume $v_k$. Since the basins of attraction are disjunct sets, the probability density function of the set of parameters located in $R_k$ is uniform, calculated by taking the probability of landing in the k-th basin ($\pi_k$ or $r_k$) and dividing by its volume.&lt;/p>
+&lt;p>Pre-training the parameters of the network conditions the network initialization to land on regions of better generalization. This is hypothetically achieved by increasing the $\pi_k$&amp;rsquo;s where the network parameters represent meaningful variations of the input, contributing to predict the output. For this reason, pre-training also reduces the variance upon parameter initialization.&lt;/p>
+&lt;img src="./figures/trajectories.png" width="70%"/>
+&lt;p style="font-size:0.8em;" align="center">2-D visualization of parameters' trajectory of 100 neural networks with and without the unsupervised pre-training step. The color gradient from dark-blue to cyan symbolizes the progression of iterations. &lt;br>Source: &lt;a href="#References">Erhan et al. (2010, pg. 541)&lt;/a>&lt;/p>
+&lt;p>The visualization of the parameters’ trajectory may demonstrate the effects of optimization and regularization. As mentioned through the former, it may select a basin of attraction with lower training errors. Conversely, regularization may bound the parameter interval to a range that yields good generalization. Also, it is crucial to notice that both training and testing errors collected in the experiments of &lt;a href="#References">Erhan et al. (2010)&lt;/a> support these hypotheses, but do favor the latter.&lt;/p>
+&lt;p>Furthermore, once established within the solution space, the parameters do not drastically change during the gradient-based adjustment process. This process is also denominated fine-tuning, as it only modifies the features slightly to get the category boundaries, rather than discovering new relationships (&lt;a href="#References">Hinton (2012, lecture 14b)&lt;/a>).&lt;/p>
+&lt;img src="./figures/trained_filters.svg" width="90%"/>
+&lt;p style="font-size:0.8em;" align="center">Visualization of filters of a Deep Belief Network used to recognize digits form the MNIST data-set after the different training processes; from left to right: units from the first, second and third layers, respectively.&lt;br>Source:&lt;a href="#References">Erhan et al. (2010, pg. 638-639)&lt;/a>&lt;/p>
+&lt;p>But how can one conceptually understand the effects of unsupervised learning? Apart from the regularization and optimization hypothesis, the layer-wise pre-training resembles the underlying distribution of the input. Ideally, this representation, by combining the different features and mapping their inner relationships, can unveil, and more importantly, disentangle causal elements that influence the output. If those inputs can be transformed into uncorrelated features, it is possible to solve for a particular parameter disregarding its influence over the others.&lt;/p>
+&lt;p>As mentioned in &lt;a href="#References">Goodfellow et al. (2016, pg. 541)&lt;/a>, this hypothesis justify approaches in which one first seeks a good representation for $p(x)$ before training with the output. If the output is closely related to factors captured by the input, an initialization that captures the distribution of x is useful for predicting the desired output distribution $p\left(y|x\right)$.&lt;/p>
+&lt;p>Furthermore, unsupervised pretraining can be related with the recent work of &lt;a href="#References">Schwartz-Ziv and Tishby (2017)&lt;/a> on studying neural networks from an information theory perspective. Essentially, the authors claim that the learning process of a neural network model is based on the maximizing the mutual information between the inputs and the outputs. Mutual information can be defined as:&lt;/p>
+&lt;p>$$I(X,Y) = H(X)-H(X|Y)$$&lt;/p>
+&lt;p>where $H$ is the entropy of the variable $X$:&lt;/p>
+&lt;p>$$H(X) = \mathbb{E}[-\log\thinspace(P(X)]$$&lt;/p>
+&lt;p>Entropy essentially measures the amount of information, i.e. the degree of uncertainty one has over a random variable. Moreover, when provided another random variable Y, we can measure the conditional entropy of X given Y:&lt;/p>
+&lt;p>$$H(Y|X)=-\sum _{x\in {\mathcal {X}},y\in {\mathcal {Y}}}p(x,y)\log {\frac {p(x,y)}{p(x)}}
+$$&lt;/p>
+&lt;p>Thus, mutual information is a statistical measurement between two random variables that indicate how much knowing one of these variables reduces uncertainty about the other. This, in turn, may have a connection with training neural networks as one begins the training stage knowing to little about the input and output, hence, having low mutual information stored in the neural network layers.&lt;/p>
+&lt;img src="./figures/tishby_anim.gif" width="100%"/>
+&lt;p style="font-size:0.8em;" align="center">Mutual information measurements on 100-layer neural networks. Layer ordering ranges from green (initial layers) to orange (final layers). Source:&lt;a href="#References">Schwartz-Ziv and Tishby (2017)&lt;/a>&lt;/p>
+&lt;p>However, as the training phase starts, the layers slowing move towards higher mutual information over $X$ and then towards $Y$. What happens in principle is that in the beginning, the network layers learn different representations over the input space, which in turn carry a lot of information over the input, but also some information about the output. As the training phase continues, the network layers, particularly the deeper ones, then discard some of the irrelevant information of $X$ which is not predictive of $Y$.&lt;/p>
+&lt;img src="./figures/tishby.png" width="100%"/>
+&lt;p style="font-size:0.8em;" align="center">Snapshot of mutual information measurements along layers in different trainig epohcs. On the left, the neural network is at epoch zero, on the center at epoch 400, and the on right at epoch 9000. Source:&lt;a href="#References">Schwartz-Ziv and Tishby (2017)&lt;/a>&lt;/p>
+&lt;p>The pretraining procedure can be related to the theory, particularly in the first part. By using an unsupervised learning algorithm, we may find a combination of parameters for each layer along with the network that shares higher mutual information with the input variable $X$ and consequently some with the output variable $Y$. As the gradient-based learning process continues, some of this information gets refined, as previously mentioned.&lt;/p>
+&lt;p>However, despite the aforementioned advantages, unsupervised pre-training presents noteworthy drawbacks, such as establishing two separate learning stages (unsupervised and supervised). As a consequence, there is a long delay between adjusting hyperparameters on the first stage utilizing feedback from the second. Additionally, although pre-training being considered a valuable regularizer, its strength adjustment is troublesome, requiring a somewhat unclear modification of far too many hyperparameters — contrasting with explicit regularization techniques that can be adjusted by a single one.&lt;/p>
+&lt;p>For the reasons mentioned above, unsupervised pre-training is not so popularly used today, as other techniques discovered yielded the same benefits but much more efficiently.
+These may be explained in a follow-up post, where we delve into initialization methods that not only tackle saturation but also a different obstacle: vanishing gradients.&lt;/p>
+&lt;h1>&lt;a name="References">&lt;/a>References&lt;/h1>
+&lt;ul style="font-size:0.6em;">
+&lt;li>Bengio, Y. (2009). Learning Deep Architectures for AI. Foundations and Trends in Machine Learning. 1-127.&lt;/li>
+&lt;li>Bengio, Y., Lamblin, P., Popovici, D., and Larochelle, H. (2007). Greedy Layer-Wise Training of Deep Networks. In Advances in Neural Information Processing Systems 19, 153-160.&lt;/li>
+&lt;li>Erhan, D., Bengio, Y., Courville, A., Manzagol, P.A., Vincent, P., and Bengio, S. (2010). Why Does Unsupervised Pre-training Help Deep Learning? Journal of Machine Learning Research, 11-36.&lt;/li>
+&lt;li>Erhan, D., Manzagol, P.A., Bengio, Y., Bengio, S., and Vincent, P. (2009). The Difficulty of Training Deep Architectures and the Effect of Unsupervised Pre-Training. Artificial Intelligence and Statistics, 153-160.&lt;/li>
+&lt;li>Glorot, X. and Bengio, Y. (2010). Understanding the diffculty of training deep feedforward neural networks. Proceedings of the Thirteenth International Conference on Artificial Intelligence and
+Statistics , pages 249-256.&lt;/li>
+&lt;li>Goodfellow, I., Bengio, Y., and Courville, A. (2016). Deep Learning. MIT Press.&lt;/li>
+&lt;li>Hinton, G. (2012). Neural Networks for Machine Learning. Coursera Online Course.&lt;/li>
+&lt;li>Hinton, G. E., Osindero, S., and Teh, Y.-W. (2006). A Fast Learning Algorithm for Deep Belief Nets. Neural Computation , 1527-1554.&lt;/li>
+&lt;li>LeCun, Y. A., Bottou, L., Orr, G. B., and Müller, K.-R. (1998). Efficient BackProp. Neural Networks: Tricks of the Trade, 9-48.&lt;/li>
+&lt;li>Rifai, S., Vincent, P., Muller, X., Glorot, X., and Bengio, Y. (2011).
+Contractive Auto-encoders: Explicit Invariance During Feature Extraction. Proceedings of the 28th International Conference
+on Machine Learning, 833-840.&lt;/li>
+&lt;li>Vincent, P., Larochelle, H., Bengio, Y., and Manzagol, P.-A. (2008).
+Extracting and Composing Robust Features with Denoising Autoencoders. Proceedings of the 25th International Conference, 1096-1103.&lt;/li>
+&lt;li>Zadeh, R. (2016). The hard thing about deep learning. O'Reilly Media.&lt;/li>
+&lt;li>Schwartz-Ziv, R. and Tishby, N. (2017). Opening the black box of Deep Neural Networks via Information. Featured on: Why &amp; When Deep Learning Works: Looking Inside Deep Learning. arXiv:1703.00810v3&lt;/li>
+&lt;/ul>
+&lt;style>
+h1 {
+text-align: left;
+}
+body {
+text-align: justify;
+}
+&lt;/style></description></item></channel></rss>
