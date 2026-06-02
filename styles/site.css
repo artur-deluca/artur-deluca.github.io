@@ -276,21 +276,27 @@ button {
   color: inherit;
 }
 
-.news-more {
-  margin-top: 0.5rem;
+.section-more {
+  margin-top: 1.1rem;
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--muted);
-  font-size: 0.76rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
+  -webkit-appearance: none;
+  appearance: none;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: normal;
   cursor: pointer;
 }
 
-.news-more:hover,
-.news-more:focus-visible {
-  color: var(--link-hover);
+.section-more:hover,
+.section-more:focus-visible {
+  color: inherit;
+}
+
+.publication-item.is-hidden {
+  display: none;
 }
 
 .publication-list li {

@@ -139,11 +139,24 @@
       <h2>News</h2>
     </div>
 
-    <div class="news-feed" data-news-feed data-news-step="3">
+    <div class="news-feed" data-expandable-feed data-expandable-step="3">
       <ul class="news-list">
       
         
-        <li class="news-item" data-news-item>
+        <li class="news-item" data-expandable-item>
+          <p class="news-date">May 2026</p>
+          <div class="news-body">
+            <h3>
+              
+                <a href="https://arxiv.org/abs/2605.22964">New paper</a> on certification from examples for circuits and Transformers.
+              
+            </h3>
+            
+          </div>
+        </li>
+      
+        
+        <li class="news-item" data-expandable-item>
           <p class="news-date">Apr 2026</p>
           <div class="news-body">
             <h3>
@@ -156,7 +169,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item>
+        <li class="news-item" data-expandable-item>
           <p class="news-date">Apr 2026</p>
           <div class="news-body">
             <h3>
@@ -169,7 +182,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item>
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Apr 2026</p>
           <div class="news-body">
             <h3>
@@ -182,7 +195,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Mar 2026</p>
           <div class="news-body">
             <h3>
@@ -195,7 +208,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Feb 2026</p>
           <div class="news-body">
             <h3>
@@ -208,7 +221,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Feb 2026</p>
           <div class="news-body">
             <h3>
@@ -221,7 +234,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Jan 2026</p>
           <div class="news-body">
             <h3>
@@ -234,7 +247,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Dec 2025</p>
           <div class="news-body">
             <h3>
@@ -247,7 +260,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Sep 2025</p>
           <div class="news-body">
             <h3>
@@ -260,7 +273,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Jul 2025</p>
           <div class="news-body">
             <h3>
@@ -273,7 +286,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">May 2025</p>
           <div class="news-body">
             <h3>
@@ -286,7 +299,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Feb 2025</p>
           <div class="news-body">
             <h3>
@@ -299,7 +312,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Feb 2025</p>
           <div class="news-body">
             <h3>
@@ -312,7 +325,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Jun 25, 2024</p>
           <div class="news-body">
             <h3>
@@ -325,7 +338,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">May 2024</p>
           <div class="news-body">
             <h3>
@@ -338,7 +351,7 @@
         </li>
       
         
-        <li class="news-item" data-news-item data-news-hidden="true">
+        <li class="news-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <p class="news-date">Feb 2024</p>
           <div class="news-body">
             <h3>
@@ -353,7 +366,7 @@
       </ul>
 
       
-        <button class="news-more" type="button" data-news-more aria-label="Show 3 more news items" hidden>
+        <button class="section-more" type="button" data-expandable-more aria-label="Show more news items" hidden>
           More
         </button>
       
@@ -367,10 +380,24 @@
       <h2>Publications</h2>
     </div>
 
-    <ul class="publication-list">
+    <div class="publication-feed" data-expandable-feed data-expandable-step="3">
+      <ul class="publication-list">
       
         
-        <li>
+        <li class="publication-item" data-expandable-item>
+          <h3>
+            
+              <a href="https://arxiv.org/abs/2605.22964" target="_blank" rel="noreferrer">Certification from Examples is Hard for Circuits and Transformers under Minimal Overparametrization</a>
+            
+          </h3>
+          <p class="publication-meta">
+            <span>Artur Back de Luca and Kimon Fountoulakis</span>
+            <span>Preprint, 2026</span>
+          </p>
+        </li>
+      
+        
+        <li class="publication-item" data-expandable-item>
           <h3>
             
               <a href="https://arxiv.org/abs/2601.23207" target="_blank" rel="noreferrer">Learning to Execute Graph Algorithms Exactly with Graph Neural Networks</a>
@@ -383,7 +410,7 @@
         </li>
       
         
-        <li>
+        <li class="publication-item" data-expandable-item>
           <h3>
             
               <a href="https://arxiv.org/abs/2502.16763" target="_blank" rel="noreferrer">Learning to Add, Multiply, and Execute Algorithmic Instructions Exactly with Neural Networks</a>
@@ -396,7 +423,7 @@
         </li>
       
         
-        <li>
+        <li class="publication-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <h3>
             
               <a href="https://openreview.net/pdf?id=4RLpgRyJIm" target="_blank" rel="noreferrer">Exact Learning of Permutations for Nonzero Binary Inputs with Logarithmic Training Size and Quadratic Ensemble Complexity</a>
@@ -409,7 +436,7 @@
         </li>
       
         
-        <li>
+        <li class="publication-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <h3>
             
               <a href="https://arxiv.org/abs/2410.01686" target="_blank" rel="noreferrer">Positional Attention: Expressivity and Learnability of Algorithmic Computation</a>
@@ -422,7 +449,7 @@
         </li>
       
         
-        <li>
+        <li class="publication-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <h3>
             
               <a href="https://arxiv.org/abs/2402.01107" target="_blank" rel="noreferrer">Simulation of Graph Algorithms with Looped Transformers</a>
@@ -435,7 +462,7 @@
         </li>
       
         
-        <li>
+        <li class="publication-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <h3>
             
               <a href="https://openreview.net/forum?id=89A5c6enfc" target="_blank" rel="noreferrer">Local Graph Clustering with Noisy Labels</a>
@@ -448,7 +475,7 @@
         </li>
       
         
-        <li>
+        <li class="publication-item is-hidden" data-expandable-item data-expandable-hidden="true" hidden>
           <h3>
             
               <a href="https://arxiv.org/abs/2206.09979" target="_blank" rel="noreferrer">Mitigating Data Heterogeneity in Federated Learning with Data Augmentation</a>
@@ -460,14 +487,21 @@
           </p>
         </li>
       
-    </ul>
+      </ul>
+
+      
+        <button class="section-more" type="button" data-expandable-more aria-label="Show more publications" hidden>
+          More
+        </button>
+      
+    </div>
   </section>
 
 
     </div>
   </main>
 
-    <script src="/scripts/news-toggle.js" defer></script>
+    <script src="/scripts/section-toggle.js" defer></script>
     <script src="/scripts/theme-toggle.js" defer></script>
   </body>
 </html>
